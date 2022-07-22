@@ -1,18 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Links">
+    tools:context=".Links"
+    android:orientation="vertical"
+    android:padding="50dp">
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/links"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/meralcoIB"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            android:clickable="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/meralco"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/meralcoTV"
+            android:layout_width="105dp"
+            android:layout_height="wrap_content"
+            android:text="@string/meralco"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"/>
+
+        <ImageButton
+            android:id="@+id/vecoIB"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            android:clickable="true"
+            android:src="@drawable/veco"
+            android:scaleType="centerInside"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/vecoTV"
+            android:layout_width="105dp"
+            android:layout_height="wrap_content"
+            android:text="@string/veco"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</FrameLayout>
