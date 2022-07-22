@@ -9,18 +9,20 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import com.example.electricitips.R
+import com.example.electricitips.databinding.FragmentDashboardBinding
 
 
+class Dashboard: Fragment() {
 
- class Dashboard: Fragment() {
+     private lateinit var binding: FragmentDashboardBinding
 
      override fun onCreateView(
          inflater: LayoutInflater,
          container: ViewGroup?,
          savedInstanceState: Bundle?
      ): View? {
-         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
-         return view
+         binding = FragmentDashboardBinding.inflate(inflater, container, false)
+         return binding.root
      }
 
      override fun onViewCreated(view:View, savedInstanceState: Bundle?){
@@ -31,10 +33,10 @@ import com.example.electricitips.R
              "Virat Kohli", "Rohit Sharma", "Steve Smith",
              "Kane Williamson", "Ross Taylor"
          )
-         var listView = view?.findViewById<ListView>(R.id.listView)
-         var adapter: ArrayAdapter<String> = ArrayAdapter<String>(context!!, android.R.layout.simple_list_item_1, list  )
 
-         listView!!.adapter = adapter
+         var adapter: ArrayAdapter<String> = ArrayAdapter<String>(context!!, android.R.layout.simple_list_item_1, list)
+
+         binding.listView.adapter = adapter
      }
 
 }
