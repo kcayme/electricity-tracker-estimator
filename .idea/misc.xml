@@ -7,18 +7,11 @@
         <entry key="..\:/Android/AndroidStudioProjects/electricity-tracker-estimator/app/src/main/res/drawable/baseline_language_24.xml" value="0.2165" />
         <entry key="..\:/Android/AndroidStudioProjects/electricity-tracker-estimator/app/src/main/res/drawable/baseline_lightbulb_24.xml" value="0.2165" />
         <entry key="..\:/Android/AndroidStudioProjects/electricity-tracker-estimator/app/src/main/res/drawable/ic_baseline_article_24.xml" value="0.2165" />
-        <entry key="..\:/Android/AndroidStudioProjects/electricity-tracker-estimator/app/src/main/res/layout/activity_dashboard.xml" value="0.24895833333333334" />
-        <entry key="..\:/Android/AndroidStudioProjects/electricity-tracker-estimator/app/src/main/res/layout/activity_home.xml" value="0.24895833333333334" />
-        <entry key="..\:/Android/AndroidStudioProjects/electricity-tracker-estimator/app/src/main/res/layout/activity_links.xml" value="0.25" />
-        <entry key="..\:/Android/AndroidStudioProjects/electricity-tracker-estimator/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Android/AndroidStudioProjects/electricity-tracker-estimator/app/src/main/res/layout/activity_tips.xml" value="0.25" />
-        <entry key="..\:/Android/AndroidStudioProjects/electricity-tracker-estimator/app/src/main/res/layout/activity_utilitylistview.xml" value="0.1" />
-        <entry key="..\:/Android/AndroidStudioProjects/electricity-tracker-estimator/app/src/main/res/layout/dropdown_appliance_types.xml" value="0.25" />
+        <entry key="..\:/Android/AndroidStudioProjects/electricity-tracker-estimator/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Android/AndroidStudioProjects/electricity-tracker-estimator/app/src/main/res/layout/fragment_articles.xml" value="0.176" />
         <entry key="..\:/Android/AndroidStudioProjects/electricity-tracker-estimator/app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
         <entry key="..\:/Android/AndroidStudioProjects/electricity-tracker-estimator/app/src/main/res/layout/fragment_home.xml" value="0.25" />
-        <entry key="..\:/Android/AndroidStudioProjects/electricity-tracker-estimator/app/src/main/res/layout/fragment_input_form.xml" value="0.25" />
-        <entry key="..\:/Android/AndroidStudioProjects/electricity-tracker-estimator/app/src/main/res/layout/fragment_links.xml" value="0.264" />
+        <entry key="..\:/Android/AndroidStudioProjects/electricity-tracker-estimator/app/src/main/res/layout/fragment_links.xml" value="0.25" />
         <entry key="..\:/Android/AndroidStudioProjects/electricity-tracker-estimator/app/src/main/res/layout/fragment_tips.xml" value="0.25" />
         <entry key="..\:/Android/AndroidStudioProjects/electricity-tracker-estimator/app/src/main/res/menu/bottom_nav.xml" value="0.1" />
         <entry key="..\:/Karl BACKUP/Karl Iskwela/USC Kolehiyo/YEAR 3/Mobile Dev/Electricitips/app/src/main/res/layout/activity_main.xml" value="0.2758152173913043" />
@@ -27,6 +20,7 @@
         <entry key="..\:/Karl BACKUP/Karl Iskwela/USC Kolehiyo/YEAR 3/Mobile Dev/Electricitips/app/src/main/res/layout/fragment_home.xml" value="0.13793103448275862" />
         <entry key="..\:/Karl BACKUP/Karl Iskwela/USC Kolehiyo/YEAR 3/Mobile Dev/Electricitips/app/src/main/res/layout/fragment_others.xml" value="0.18802083333333333" />
         <entry key="..\:/Karl BACKUP/Karl Iskwela/USC Kolehiyo/YEAR 3/Mobile Dev/Electricitips/app/src/main/res/menu/bottom_nav.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/scyth/AndroidStudioProjects/electricity-tracker-estimator/app/src/main/res/layout/dropdown_appliance_types.xml" value="0.1" />
       </map>
     </option>
   </component>
