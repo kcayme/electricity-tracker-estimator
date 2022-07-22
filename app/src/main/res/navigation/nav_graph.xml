@@ -16,13 +16,13 @@
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" />
     <fragment
-        android:id="@+id/articles"
-        android:name="com.example.electricitips.fragments.Articles"
-        android:label="fragment_articles"
-        tools:layout="@layout/fragment_articles" />
+        android:id="@+id/links"
+        android:name="com.example.electricitips.fragments.Links"
+        android:label="fragment_links"
+        tools:layout="@layout/fragment_links" />
     <fragment
-        android:id="@+id/others"
-        android:name="com.example.electricitips.fragments.Others"
-        android:label="fragment_others"
-        tools:layout="@layout/fragment_others" />
+        android:id="@+id/tips"
+        android:name="com.example.electricitips.fragments.Tips"
+        android:label="fragment_tips"
+        tools:layout="@layout/fragment_tips" />
 </navigation>
