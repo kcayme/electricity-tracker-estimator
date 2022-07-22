@@ -3,6 +3,7 @@ package com.example.electricitips
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -47,14 +48,35 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(R.id.dashboard)
 
             val inputBind = FragmentInputFormBinding.inflate(layoutInflater)
-            val items: Array<String> = resources.getStringArray(R.array.appliance_types)
-            val typesAdapter = ArrayAdapter(this, R.layout.dropdown_appliance_types, items)
-            inputBind.autoCompleteTypes.setAdapter(typesAdapter)
+
+            val typeItems: Array<String> = resources.getStringArray(R.array.appliance_types)
+            val typesAdapter = ArrayAdapter(this, R.layout.dropdown_appliance_types, typeItems)
+            inputBind.inputType.setAdapter(typesAdapter)
+            val freqItems: Array<String> = resources.getStringArray(R.array.frequency)
+            val freqAdapter = ArrayAdapter(this, R.layout.dropdown_appliance_types, freqItems)
+            inputBind.inputFreq.setAdapter(freqAdapter)
 
             val mBuilder = AlertDialog.Builder(this)
                 .setView(inputBind.root)
-                .setTitle("Login Form")
+                .setCancelable(true)
+                .setIcon(R.drawable.ic_baseline_input_24)
+                .setTitle("Input Device")
             val mAlertDialog = mBuilder.show()
+
+            inputBind.cancelBtn.setOnClickListener {
+                mAlertDialog.dismiss()
+            }
+
+            inputBind.confirmBtn.setOnClickListener {
+                val name = inputBind.inputName.text.toString()
+                val type = inputBind.inputType.text.toString()
+                val rating = inputBind.inputRating.text.toString()
+                val duration = inputBind.inputHours.text.toString()
+                val freq = inputBind.inputFreq.text.toString()
+                mAlertDialog.dismiss()
+                Toast.makeText(this,"$name $type $rating $duration $freq",Toast.LENGTH_LONG).show()
+            }
+
         }
 
 
