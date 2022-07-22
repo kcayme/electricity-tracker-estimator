@@ -6,4 +6,10 @@
     <string name="tips">Tips</string>
     <string name="dashboard">Dashboard</string>
     <string name="home">Home</string>
+    <string name="luzon">LUZON</string>
+    <string name="visayas">VISAYAS</string>
+    <string name="mindanao">MINDANAO</string>
+    <string name="others">OTHERS</string>
+    <string name="meralco">MERALCO</string>
+    <string name="veco">VECO</string>
 </resources>
