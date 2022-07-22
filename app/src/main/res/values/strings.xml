@@ -2,4 +2,11 @@
     <string name="app_name">Electricitips</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="appliance_types">
+        <item>Entertainment</item>
+        <item>Lighting</item>
+        <item>Cooling and Ventilation</item>
+        <item>Kitchen Appliance</item>
+        <item>Household Appliance</item>
+    </string-array>
 </resources>

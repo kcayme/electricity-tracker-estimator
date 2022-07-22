@@ -21,7 +21,6 @@
             android:id="@+id/bottom_nav_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             app:elevation="0dp"
             android:background="@android:color/transparent"
             app:menu="@menu/bottom_nav"/>
@@ -36,9 +35,12 @@
         app:layout_anchor="@id/bottom_bar"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <FrameLayout
-        android:id="@+id/fragment_container"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:navGraph="@navigation/nav_graph"
+        app:defaultNavHost="true"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
