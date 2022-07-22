@@ -6,21 +6,35 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.ui.AppBarConfiguration
+import android.widget.ArrayAdapter
+import android.widget.ListView
 import com.example.electricitips.R
-import com.example.electricitips.displayView
 
 
 
  class Dashboard: Fragment() {
 
-     var displayView: displayView = displayView()
-
-     fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle): View? {
-
-         val view = displayView.onCreateView(inflater, container, savedInstanceState)
+     override fun onCreateView(
+         inflater: LayoutInflater,
+         container: ViewGroup?,
+         savedInstanceState: Bundle?
+     ): View? {
+         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
          return view
+     }
 
+     override fun onViewCreated(view:View, savedInstanceState: Bundle?){
+        super.onViewCreated(view,savedInstanceState)
+         val list = arrayListOf(
+             "Antique ruby",
+             "Bitter lemon",
+             "Virat Kohli", "Rohit Sharma", "Steve Smith",
+             "Kane Williamson", "Ross Taylor"
+         )
+         var listView = view?.findViewById<ListView>(R.id.listView)
+         var adapter: ArrayAdapter<String> = ArrayAdapter<String>(context!!, android.R.layout.simple_list_item_1, list  )
+
+         listView!!.adapter = adapter
      }
 
 }
