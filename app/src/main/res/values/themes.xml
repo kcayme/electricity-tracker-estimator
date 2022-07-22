@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.Electricitips" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#FFEE58</item>
-        <item name="colorPrimaryVariant">#29B6F6</item>
+        <item name="colorPrimary">@color/theme_yellow</item>
+        <item name="colorPrimaryVariant">@color/theme_orange</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">#42A5F5</item>
-        <item name="colorSecondaryVariant">#FFCA28</item>
+        <item name="colorSecondary">@color/theme_orange</item>
+        <item name="colorSecondaryVariant">@color/theme_yellow</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
