@@ -4,10 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.electricitips.databinding.ActivityMainBinding
-import com.example.electricitips.fragments.Articles
-import com.example.electricitips.fragments.Dashboard
-import com.example.electricitips.fragments.Home
-import com.example.electricitips.fragments.Others
+import com.example.electricitips.fragments.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,12 +12,12 @@ class MainActivity : AppCompatActivity() {
     // create instances of the fragment objects
     private val homeFragment = Home()
     private val dashboardFragment = Dashboard()
-    private val articlesFragment = Articles()
-    private val othersFragment = Others()
+    private val linksFragment = Links()
+    private val tipsFragment = Tips()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         replaceFragment(homeFragment)
 
@@ -30,8 +27,8 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.home -> replaceFragment(homeFragment)
                 R.id.dashboard -> replaceFragment(dashboardFragment)
-                R.id.articles -> replaceFragment(articlesFragment)
-                R.id.others -> replaceFragment(othersFragment)
+                R.id.links -> replaceFragment(linksFragment)
+                R.id.tips -> replaceFragment(tipsFragment)
             }
             true
         }
@@ -40,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     private fun replaceFragment(fragment: Fragment){
         if(fragment != null){
             val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, fragment)
+            transaction.replace(R.id.fragmentContainer, fragment)
             transaction.commit()
         }
     }
