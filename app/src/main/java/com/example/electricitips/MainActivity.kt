@@ -2,6 +2,8 @@ package com.example.electricitips
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
+import android.text.TextUtils.isEmpty
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -32,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private var arrayList = ArrayList<Appliance>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,7 +70,6 @@ class MainActivity : AppCompatActivity() {
             val mBuilder = AlertDialog.Builder(this)
                 .setView(inputBind.root)
                 .setCancelable(true)
-                .setIcon(R.drawable.ic_baseline_input_24)
             val mAlertDialog = mBuilder.show()
 
             inputBind.cancelBtn.setOnClickListener {
@@ -80,26 +82,45 @@ class MainActivity : AppCompatActivity() {
                 val rating = inputBind.inputRating.text.toString()
                 val duration = inputBind.inputHours.text.toString()
                 val freq = inputBind.inputFreq.text.toString()
+
                 mAlertDialog.dismiss()
-                // create new dashboard object
-                val dbFragment = Dashboard()
-                // create transaction object
-                val fragmentTransaction = supportFragmentManager.beginTransaction()
-                // create bundle containg user inputs
-                val bundle = Bundle()
-                bundle.putStringArrayList("data", arrayListOf("$name","$type","$rating","$duration","$freq"))
-                if (dbFragment != null) {
-                    // pass bundle as an argument of the fragment
-                    dbFragment.arguments = bundle
+
+                if(isEmpty(name) || isEmpty(type) || isEmpty(rating) || isEmpty(duration) || isEmpty(freq)){
+                    Toast.makeText(this, "Some fields are empty!",Toast.LENGTH_SHORT).show()
                 }
-                if (dbFragment != null) {
-                    // replace the current dashboard fragment in the R.id.nav_host_fragment and replace with newer instance of dashboard containing the input
-                    fragmentTransaction.replace(R.id.nav_host_fragment,dbFragment).commit()
+                else{
+                    var imgID: Int = getTypeIcon(type)
+                    var newAppliance = Appliance(imgID,name,type,rating,duration,freq)
+                    arrayList.add(newAppliance)
+                    // create new dashboard object
+                    val dbFragment = Dashboard()
+                    // create transaction object
+                    val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    // create bundle containing user inputs
+                    val bundle = Bundle()
+                    bundle.putParcelableArrayList("data", arrayList)
+                    if (dbFragment != null) {
+                        // pass bundle as an argument of the fragment
+                        dbFragment.arguments = bundle
+                        // replace the current dashboard fragment in the R.id.nav_host_fragment and replace with newer instance of dashboard containing the input
+                        fragmentTransaction.replace(R.id.nav_host_fragment,dbFragment).commit()
+                    }
                 }
+
+
             }
 
         }
 
+    }
+
+    private fun getTypeIcon(type: String) = when (type) {
+        "Entertainment" -> R.drawable.entertainment
+        "Lighting" -> R.drawable.lighting
+        "Cooling" -> R.drawable.cooling
+        "Kitchen Appliance" -> R.drawable.kitchen
+        "Household Appliance" -> R.drawable.household
+        else -> R.drawable.others
     }
 
     private fun navigateFragments(it: MenuItem): Boolean {
