@@ -20,11 +20,10 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:elevation="0dp"
             android:background="@android:color/transparent"
             app:menu="@menu/bottom_nav"/>
-
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -39,8 +38,8 @@
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:navGraph="@navigation/nav_graph"
-        app:defaultNavHost="true"/>
+        android:layout_height="677dp"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
