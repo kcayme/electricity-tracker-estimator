@@ -2,6 +2,7 @@ package com.example.electricitips
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -12,7 +13,20 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.electricitips.databinding.ActivityMainBinding
 import com.example.electricitips.databinding.FragmentInputFormBinding
+import com.example.electricitips.fragments.Dashboard
 
+/*
+        Minimum Requiresments:
+        a. Segues (Multi-scene)
+        b. Embed in Tab Bar / Navigation View Controller
+        c. Appropriate User Interfaces
+        d. Alert View / Action View
+        e. Images and Sounds
+        f. Table Views / Picker View / Web View (better option, as per app requires)
+        g. Dynamic  Data  Persistence:  Property  List  /  Core  Data  /  SQLite  (better  option,  as  per  app
+        requires)
+        h. App Icon
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -35,13 +49,7 @@ class MainActivity : AppCompatActivity() {
 
         // listener still needed to ensure correct navigation
         binding.bottomNavView.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.home -> navController.navigate(R.id.home)
-                R.id.dashboard -> navController.navigate(R.id.dashboard)
-                R.id.links -> navController.navigate(R.id.links)
-                else -> navController.navigate(R.id.tips)
-            }
-            true
+            navigateFragments(it)
         }
 
         binding.floating.setOnClickListener {
@@ -73,11 +81,36 @@ class MainActivity : AppCompatActivity() {
                 val duration = inputBind.inputHours.text.toString()
                 val freq = inputBind.inputFreq.text.toString()
                 mAlertDialog.dismiss()
-                Toast.makeText(this,"$name $type $rating $duration $freq",Toast.LENGTH_LONG).show()
+                // create new dashboard object
+                val dbFragment = Dashboard()
+                // create transaction object
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                // create bundle containg user inputs
+                val bundle = Bundle()
+                bundle.putStringArrayList("data", arrayListOf("$name","$type","$rating","$duration","$freq"))
+                if (dbFragment != null) {
+                    // pass bundle as an argument of the fragment
+                    dbFragment.arguments = bundle
+                }
+                if (dbFragment != null) {
+                    fragmentTransaction.remove()
+                    // replace the current dashboard fragment in the R.id.nav_host_fragment and replace with newer instance of dashboard containing the input
+                    fragmentTransaction.replace(R.id.nav_host_fragment,dbFragment).commit()
+                }
             }
 
         }
 
+    }
+
+    private fun navigateFragments(it: MenuItem): Boolean {
+        when (it.itemId) {
+            R.id.home -> navController.navigate(R.id.home)
+            R.id.dashboard -> navController.navigate(R.id.dashboard)
+            R.id.links -> navController.navigate(R.id.links)
+            else -> navController.navigate(R.id.tips)
+        }
+        return true
     }
 
 }
