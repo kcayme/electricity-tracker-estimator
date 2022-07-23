@@ -6,12 +6,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="You Appliances"
+        android:layout_marginStart="10dp"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
     <com.google.android.material.chip.ChipGroup
         style="@style/Widget.Material3.Chip.Filter.Elevated"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:paddingStart="10dp"
+        android:paddingStart="20dp"
         app:singleSelection="false">
 
         <com.google.android.material.chip.Chip
@@ -71,8 +82,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
         android:hint="Electricity Rate"
-        android:padding="10dp"
         app:boxStrokeWidth="0dp">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -83,28 +94,16 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="382dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="16dp"
-        android:text="DEVICES"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
-
     <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:layout_marginTop="9dp">
+        android:layout_marginTop="10dp">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="580dp"
             app:cardBackgroundColor="@color/theme_yellow"
-            app:cardCornerRadius="40dp"
-            >
+            app:cardCornerRadius="40dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -127,6 +126,7 @@
     </LinearLayout>
 
     <ListView
+        android:visibility="gone"
         android:id="@+id/deviceList"
         android:layout_width="wrap_content"
         android:layout_height="522dp" />
