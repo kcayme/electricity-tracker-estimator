@@ -11,7 +11,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:hint="Appliance Type"
+        android:hint="@string/appliance_name"
         app:startIconDrawable="@drawable/ic_appliance">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -23,7 +23,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:hint="Appliance Name"
+        android:hint="@string/appliance_type"
         app:startIconDrawable="@drawable/ic_appliance">
 
         <AutoCompleteTextView
