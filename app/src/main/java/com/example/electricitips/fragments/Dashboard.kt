@@ -41,6 +41,11 @@ class Dashboard :  Fragment(R.layout.fragment_dashboard){
         arrayList.add(MyData(R.drawable.ic_appliance, "Pride & Prejudice",  "2005"))
         val romListAdapter = MyListAdapter(this, arrayList)
         _binding?.deviceList?.adapter = romListAdapter
+        if(arguments != null){
+            val bundle = arguments
+            val data = bundle!!.getStringArrayList("data")
+            _binding!!.listHeader.text = data.toString()
+        }
     }
 
     override fun onDestroyView() {
