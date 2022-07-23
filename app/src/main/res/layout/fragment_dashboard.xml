@@ -17,7 +17,7 @@
         android:text="Your Appliances"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="26sp"
         android:textStyle="bold" />
 
     <com.google.android.material.chip.ChipGroup
@@ -26,7 +26,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:selectionRequired="true"
         android:paddingStart="20dp"
         app:singleSelection="false">
 
@@ -35,46 +34,38 @@
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="All" />
+            android:text="Entertainment" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip2"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Entertainment" />
+            android:text="Lighting" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip3"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lighting" />
+            android:text="Cooling" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip4"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cooling" />
+            android:text="Kitchen" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip5"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kitchen" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip6"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Household" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip7"
+            android:id="@+id/chip6"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -101,7 +92,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dashboard_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"

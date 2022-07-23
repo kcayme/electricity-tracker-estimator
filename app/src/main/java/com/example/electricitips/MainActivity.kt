@@ -4,14 +4,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcelable
 import android.text.TextUtils.isEmpty
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.example.electricitips.databinding.ActivityMainBinding
 import com.example.electricitips.databinding.FragmentInputFormBinding
@@ -51,11 +55,16 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavView.setupWithNavController(navController)
 
         // listener still needed to ensure correct navigation
+        /*
         binding.bottomNavView.setOnItemSelectedListener {
             navigateFragments(it)
         }
+         */
+
 
         binding.floating.setOnClickListener {
+            //val manager = supportFragmentManager.fragments.size.toString()
+            //Toast.makeText(this,"$manager",Toast.LENGTH_SHORT).show()
             navController.navigate(R.id.dashboard)
 
             val inputBind = FragmentInputFormBinding.inflate(layoutInflater)
@@ -77,6 +86,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             inputBind.confirmBtn.setOnClickListener {
+
+
                 val name = inputBind.inputName.text.toString()
                 val type = inputBind.inputType.text.toString()
                 val rating = inputBind.inputRating.text.toString()
@@ -103,7 +114,9 @@ class MainActivity : AppCompatActivity() {
                         // pass bundle as an argument of the fragment
                         dbFragment.arguments = bundle
                         // replace the current dashboard fragment in the R.id.nav_host_fragment and replace with newer instance of dashboard containing the input
-                        fragmentTransaction.replace(R.id.nav_host_fragment,dbFragment).commit()
+                        fragmentTransaction.replace(R.id.nav_host_fragment,dbFragment, "DASHBOARD")
+                        //fragmentTransaction.addToBackStack(supportFragmentManager.fragments[])
+                        fragmentTransaction.commit()
                     }
                 }
 
@@ -112,6 +125,15 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.bottom_nav, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item,navController) || super.onOptionsItemSelected(item)
     }
 
     private fun getTypeIcon(type: String) = when (type) {
@@ -124,11 +146,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateFragments(it: MenuItem): Boolean {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
         when (it.itemId) {
-            R.id.home -> navController.navigate(R.id.home)
-            R.id.dashboard -> navController.navigate(R.id.dashboard)
-            R.id.links -> navController.navigate(R.id.links)
-            else -> navController.navigate(R.id.tips)
+            R.id.home -> NavigationUI.onNavDestinationSelected(it,navController)
+            R.id.dashboard -> NavigationUI.onNavDestinationSelected(it,navController)
+            R.id.links -> NavigationUI.onNavDestinationSelected(it,navController)
+            else -> NavigationUI.onNavDestinationSelected(it,navController)
         }
         return true
     }
