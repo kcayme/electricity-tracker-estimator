@@ -5,9 +5,10 @@
     <string-array name="appliance_types">
         <item>Entertainment</item>
         <item>Lighting</item>
-        <item>Cooling and Ventilation</item>
+        <item>Cooling</item>
         <item>Kitchen Appliance</item>
         <item>Household Appliance</item>
+        <item>Others</item>
     </string-array>
     <string name="links">Links</string>
     <string name="tips">Tips</string>

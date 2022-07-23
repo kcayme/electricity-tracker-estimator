@@ -60,7 +60,6 @@ class MainActivity : AppCompatActivity() {
                 .setView(inputBind.root)
                 .setCancelable(true)
                 .setIcon(R.drawable.ic_baseline_input_24)
-                .setTitle("Input Device")
             val mAlertDialog = mBuilder.show()
 
             inputBind.cancelBtn.setOnClickListener {
@@ -78,7 +77,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-
 
     }
 
