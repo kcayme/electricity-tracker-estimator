@@ -93,7 +93,6 @@ class MainActivity : AppCompatActivity() {
                     dbFragment.arguments = bundle
                 }
                 if (dbFragment != null) {
-                    fragmentTransaction.remove()
                     // replace the current dashboard fragment in the R.id.nav_host_fragment and replace with newer instance of dashboard containing the input
                     fragmentTransaction.replace(R.id.nav_host_fragment,dbFragment).commit()
                 }
