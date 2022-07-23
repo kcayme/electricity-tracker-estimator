@@ -3,11 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Karl BACKUP/Karl Iskwela/USC Kolehiyo/YEAR 3/Mobile Dev/Electricitips/app/src/main/res/layout/activity_main.xml" value="0.2758152173913043" />
+        <entry key="..\:/Karl BACKUP/Karl Iskwela/USC Kolehiyo/YEAR 3/Mobile Dev/Electricitips/app/src/main/res/layout/activity_main.xml" value="0.20469798657718122" />
+        <entry key="..\:/Karl BACKUP/Karl Iskwela/USC Kolehiyo/YEAR 3/Mobile Dev/Electricitips/app/src/main/res/layout/cardview_items.xml" value="0.33" />
         <entry key="..\:/Karl BACKUP/Karl Iskwela/USC Kolehiyo/YEAR 3/Mobile Dev/Electricitips/app/src/main/res/layout/fragment_articles.xml" value="0.18802083333333333" />
-        <entry key="..\:/Karl BACKUP/Karl Iskwela/USC Kolehiyo/YEAR 3/Mobile Dev/Electricitips/app/src/main/res/layout/fragment_dashboard.xml" value="0.14893617021276595" />
+        <entry key="..\:/Karl BACKUP/Karl Iskwela/USC Kolehiyo/YEAR 3/Mobile Dev/Electricitips/app/src/main/res/layout/fragment_dashboard.xml" value="0.22" />
         <entry key="..\:/Karl BACKUP/Karl Iskwela/USC Kolehiyo/YEAR 3/Mobile Dev/Electricitips/app/src/main/res/layout/fragment_home.xml" value="0.13793103448275862" />
         <entry key="..\:/Karl BACKUP/Karl Iskwela/USC Kolehiyo/YEAR 3/Mobile Dev/Electricitips/app/src/main/res/layout/fragment_others.xml" value="0.18802083333333333" />
+        <entry key="..\:/Karl BACKUP/Karl Iskwela/USC Kolehiyo/YEAR 3/Mobile Dev/Electricitips/app/src/main/res/layout/list_view.xml" value="0.36666666666666664" />
         <entry key="..\:/Karl BACKUP/Karl Iskwela/USC Kolehiyo/YEAR 3/Mobile Dev/Electricitips/app/src/main/res/menu/bottom_nav.xml" value="0.18802083333333333" />
         <entry key="..\:/Karl BACKUP/Karl Iskwela/USC Kolehiyo/YEAR 3/Summer Sem/Mobile Dev/LE/electricity-tracker-estimator/app/src/main/res/drawable/ic_appliance_24.xml" value="0.229" />
         <entry key="..\:/Karl BACKUP/Karl Iskwela/USC Kolehiyo/YEAR 3/Summer Sem/Mobile Dev/LE/electricity-tracker-estimator/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.338" />

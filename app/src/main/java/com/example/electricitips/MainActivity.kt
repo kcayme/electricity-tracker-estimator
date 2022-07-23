@@ -2,6 +2,9 @@ package com.example.electricitips
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
+import android.text.TextUtils.isEmpty
+import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -12,12 +15,26 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.electricitips.databinding.ActivityMainBinding
 import com.example.electricitips.databinding.FragmentInputFormBinding
+import com.example.electricitips.fragments.Dashboard
 
+/*
+        Minimum Requiresments:
+        a. Segues (Multi-scene)
+        b. Embed in Tab Bar / Navigation View Controller
+        c. Appropriate User Interfaces
+        d. Alert View / Action View
+        e. Images and Sounds
+        f. Table Views / Picker View / Web View (better option, as per app requires)
+        g. Dynamic  Data  Persistence:  Property  List  /  Core  Data  /  SQLite  (better  option,  as  per  app
+        requires)
+        h. App Icon
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private var arrayList = ArrayList<Appliance>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,13 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         // listener still needed to ensure correct navigation
         binding.bottomNavView.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.home -> navController.navigate(R.id.home)
-                R.id.dashboard -> navController.navigate(R.id.dashboard)
-                R.id.links -> navController.navigate(R.id.links)
-                else -> navController.navigate(R.id.tips)
-            }
-            true
+            navigateFragments(it)
         }
 
         binding.floating.setOnClickListener {
@@ -59,7 +70,6 @@ class MainActivity : AppCompatActivity() {
             val mBuilder = AlertDialog.Builder(this)
                 .setView(inputBind.root)
                 .setCancelable(true)
-                .setIcon(R.drawable.ic_baseline_input_24)
             val mAlertDialog = mBuilder.show()
 
             inputBind.cancelBtn.setOnClickListener {
@@ -72,12 +82,55 @@ class MainActivity : AppCompatActivity() {
                 val rating = inputBind.inputRating.text.toString()
                 val duration = inputBind.inputHours.text.toString()
                 val freq = inputBind.inputFreq.text.toString()
+
                 mAlertDialog.dismiss()
-                Toast.makeText(this,"$name $type $rating $duration $freq",Toast.LENGTH_LONG).show()
+
+                if(isEmpty(name) || isEmpty(type) || isEmpty(rating) || isEmpty(duration) || isEmpty(freq)){
+                    Toast.makeText(this, "Some fields are empty!",Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    var imgID: Int = getTypeIcon(type)
+                    var newAppliance = Appliance(imgID,name,type,rating,duration,freq)
+                    arrayList.add(newAppliance)
+                    // create new dashboard object
+                    val dbFragment = Dashboard()
+                    // create transaction object
+                    val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    // create bundle containing user inputs
+                    val bundle = Bundle()
+                    bundle.putParcelableArrayList("data", arrayList)
+                    if (dbFragment != null) {
+                        // pass bundle as an argument of the fragment
+                        dbFragment.arguments = bundle
+                        // replace the current dashboard fragment in the R.id.nav_host_fragment and replace with newer instance of dashboard containing the input
+                        fragmentTransaction.replace(R.id.nav_host_fragment,dbFragment).commit()
+                    }
+                }
+
+
             }
 
         }
 
+    }
+
+    private fun getTypeIcon(type: String) = when (type) {
+        "Entertainment" -> R.drawable.entertainment
+        "Lighting" -> R.drawable.lighting
+        "Cooling" -> R.drawable.cooling
+        "Kitchen Appliance" -> R.drawable.kitchen
+        "Household Appliance" -> R.drawable.household
+        else -> R.drawable.others
+    }
+
+    private fun navigateFragments(it: MenuItem): Boolean {
+        when (it.itemId) {
+            R.id.home -> navController.navigate(R.id.home)
+            R.id.dashboard -> navController.navigate(R.id.dashboard)
+            R.id.links -> navController.navigate(R.id.links)
+            else -> navController.navigate(R.id.tips)
+        }
+        return true
     }
 
 }

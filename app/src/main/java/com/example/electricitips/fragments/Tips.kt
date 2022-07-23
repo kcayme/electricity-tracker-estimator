@@ -12,7 +12,10 @@ class Tips :  Fragment(){
         inflater: LayoutInflater, container:ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // inflate layout for this fragment
         val view = inflater.inflate(R.layout.fragment_tips, container, false)
+
+
         return view
     }
 

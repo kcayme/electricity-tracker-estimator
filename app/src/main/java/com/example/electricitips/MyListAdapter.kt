@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 
-class MyListAdapter (private val context: Fragment, private val arrayList: ArrayList<MyData>) : BaseAdapter(){
+class MyListAdapter (private val context: Fragment, private val arrayList: ArrayList<Appliance>) : BaseAdapter(){
     override fun getCount(): Int {
         return arrayList.size
     }
@@ -24,18 +24,17 @@ class MyListAdapter (private val context: Fragment, private val arrayList: Array
         val inflater = context.layoutInflater
         val rowView = inflater.inflate(R.layout.list_view, null, true)
 
-        val titleText = rowView.findViewById<TextView>(R.id.name)
-        val dateText = rowView.findViewById<TextView>(R.id.type)
-        val img = rowView.findViewById<ImageView>(R.id.iconImageView)
+        val titleText = rowView.findViewById<TextView>(R.id.card_name)
+        val dateText = rowView.findViewById<TextView>(R.id.card_type)
+        val img = rowView.findViewById<ImageView>(R.id.card_img)
 
-        titleText.text = arrayList[position].title
-        dateText.text = arrayList[position].release
-        img.setImageResource( arrayList[position].Id)
+        //titleText.text = arrayList[position].title
+        //dateText.text = arrayList[position].release
+        //img.setImageResource( arrayList[position].Id)
 
         return rowView
     }
 }
-class MyData(var Id: Int, var title: String, var release: String)
 /*
 class MyAdapter(private val context: Context, private val arrayList: java.util.ArrayList<MyData>) : BaseAdapter() {
     private lateinit var serialNum: TextView
