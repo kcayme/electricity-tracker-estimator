@@ -34,7 +34,6 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
          return binding!!.root
      }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -43,7 +42,6 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
             val bundle = arguments
             if (bundle != null) {
                 arrayList = bundle.getParcelableArrayList("data")!!
-                Toast.makeText(context, "${arrayList.size.toString()}", Toast.LENGTH_SHORT).show()
             }
         }
         // use data passed into cardview
@@ -52,64 +50,189 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
             val cardAdapter = RecyclerViewAdapter(arrayList, this)
             binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
             binding?.dashboardRecyclerview?.adapter = cardAdapter
+
         }
 
-        binding!!.chip1.setOnClickListener {
-
-            var cardAdapter: RecyclerViewAdapter? = null
-            val checkedIDs = binding!!.chipGroup.checkedChipIds
-            //if no chips are selected
-            if(!binding!!.chip1.isChecked && checkedIDs.size == 0){
-                cardAdapter = RecyclerViewAdapter(arrayList, this)
-                filteredArrayList.clear()
-            }
-            // if this chip is not selected but other chips are
-            else if(!binding!!.chip1.isChecked && checkedIDs.size >= 1){
-                filteredArrayList.removeIf {
-                    it.type == "Entertainment"
+        binding!!.fillterEntertainment.setOnClickListener {
+            if(arrayList != null){
+                var cardAdapter: RecyclerViewAdapter? = null
+                val checkedIDs = binding!!.chipGroup.checkedChipIds
+                //if no chips are selected
+                if(!binding!!.fillterEntertainment.isChecked && checkedIDs.size == 0){
+                    cardAdapter = RecyclerViewAdapter(arrayList, this)
+                    filteredArrayList.clear()
                 }
-                cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
-            }
-            // if this chip is selected
-            else if(binding!!.chip1.isChecked) {
-                for (appliance in arrayList){
-                    if(appliance.type == "Entertainment"){
-                        filteredArrayList.add(appliance)
+                // if this chip is not selected but other chips are
+                else if(!binding!!.fillterEntertainment.isChecked && checkedIDs.size >= 1){
+                    filteredArrayList.removeIf {
+                        it.type == "Entertainment"
                     }
+                    cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
                 }
-                cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
+                // if this chip is selected
+                else if(binding!!.fillterEntertainment.isChecked) {
+                    for (appliance in arrayList){
+                        if(appliance.type == "Entertainment"){
+                            filteredArrayList.add(appliance)
+                        }
+                    }
+                    cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
+                }
+                binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
+                binding?.dashboardRecyclerview?.adapter = cardAdapter
             }
-            binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
-            binding?.dashboardRecyclerview?.adapter = cardAdapter
         }
 
-        binding!!.chip2.setOnClickListener {
-            var cardAdapter: RecyclerViewAdapter? = null
-            val checkedIDs = binding!!.chipGroup.checkedChipIds
-            //if no chips are selected
-            if(!binding!!.chip2.isChecked && checkedIDs.size == 0){
-                cardAdapter = RecyclerViewAdapter(arrayList, this)
-                filteredArrayList.clear()
-            }
-            // if this chip is not selected but other chips are
-            else if(!binding!!.chip2.isChecked && checkedIDs.size >= 1){
-                filteredArrayList.removeIf {
-                    it.type == "Lighting"
+        binding!!.filterLighting.setOnClickListener {
+            if(arrayList != null){
+                var cardAdapter: RecyclerViewAdapter? = null
+                val checkedIDs = binding!!.chipGroup.checkedChipIds
+                //if no chips are selected
+                if(!binding!!.filterLighting.isChecked && checkedIDs.size == 0){
+                    cardAdapter = RecyclerViewAdapter(arrayList, this)
+                    filteredArrayList.clear()
                 }
-                cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
-            }
-            // if this chip is selected
-            else if(binding!!.chip2.isChecked) {
-                for (appliance in arrayList){
-                    if(appliance.type == "Lighting"){
-                        filteredArrayList.add(appliance)
+                // if this chip is not selected but other chips are
+                else if(!binding!!.filterLighting.isChecked && checkedIDs.size >= 1){
+                    filteredArrayList.removeIf {
+                        it.type == "Lighting"
                     }
+                    cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
                 }
-                cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
+                // if this chip is selected
+                else if(binding!!.filterLighting.isChecked) {
+                    for (appliance in arrayList){
+                        if(appliance.type == "Lighting"){
+                            filteredArrayList.add(appliance)
+                        }
+                    }
+                    cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
+                }
+                binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
+                binding?.dashboardRecyclerview?.adapter = cardAdapter
             }
-            binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
-            binding?.dashboardRecyclerview?.adapter = cardAdapter
         }
+
+        binding!!.filterCooling.setOnClickListener {
+            if(arrayList != null){
+                var cardAdapter: RecyclerViewAdapter? = null
+                val checkedIDs = binding!!.chipGroup.checkedChipIds
+                //if no chips are selected
+                if(!binding!!.filterCooling.isChecked && checkedIDs.size == 0){
+                    cardAdapter = RecyclerViewAdapter(arrayList, this)
+                    filteredArrayList.clear()
+                }
+                // if this chip is not selected but other chips are
+                else if(!binding!!.filterCooling.isChecked && checkedIDs.size >= 1){
+                    filteredArrayList.removeIf {
+                        it.type == "Cooling"
+                    }
+                    cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
+                }
+                // if this chip is selected
+                else if(binding!!.filterCooling.isChecked) {
+                    for (appliance in arrayList){
+                        if(appliance.type == "Cooling"){
+                            filteredArrayList.add(appliance)
+                        }
+                    }
+                    cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
+                }
+                binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
+                binding?.dashboardRecyclerview?.adapter = cardAdapter
+            }
+        }
+
+        binding!!.filterKitchen.setOnClickListener {
+            if(arrayList != null){
+                var cardAdapter: RecyclerViewAdapter? = null
+                val checkedIDs = binding!!.chipGroup.checkedChipIds
+                //if no chips are selected
+                if(!binding!!.filterCooling.isChecked && checkedIDs.size == 0){
+                    cardAdapter = RecyclerViewAdapter(arrayList, this)
+                    filteredArrayList.clear()
+                }
+                // if this chip is not selected but other chips are
+                else if(!binding!!.filterKitchen.isChecked && checkedIDs.size >= 1){
+                    filteredArrayList.removeIf {
+                        it.type == "Kitchen Appliance"
+                    }
+                    cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
+                }
+                // if this chip is selected
+                else if(binding!!.filterKitchen.isChecked) {
+                    for (appliance in arrayList){
+                        if(appliance.type == "Kitchen Appliance"){
+                            filteredArrayList.add(appliance)
+                        }
+                    }
+                    cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
+                }
+                binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
+                binding?.dashboardRecyclerview?.adapter = cardAdapter
+            }
+        }
+
+        binding!!.filterHousehold.setOnClickListener {
+            if(arrayList != null){
+                var cardAdapter: RecyclerViewAdapter? = null
+                val checkedIDs = binding!!.chipGroup.checkedChipIds
+                //if no chips are selected
+                if(!binding!!.filterHousehold.isChecked && checkedIDs.size == 0){
+                    cardAdapter = RecyclerViewAdapter(arrayList, this)
+                    filteredArrayList.clear()
+                }
+                // if this chip is not selected but other chips are
+                else if(!binding!!.filterHousehold.isChecked && checkedIDs.size >= 1){
+                    filteredArrayList.removeIf {
+                        it.type == "Household Appliance"
+                    }
+                    cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
+                }
+                // if this chip is selected
+                else if(binding!!.filterHousehold.isChecked) {
+                    for (appliance in arrayList){
+                        if(appliance.type == "Household Appliance"){
+                            filteredArrayList.add(appliance)
+                        }
+                    }
+                    cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
+                }
+                binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
+                binding?.dashboardRecyclerview?.adapter = cardAdapter
+            }
+        }
+
+        binding!!.filterOthers.setOnClickListener {
+            if(arrayList != null){
+                var cardAdapter: RecyclerViewAdapter? = null
+                val checkedIDs = binding!!.chipGroup.checkedChipIds
+                //if no chips are selected
+                if(!binding!!.filterOthers.isChecked && checkedIDs.size == 0){
+                    cardAdapter = RecyclerViewAdapter(arrayList, this)
+                    filteredArrayList.clear()
+                }
+                // if this chip is not selected but other chips are
+                else if(!binding!!.filterOthers.isChecked && checkedIDs.size >= 1){
+                    filteredArrayList.removeIf {
+                        it.type == "Others"
+                    }
+                    cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
+                }
+                // if this chip is selected
+                else if(binding!!.filterOthers.isChecked) {
+                    for (appliance in arrayList){
+                        if(appliance.type == "Others"){
+                            filteredArrayList.add(appliance)
+                        }
+                    }
+                    cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
+                }
+                binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
+                binding?.dashboardRecyclerview?.adapter = cardAdapter
+            }
+        }
+
     }
 
     override fun onDestroyView() {

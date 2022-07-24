@@ -9,6 +9,8 @@ import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -20,6 +22,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.electricitips.databinding.ActivityMainBinding
 import com.example.electricitips.databinding.FragmentInputFormBinding
 import com.example.electricitips.fragments.Dashboard
+import com.example.electricitips.fragments.Home
+import com.example.electricitips.fragments.Links
+import com.example.electricitips.fragments.Tips
 
 /*
         Minimum Requiresments:
@@ -54,19 +59,46 @@ class MainActivity : AppCompatActivity() {
         )
         binding.bottomNavView.setupWithNavController(navController)
 
-        // listener still needed to ensure correct navigation
-        /*
-        binding.bottomNavView.setOnItemSelectedListener {
-            navigateFragments(it)
-        }
-         */
 
+        // listener still needed to ensure correct navigation
+        binding.bottomNavView.setOnItemSelectedListener {
+            val fragTransaction = supportFragmentManager.beginTransaction()
+            when (it.itemId) {
+                R.id.home -> {
+                    val fragHome = Home()
+                    fragTransaction.replace(R.id.nav_host_fragment, fragHome, "HOME")
+                    fragTransaction.commit()
+                    true
+                }
+                R.id.dashboard -> {
+                    val fragDash = Dashboard()
+                    if (arrayList != null){
+                        val bundle = Bundle()
+                        bundle.putParcelableArrayList("data", arrayList)
+                        fragDash.arguments = bundle
+                    }
+                    fragTransaction.replace(R.id.nav_host_fragment,fragDash, "DASHBOARD")
+                    fragTransaction.commit()
+                    true
+                }
+                R.id.links -> {
+                    val fragLinks = Links()
+                    fragTransaction.replace(R.id.nav_host_fragment, fragLinks, "LINKS")
+                    fragTransaction.commit()
+                    true
+                }
+                else -> {
+                    val fragTips = Tips()
+                    fragTransaction.replace(R.id.nav_host_fragment, fragTips, "TIPS")
+                    fragTransaction.commit()
+                    true
+                }
+            }
+
+            true
+        }
 
         binding.floating.setOnClickListener {
-            //val manager = supportFragmentManager.fragments.size.toString()
-            //Toast.makeText(this,"$manager",Toast.LENGTH_SHORT).show()
-            navController.navigate(R.id.dashboard)
-
             val inputBind = FragmentInputFormBinding.inflate(layoutInflater)
 
             val typeItems: Array<String> = resources.getStringArray(R.array.appliance_types)
@@ -80,6 +112,8 @@ class MainActivity : AppCompatActivity() {
                 .setView(inputBind.root)
                 .setCancelable(true)
             val mAlertDialog = mBuilder.show()
+
+            navController.navigate(R.id.dashboard)
 
             inputBind.cancelBtn.setOnClickListener {
                 mAlertDialog.dismiss()
@@ -113,9 +147,7 @@ class MainActivity : AppCompatActivity() {
                     if (dbFragment != null) {
                         // pass bundle as an argument of the fragment
                         dbFragment.arguments = bundle
-                        // replace the current dashboard fragment in the R.id.nav_host_fragment and replace with newer instance of dashboard containing the input
                         fragmentTransaction.replace(R.id.nav_host_fragment,dbFragment, "DASHBOARD")
-                        //fragmentTransaction.addToBackStack(supportFragmentManager.fragments[])
                         fragmentTransaction.commit()
                     }
                 }
@@ -133,7 +165,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item,navController) || super.onOptionsItemSelected(item)
+        return  item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 
     private fun getTypeIcon(type: String) = when (type) {
@@ -144,16 +176,4 @@ class MainActivity : AppCompatActivity() {
         "Household Appliance" -> R.drawable.household
         else -> R.drawable.others
     }
-
-    private fun navigateFragments(it: MenuItem): Boolean {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        when (it.itemId) {
-            R.id.home -> NavigationUI.onNavDestinationSelected(it,navController)
-            R.id.dashboard -> NavigationUI.onNavDestinationSelected(it,navController)
-            R.id.links -> NavigationUI.onNavDestinationSelected(it,navController)
-            else -> NavigationUI.onNavDestinationSelected(it,navController)
-        }
-        return true
-    }
-
 }
