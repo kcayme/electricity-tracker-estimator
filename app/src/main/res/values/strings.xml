@@ -5,14 +5,20 @@
     <string-array name="appliance_types">
         <item>Entertainment</item>
         <item>Lighting</item>
-        <item>Cooling and Ventilation</item>
+        <item>Cooling</item>
         <item>Kitchen Appliance</item>
         <item>Household Appliance</item>
+        <item>Others</item>
     </string-array>
     <string name="links">Links</string>
     <string name="tips">Tips</string>
     <string name="dashboard">Dashboard</string>
     <string name="home">Home</string>
+    <string-array name="frequency">
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+    </string-array>
     <string name="luzon">LUZON</string>
     <string name="visayas">VISAYAS</string>
     <string name="mindanao">MINDANAO</string>
