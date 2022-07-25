@@ -12,7 +12,6 @@ class SharedViewModel : ViewModel() {
     var arrayListLive : LiveData<ArrayList<Appliance>> = arrayList
     var electricityRateLive = electricityRate
 
-
     fun setApplianceList (arrayListLive: ArrayList<Appliance>){
         arrayList.value = arrayListLive
     }

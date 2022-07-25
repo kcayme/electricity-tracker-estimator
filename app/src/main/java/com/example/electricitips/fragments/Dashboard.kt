@@ -15,10 +15,7 @@ import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.electricitips.Appliance
-import com.example.electricitips.R
-import com.example.electricitips.RecyclerViewAdapter
-import com.example.electricitips.SharedViewModel
+import com.example.electricitips.*
 import com.example.electricitips.databinding.FragmentDashboardBinding
 
 
@@ -32,6 +29,7 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
     // this is a ViewModel class that holds data (the added items and electricity rate input) that can be used by all fragments and main activity
     // NOT USED FOR DATA PERSISTENCE
     private val sharedViewModel: SharedViewModel by activityViewModels()
+    private lateinit var applianceDBHelper: ApplianceDBHelper
 
      override fun onCreateView(
          inflater: LayoutInflater,
@@ -39,6 +37,9 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
          savedInstanceState: Bundle?
      ): View? {
          binding = FragmentDashboardBinding.inflate(inflater, container, false)
+
+         // initialize db helper
+         applianceDBHelper = ApplianceDBHelper(activity!!.applicationContext)
 
          val modelSavedCost = sharedViewModel.electricityRateLive.value
          if(modelSavedCost == null){
@@ -61,15 +62,7 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // get arraylist data passed from main activity
-        if(arguments != null){
-            val bundle = arguments
-            if (bundle != null) {
-                arrayList = bundle.getParcelableArrayList("data")!!
-            }
-        }
-        // set arraylist data of sharedviewmodel
-        sharedViewModel.setApplianceList(arrayList)
+        arrayList = applianceDBHelper.readAllAppliances()
 
         // use data passed into cardview
         if(arrayList != null){

@@ -3,26 +3,17 @@ package com.example.electricitips
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Parcelable
 import android.text.TextUtils.isEmpty
 import android.view.Menu
 import android.view.MenuItem
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.getSystemService
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.example.electricitips.databinding.ActivityMainBinding
@@ -50,24 +41,25 @@ class MainActivity : AppCompatActivity() {
     // navigation components
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
-    // arraylist that holds item inputs
-    private var arrayList = ArrayList<Appliance>()
-    // this is a ViewModel class that holds data (the added items and electricity rate input) that can be used by all fragments and main activity
+    // database helper
+    private lateinit var applianceDBHelper: ApplianceDBHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // setup navigation bar
+        // setup navigation host
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         //navController controls the navigation between fragments
         navController = navHostFragment.findNavController()
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.home,R.id.dashboard,R.id.links,R.id.tips)
         )
+        // setup controller of navigation bar
         binding.bottomNavView.setupWithNavController(navController)
 
+        applianceDBHelper = ApplianceDBHelper(this)
 
         // listener still needed to ensure correct navigation
         binding.bottomNavView.setOnItemSelectedListener {
@@ -81,12 +73,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.dashboard -> {
                     val fragDash = Dashboard()
-                    if (arrayList != null){
-                        val bundle = Bundle()
-                        bundle.putParcelableArrayList("data", arrayList)
-                        fragDash.arguments = bundle
-                    }
-                    fragTransaction.replace(R.id.nav_host_fragment,fragDash, "DASHBOARD")
+                    fragTransaction.replace(R.id.nav_host_fragment, fragDash, "DASHBOARD")
                     fragTransaction.commit()
                     true
                 }
@@ -103,11 +90,11 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
             }
-
             true
         }
 
         binding.floating.setOnClickListener {
+            navController.navigate(R.id.dashboard)
             val inputBind = FragmentInputFormBinding.inflate(layoutInflater)
 
             val typeItems: Array<String> = resources.getStringArray(R.array.appliance_types)
@@ -123,7 +110,6 @@ class MainActivity : AppCompatActivity() {
             val mAlertDialog = mBuilder.show()
             mAlertDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
             mAlertDialog.window!!.setBackgroundBlurRadius(3)
-            navController.navigate(R.id.dashboard)
 
             // force hide keyboard when Type and Frequency inputs text are pressed
             inputBind.inputFreq.setOnClickListener {
@@ -143,30 +129,35 @@ class MainActivity : AppCompatActivity() {
 
 
                 val name = inputBind.inputName.text.toString()
+                val code = inputBind.inputCode.text.toString().uppercase()
                 val type = inputBind.inputType.text.toString()
                 val rating = inputBind.inputRating.text.toString()
                 val duration = inputBind.inputHours.text.toString()
                 val freq = inputBind.inputFreq.text.toString()
 
-                mAlertDialog.dismiss()
-
                 if(isEmpty(name) || isEmpty(type) || isEmpty(rating) || isEmpty(duration) || isEmpty(freq)){
                     Toast.makeText(this, "Some fields are empty!",Toast.LENGTH_SHORT).show()
                 }
                 else{
+                    mAlertDialog.dismiss()
                     var imgID: Int = getTypeIcon(type)
-                    var newAppliance = Appliance(imgID,name,type,rating,duration,freq)
-                    arrayList.add(newAppliance)
+                    var newAppliance = Appliance(imgId = imgID, name = name,
+                        modelCode = code, type = type,
+                        rating = rating.toFloat(), duration = duration.toFloat(), frequency = freq
+                    )
+                    //arrayList.add(newAppliance)
+                    val msg = applianceDBHelper.insertAppliance(newAppliance)
+                    Toast.makeText(this,"Successful Add? $msg", Toast.LENGTH_SHORT).show()
                     // create new dashboard object
                     val dbFragment = Dashboard()
                     // create transaction object
                     val fragmentTransaction = supportFragmentManager.beginTransaction()
                     // create bundle containing user inputs
-                    val bundle = Bundle()
-                    bundle.putParcelableArrayList("data", arrayList)
+                    //val bundle = Bundle()
+                    //bundle.putParcelableArrayList("data", arrayList)
                     if (dbFragment != null) {
                         // pass bundle as an argument of the fragment
-                        dbFragment.arguments = bundle
+                        //dbFragment.arguments = bundle
                         fragmentTransaction.replace(R.id.nav_host_fragment,dbFragment, "DASHBOARD")
                         fragmentTransaction.commit()
                     }
