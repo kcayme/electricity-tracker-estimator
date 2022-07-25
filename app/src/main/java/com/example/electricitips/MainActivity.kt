@@ -15,6 +15,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.getSystemService
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -45,9 +47,12 @@ import com.example.electricitips.fragments.Tips
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    // navigation components
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
+    // arraylist that holds item inputs
     private var arrayList = ArrayList<Appliance>()
+    // this is a ViewModel class that holds data (the added items and electricity rate input) that can be used by all fragments and main activity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

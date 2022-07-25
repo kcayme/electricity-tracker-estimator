@@ -31,7 +31,7 @@
         app:singleSelection="false">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/fillter_entertainment"
+            android:id="@+id/filter_entertainment"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,6 +81,7 @@
         android:paddingEnd="20dp">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/costInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
