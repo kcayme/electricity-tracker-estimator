@@ -4,16 +4,16 @@
     android:id="@+id/dashboard_cardview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
+    android:layout_marginBottom="5dp"
     android:elevation="3dp"
     android:foreground="?selectableItemBackground"
     app:cardCornerRadius="20dp">
 
     <LinearLayout
+        android:id="@+id/card_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_margin="3dp"
         android:orientation="horizontal"
         android:paddingStart="15dp"
         android:paddingEnd="10dp">
@@ -70,8 +70,16 @@
                             android:id="@+id/card_rating"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="asda"
+                            android:text="213"
                             android:textAlignment="textEnd"
+                            android:textColor="@color/white"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" W"
                             android:textColor="@color/white"
                             android:textSize="16sp" />
 
@@ -95,24 +103,23 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/textView3"
+                            android:id="@+id/textView6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="10dp"
-                            android:paddingEnd="10dp"
-                            android:text="|"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/card_frequency"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Frequency"
-                            android:textAlignment="textEnd"
+                            android:text=" Hrs"
                             android:textColor="@color/white"
                             android:textSize="16sp" />
+
                     </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/card_frequency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Frequency"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
