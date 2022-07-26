@@ -1,18 +1,12 @@
 package com.example.electricitips
 
-import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
-import com.example.electricitips.R
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 
 class RecyclerViewAdapter (var arrayList: ArrayList<Appliance>, val context: Fragment) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
@@ -29,13 +23,24 @@ class RecyclerViewAdapter (var arrayList: ArrayList<Appliance>, val context: Fra
         private var frequency = itemView.findViewById<TextView>(R.id.card_frequency)
 
         fun bindItems(appliance: Appliance){
-            img.setImageResource(appliance.imgId)
-            name.text = appliance.name
-            modelCode.text = appliance.modelCode
-            type.text = appliance.type
-            rating.text = appliance.rating.toString()
-            duration.text = appliance.duration.toString()
-            frequency.text = appliance.frequency
+            if(appliance.imgId == R.drawable.empty){
+                img.setImageResource(appliance.imgId)
+                name.text = appliance.name
+                modelCode.visibility = View.GONE
+                type.visibility = View.GONE
+                rating.text = "N/A"
+                duration.text = "N/A"
+                frequency.visibility = View.GONE
+            }
+            else{
+                img.setImageResource(appliance.imgId)
+                name.text = appliance.name
+                modelCode.text = appliance.modelCode
+                type.text = appliance.type
+                rating.text = appliance.rating.toString()
+                duration.text = appliance.duration.toString()
+                frequency.text = appliance.frequency
+            }
         }
     }
 
@@ -43,6 +48,7 @@ class RecyclerViewAdapter (var arrayList: ArrayList<Appliance>, val context: Fra
         val v = LayoutInflater.from(parent.context).inflate(R.layout.cardview_items, parent, false)
         // initialize db helper
         applianceDBHelper = ApplianceDBHelper(context.context!!)
+
         return ViewHolder(v)
     }
 
@@ -53,22 +59,37 @@ class RecyclerViewAdapter (var arrayList: ArrayList<Appliance>, val context: Fra
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems(arrayList[position])
 
-        holder.itemView.setOnLongClickListener{
-            Toast.makeText(context.context,"${arrayList[position].modelCode} selected", Toast.LENGTH_SHORT).show()
-            AlertDialog.Builder(context!!.context!!)
-                .setTitle("Delete")
-                .setMessage("Proceed to delete item?")
-                .setPositiveButton("OK"){ dialog, which ->
-                    // delete item from database
-                    applianceDBHelper.deleteAppliance(arrayList.get(position).modelCode)
-                    // delete item from adapter's arraylist
-                    arrayList.removeAt(position)
-                    // update recycler view
-                    notifyDataSetChanged()
-                }
-                .setNegativeButton("Cancel"){_,_ ->
-                }
-                .show()
+        holder.itemView.setOnLongClickListener {
+            if(holder.itemView.findViewById<TextView>(R.id.card_rating).text != "N/A"){
+                AlertDialog.Builder(context!!.context!!)
+                    .setMessage("Proceed to delete item?")
+                    .setPositiveButton("OK") { dialog, which ->
+                        // delete item from database
+                        applianceDBHelper.deleteAppliance(arrayList[position].modelCode)
+                        // delete item from adapter's arraylist
+                        arrayList.removeAt(position)
+                        if (arrayList.size == 0) {
+                            arrayList.add(
+                                Appliance(
+                                    R.drawable.empty,
+                                    "No items to show",
+                                    "",
+                                    "",
+                                    0.0f,
+                                    0.0f,
+                                    ""
+                                )
+                            )
+
+                        }
+                        // update recycler view
+                        notifyDataSetChanged()
+                        holder.bindItems(arrayList[position])
+                    }
+                    .setNegativeButton("Cancel") { _, _ ->
+                    }
+                    .show()
+            }
             true
         }
 

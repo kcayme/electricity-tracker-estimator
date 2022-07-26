@@ -145,7 +145,7 @@ class ApplianceDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_N
     companion object {
         // if you change the database schema, you must increment database version
         val DATABASE_VERSION = 1
-        val DATABASE_NAME = "Electricitips.db"
+        val DATABASE_NAME = "Electricitips_appliances.db"
 
         private val SQL_CREATE_ENTRIES =
             "CREATE TABLE " + DBSchema.ApplianceEntity.TABLE_NAME + " (" +

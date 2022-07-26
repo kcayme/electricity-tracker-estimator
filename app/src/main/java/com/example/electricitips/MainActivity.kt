@@ -69,25 +69,21 @@ class MainActivity : AppCompatActivity() {
                     val fragHome = Home()
                     fragTransaction.replace(R.id.nav_host_fragment, fragHome, "HOME")
                     fragTransaction.commit()
-                    true
                 }
                 R.id.dashboard -> {
                     val fragDash = Dashboard()
                     fragTransaction.replace(R.id.nav_host_fragment, fragDash, "DASHBOARD")
                     fragTransaction.commit()
-                    true
                 }
                 R.id.links -> {
                     val fragLinks = Links()
                     fragTransaction.replace(R.id.nav_host_fragment, fragLinks, "LINKS")
                     fragTransaction.commit()
-                    true
                 }
                 else -> {
                     val fragTips = Tips()
                     fragTransaction.replace(R.id.nav_host_fragment, fragTips, "TIPS")
                     fragTransaction.commit()
-                    true
                 }
             }
             true
@@ -145,19 +141,13 @@ class MainActivity : AppCompatActivity() {
                         modelCode = code, type = type,
                         rating = rating.toFloat(), duration = duration.toFloat(), frequency = freq
                     )
-                    //arrayList.add(newAppliance)
                     val msg = applianceDBHelper.insertAppliance(newAppliance)
                     Toast.makeText(this,"Successful Add? $msg", Toast.LENGTH_SHORT).show()
                     // create new dashboard object
                     val dbFragment = Dashboard()
                     // create transaction object
                     val fragmentTransaction = supportFragmentManager.beginTransaction()
-                    // create bundle containing user inputs
-                    //val bundle = Bundle()
-                    //bundle.putParcelableArrayList("data", arrayList)
                     if (dbFragment != null) {
-                        // pass bundle as an argument of the fragment
-                        //dbFragment.arguments = bundle
                         fragmentTransaction.replace(R.id.nav_host_fragment,dbFragment, "DASHBOARD")
                         fragmentTransaction.commit()
                     }
