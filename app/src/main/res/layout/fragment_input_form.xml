@@ -2,9 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
     android:background="@color/theme_dark_blue"
     android:dividerPadding="10dp"
     android:orientation="vertical"
@@ -24,11 +23,10 @@
         android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:hint="Appliance Name"
-        app:boxStrokeWidth="0dp"
         app:startIconDrawable="@drawable/ic_name">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -38,13 +36,27 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:hint="Model Code"
+        app:startIconDrawable="@drawable/code">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapCharacters" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/typelayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
         android:hint="Appliance Type"
-        app:boxStrokeWidth="0dp"
         app:startIconDrawable="@drawable/ic_appliance">
 
         <AutoCompleteTextView
@@ -56,12 +68,11 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
         android:hint="Power Rating (Watts)"
-        app:boxStrokeWidth="0dp"
         app:startIconDrawable="@drawable/ic_baseline_electrical_services_24">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -73,13 +84,12 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:hint="Usage Duration (Hours)"
-        app:boxStrokeWidth="0dp"
         app:startIconDrawable="@drawable/ic_baseline_timelapse_24">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -92,13 +102,12 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/freqlayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
         android:hint="Frequency"
         android:windowSoftInputMode="stateHidden"
-        app:boxStrokeWidth="0dp"
         app:startIconDrawable="@drawable/ic_baseline_frequency">
 
         <AutoCompleteTextView

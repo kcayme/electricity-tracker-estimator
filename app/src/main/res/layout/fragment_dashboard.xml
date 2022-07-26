@@ -107,21 +107,29 @@
 
     </LinearLayout>
 
-    <FrameLayout
+    <TextView
+        android:id="@+id/emptyText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/material_dynamic_neutral_variant10">
+        android:background="@color/material_dynamic_neutral_variant10"
+        android:gravity="center"
+        android:text="No appliances to show"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        android:visibility="gone" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/dashboard_recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/dashboard_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/material_dynamic_neutral_variant10"
+        android:paddingStart="5dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="5dp">
 
-        </androidx.recyclerview.widget.RecyclerView>
-    </FrameLayout>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>
