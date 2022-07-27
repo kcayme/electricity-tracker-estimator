@@ -12,10 +12,12 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.onNavDestinationSelected
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.electricitips.databinding.ActivityMainBinding
 import com.example.electricitips.databinding.FragmentInputFormBinding
@@ -67,6 +69,7 @@ class MainActivity : AppCompatActivity() {
             val fragTransaction = supportFragmentManager.beginTransaction()
             when (it.itemId) {
                 R.id.home -> {
+                    binding.bottomNavView.menu.getItem(0).isChecked = true
                     val fragHome = Home()
                     fragTransaction.replace(R.id.nav_host_fragment, fragHome, "HOME")
                     fragTransaction.commit()
@@ -92,8 +95,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.floating.setOnClickListener {
             val mPrompt = MediaPlayer.create(this,R.raw.input)
-            navController.navigate(R.id.dashboard)
-
+            mPrompt.start()
             val inputBind = FragmentInputFormBinding.inflate(layoutInflater)
 
             val typeItems: Array<String> = resources.getStringArray(R.array.appliance_types)
@@ -107,7 +109,7 @@ class MainActivity : AppCompatActivity() {
                 .setView(inputBind.root)
                 .setCancelable(false)
             val mAlertDialog = mBuilder.show()
-            mPrompt.start()
+
             mAlertDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
             mAlertDialog.window!!.setBackgroundBlurRadius(3)
 
@@ -180,6 +182,7 @@ class MainActivity : AppCompatActivity() {
                     val dbFragment = Dashboard()
                     // create transaction object
                     val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    //supportFragmentManager.popBackStack()
                     fragmentTransaction.replace(R.id.nav_host_fragment,dbFragment, "DASHBOARD")
                     fragmentTransaction.commit()
                     mAlertDialog.dismiss()

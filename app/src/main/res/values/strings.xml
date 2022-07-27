@@ -50,7 +50,7 @@
     <string name="national_grid_corporation_of_the_philippines">National Grid Corporation of the Philippines</string>
     <string name="appliance_name">Appliance Name</string>
     <string name="appliance_type">Appliance Type</string>
-    <string name="tipsText">Click on the tips button to know\nmore on saving electricity!</string>
+    <string name="tipsText">Know more on saving electricity!</string>
     <string name="tipsBtnText">Tips</string>
 
     <string-array name="tipsWebsites">
