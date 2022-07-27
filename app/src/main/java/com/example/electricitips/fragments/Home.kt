@@ -10,9 +10,6 @@ import com.example.electricitips.*
 import com.example.electricitips.databinding.FragmentHomeBinding
 
 class Home :  Fragment(R.layout.fragment_home){
-    // this is an instance of SharedViewModel used to get data like electricity rate and item input from dashboard fragment
-    // NOT USED FOR DATA PERSISTENCE
-    private val sharedViewModel: SharedViewModel by activityViewModels()
     private var binding: FragmentHomeBinding? = null
     private var arrayList = ArrayList<Appliance>()
     private lateinit var applianceDBHelper: ApplianceDBHelper

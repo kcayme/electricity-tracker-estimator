@@ -2,20 +2,15 @@ package com.example.electricitips.fragments
 
 
 import android.content.Context
+import android.media.MediaPlayer
 import androidx.fragment.app.Fragment
 import android.os.Bundle
-import android.text.TextUtils.isEmpty
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.fragment.app.activityViewModels
-import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.electricitips.*
 import com.example.electricitips.databinding.FragmentDashboardBinding
 
@@ -44,10 +39,12 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
          binding!!.inputCostRate.setText(rateDBHelper.readCost().toString())
 
          binding!!.setRateBtn.setOnClickListener {
+             val mSet = MediaPlayer.create(context,R.raw.set)
              rateDBHelper.deleteCost()
              val cost = binding!!.inputCostRate.text.toString().toFloat()
              rateDBHelper.insertRate(cost)
              val test = rateDBHelper.readCost()
+             mSet.start()
              // hide keyboard layout after set button is pressed
              val imm: InputMethodManager = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
              imm.hideSoftInputFromWindow(binding!!.costInputLayout.windowToken,0)

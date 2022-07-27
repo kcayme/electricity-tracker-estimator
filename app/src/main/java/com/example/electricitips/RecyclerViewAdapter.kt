@@ -1,5 +1,6 @@
 package com.example.electricitips
 
+import android.media.MediaPlayer
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
@@ -9,9 +10,10 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 
-class RecyclerViewAdapter (var arrayList: ArrayList<Appliance>, val context: Fragment) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val context: Fragment) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     private lateinit var applianceDBHelper: ApplianceDBHelper
+    private var mDelete = MediaPlayer.create(context.context, R.raw.delete)
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private var img = itemView.findViewById<ImageView>(R.id.card_img)
@@ -61,13 +63,14 @@ class RecyclerViewAdapter (var arrayList: ArrayList<Appliance>, val context: Fra
 
         holder.itemView.setOnLongClickListener {
             if(holder.itemView.findViewById<TextView>(R.id.card_rating).text != "N/A"){
-                AlertDialog.Builder(context!!.context!!)
+                AlertDialog.Builder(context.context!!)
                     .setMessage("Proceed to delete item?")
-                    .setPositiveButton("OK") { dialog, which ->
+                    .setPositiveButton("OK") { _, _ ->
                         // delete item from database
                         applianceDBHelper.deleteAppliance(arrayList[position].modelCode)
                         // delete item from adapter's arraylist
                         arrayList.removeAt(position)
+                        mDelete.start()
                         if (arrayList.size == 0) {
                             arrayList.add(
                                 Appliance(
