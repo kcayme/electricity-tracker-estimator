@@ -5,7 +5,6 @@ plugins {
 
 android {
     compileSdk 32
-    buildToolsVersion = "28.0.2"
 
     defaultConfig {
         applicationId "com.example.electricitips"
