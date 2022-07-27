@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="50dp">
     <TextView
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/select_an_electric_utility_distributor_corporation_to_show_their_links" />
