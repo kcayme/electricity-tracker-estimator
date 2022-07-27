@@ -1,6 +1,7 @@
 package com.example.electricitips
 
 import android.content.Context
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils.isEmpty
@@ -24,7 +25,7 @@ import com.example.electricitips.fragments.Links
 import com.example.electricitips.fragments.Tips
 
 /*
-        Minimum Requiresments:
+        Minimum Requirements:
         a. Segues (Multi-scene)
         b. Embed in Tab Bar / Navigation View Controller
         c. Appropriate User Interfaces
@@ -90,7 +91,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.floating.setOnClickListener {
+            val mPrompt = MediaPlayer.create(this,R.raw.input)
             navController.navigate(R.id.dashboard)
+
+
             val inputBind = FragmentInputFormBinding.inflate(layoutInflater)
 
             val typeItems: Array<String> = resources.getStringArray(R.array.appliance_types)
@@ -102,27 +106,29 @@ class MainActivity : AppCompatActivity() {
 
             val mBuilder = AlertDialog.Builder(this)
                 .setView(inputBind.root)
-                .setCancelable(true)
+                .setCancelable(false)
             val mAlertDialog = mBuilder.show()
+            mPrompt.start()
             mAlertDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
             mAlertDialog.window!!.setBackgroundBlurRadius(3)
 
             // force hide keyboard when Type and Frequency inputs text are pressed
             inputBind.inputFreq.setOnClickListener {
                 val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(inputBind.freqlayout.windowToken,0)
+                imm.hideSoftInputFromWindow(inputBind.inputFreqLayout.windowToken,0)
             }
             inputBind.inputType.setOnClickListener {
                 val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(inputBind.typelayout.windowToken,0)
+                imm.hideSoftInputFromWindow(inputBind.inputTypeLayout.windowToken,0)
             }
 
             inputBind.cancelBtn.setOnClickListener {
                 mAlertDialog.dismiss()
             }
 
-            inputBind.confirmBtn.setOnClickListener {
+            inputFieldsFocusListeners(inputBind)
 
+            inputBind.confirmBtn.setOnClickListener {
 
                 val name = inputBind.inputName.text.toString()
                 val code = inputBind.inputCode.text.toString().uppercase()
@@ -131,26 +137,53 @@ class MainActivity : AppCompatActivity() {
                 val duration = inputBind.inputHours.text.toString()
                 val freq = inputBind.inputFreq.text.toString()
 
-                if(isEmpty(name) || isEmpty(type) || isEmpty(rating) || isEmpty(duration) || isEmpty(freq)){
-                    Toast.makeText(this, "Some fields are empty!",Toast.LENGTH_SHORT).show()
+                val errorMsg = "This field is required!"
+                // prompt error message if fields are empty
+                if(isEmpty(name) || isEmpty(code) || isEmpty(type) || isEmpty(rating) || isEmpty(duration) || isEmpty(freq)){
+                    if(isEmpty(name)){
+                        inputBind.inputNameLayout.isErrorEnabled = true
+                        inputBind.inputNameLayout.error = errorMsg
+                    }
+                    if(isEmpty(code)){
+                        inputBind.inputCodeLayout.isErrorEnabled = true
+                        inputBind.inputCodeLayout.error = errorMsg
+                    }
+                    if(isEmpty(type)){
+                        inputBind.inputTypeLayout.isErrorEnabled = true
+                        inputBind.inputTypeLayout.error = errorMsg
+                    }
+                    if(isEmpty(rating)){
+                        inputBind.inputRatingLayout.isErrorEnabled = true
+                        inputBind.inputRatingLayout.error = errorMsg
+                    }
+                    if(isEmpty(duration)){
+                        inputBind.inputDurationLayout.isErrorEnabled = true
+                        inputBind.inputDurationLayout.error = errorMsg
+                    }
+                    if(isEmpty(freq)){
+                        inputBind.inputFreqLayout.isErrorEnabled = true
+                        inputBind.inputFreqLayout.error = errorMsg
+                    }
                 }
                 else{
-                    mAlertDialog.dismiss()
-                    var imgID: Int = getTypeIcon(type)
-                    var newAppliance = Appliance(imgId = imgID, name = name,
+                    val mSuccess = MediaPlayer.create(this,R.raw.success)
+
+                    val imgID: Int = getTypeIcon(type)
+                    // blue text is just to ensure variables are passed to correct object parameters
+                    val newAppliance = Appliance(imgId = imgID, name = name,
                         modelCode = code, type = type,
                         rating = rating.toFloat(), duration = duration.toFloat(), frequency = freq
                     )
-                    val msg = applianceDBHelper.insertAppliance(newAppliance)
-                    Toast.makeText(this,"Successful Add? $msg", Toast.LENGTH_SHORT).show()
+                    applianceDBHelper.insertAppliance(newAppliance)
+                    mSuccess.start()
+                    Toast.makeText(this,"New item added!", Toast.LENGTH_SHORT).show()
                     // create new dashboard object
                     val dbFragment = Dashboard()
                     // create transaction object
                     val fragmentTransaction = supportFragmentManager.beginTransaction()
-                    if (dbFragment != null) {
-                        fragmentTransaction.replace(R.id.nav_host_fragment,dbFragment, "DASHBOARD")
-                        fragmentTransaction.commit()
-                    }
+                    fragmentTransaction.replace(R.id.nav_host_fragment,dbFragment, "DASHBOARD")
+                    fragmentTransaction.commit()
+                    mAlertDialog.dismiss()
                 }
 
 
@@ -158,6 +191,39 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    private fun inputFieldsFocusListeners(inputBind: FragmentInputFormBinding) {
+        inputBind.inputName.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                inputBind.inputNameLayout.isErrorEnabled = false
+            }
+        }
+        inputBind.inputCode.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                inputBind.inputCodeLayout.isErrorEnabled = false
+            }
+        }
+        inputBind.inputType.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                inputBind.inputTypeLayout.isErrorEnabled = false
+            }
+        }
+        inputBind.inputRating.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                inputBind.inputRatingLayout.isErrorEnabled = false
+            }
+        }
+        inputBind.inputHours.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                inputBind.inputDurationLayout.isErrorEnabled = false
+            }
+        }
+        inputBind.inputFreq.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                inputBind.inputFreqLayout.isErrorEnabled = false
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
