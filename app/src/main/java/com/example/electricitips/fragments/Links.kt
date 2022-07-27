@@ -13,7 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import com.example.electricitips.R
 import com.example.electricitips.databinding.FragmentLinksBinding
 
-class Links : Fragment(), View.OnClickListener {
+class Links : Fragment(R.layout.fragment_links), View.OnClickListener {
 
     private lateinit var binding: FragmentLinksBinding
 

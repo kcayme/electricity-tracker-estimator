@@ -11,7 +11,7 @@ import android.webkit.WebViewClient
 import androidx.appcompat.app.AlertDialog
 import com.example.electricitips.databinding.FragmentTipsBinding
 
-class Tips :  Fragment(){
+class Tips :  Fragment(R.layout.fragment_tips){
 
     private lateinit var binding: FragmentTipsBinding
     private var webView: WebView? = null

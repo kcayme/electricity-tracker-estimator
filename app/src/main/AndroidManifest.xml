@@ -4,7 +4,6 @@
     package="com.example.electricitips">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Electricitips"
-        tools:targetApi="31">
+        tools:targetApi="29">
         <activity
             android:name=".MainActivity"
             android:exported="true">
