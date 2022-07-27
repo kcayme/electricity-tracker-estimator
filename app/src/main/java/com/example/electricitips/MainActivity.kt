@@ -94,7 +94,6 @@ class MainActivity : AppCompatActivity() {
             val mPrompt = MediaPlayer.create(this,R.raw.input)
             navController.navigate(R.id.dashboard)
 
-
             val inputBind = FragmentInputFormBinding.inflate(layoutInflater)
 
             val typeItems: Array<String> = resources.getStringArray(R.array.appliance_types)
