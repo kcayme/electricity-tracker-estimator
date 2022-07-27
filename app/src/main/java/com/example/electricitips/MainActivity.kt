@@ -12,12 +12,10 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.onNavDestinationSelected
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.electricitips.databinding.ActivityMainBinding
 import com.example.electricitips.databinding.FragmentInputFormBinding
@@ -63,7 +61,6 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavView.setupWithNavController(navController)
 
         applianceDBHelper = ApplianceDBHelper(this)
-
         // listener still needed to ensure correct navigation
         binding.bottomNavView.setOnItemSelectedListener {
             val fragTransaction = supportFragmentManager.beginTransaction()
@@ -181,10 +178,12 @@ class MainActivity : AppCompatActivity() {
                     // create new dashboard object
                     val dbFragment = Dashboard()
                     // create transaction object
+                    //val fragmentTransaction = parentFragmentManager
                     val fragmentTransaction = supportFragmentManager.beginTransaction()
                     //supportFragmentManager.popBackStack()
                     fragmentTransaction.replace(R.id.nav_host_fragment,dbFragment, "DASHBOARD")
                     fragmentTransaction.commit()
+                    binding.bottomNavView.menu.getItem(1).isChecked = true
                     mAlertDialog.dismiss()
                 }
 
