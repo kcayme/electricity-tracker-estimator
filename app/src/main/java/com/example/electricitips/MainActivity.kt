@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -61,29 +62,33 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavView.setupWithNavController(navController)
 
         applianceDBHelper = ApplianceDBHelper(this)
-
         // listener still needed to ensure correct navigation
         binding.bottomNavView.setOnItemSelectedListener {
             val fragTransaction = supportFragmentManager.beginTransaction()
             when (it.itemId) {
                 R.id.home -> {
+                    binding.bottomNavView.menu.getItem(0).isChecked = true
                     val fragHome = Home()
                     fragTransaction.replace(R.id.nav_host_fragment, fragHome, "HOME")
+                    fragTransaction.addToBackStack("HOME")
                     fragTransaction.commit()
                 }
                 R.id.dashboard -> {
                     val fragDash = Dashboard()
                     fragTransaction.replace(R.id.nav_host_fragment, fragDash, "DASHBOARD")
+                    fragTransaction.addToBackStack("DASHBOARD")
                     fragTransaction.commit()
                 }
                 R.id.links -> {
                     val fragLinks = Links()
                     fragTransaction.replace(R.id.nav_host_fragment, fragLinks, "LINKS")
+                    fragTransaction.addToBackStack("LINKS")
                     fragTransaction.commit()
                 }
                 else -> {
                     val fragTips = Tips()
                     fragTransaction.replace(R.id.nav_host_fragment, fragTips, "TIPS")
+                    fragTransaction.addToBackStack("TIPS")
                     fragTransaction.commit()
                 }
             }
@@ -92,9 +97,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.floating.setOnClickListener {
             val mPrompt = MediaPlayer.create(this,R.raw.input)
-            navController.navigate(R.id.dashboard)
-
-
+            mPrompt.start()
             val inputBind = FragmentInputFormBinding.inflate(layoutInflater)
 
             val typeItems: Array<String> = resources.getStringArray(R.array.appliance_types)
@@ -108,7 +111,7 @@ class MainActivity : AppCompatActivity() {
                 .setView(inputBind.root)
                 .setCancelable(false)
             val mAlertDialog = mBuilder.show()
-            mPrompt.start()
+
             mAlertDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
             mAlertDialog.window!!.setBackgroundBlurRadius(3)
 
@@ -180,9 +183,12 @@ class MainActivity : AppCompatActivity() {
                     // create new dashboard object
                     val dbFragment = Dashboard()
                     // create transaction object
+                    //val fragmentTransaction = parentFragmentManager
                     val fragmentTransaction = supportFragmentManager.beginTransaction()
                     fragmentTransaction.replace(R.id.nav_host_fragment,dbFragment, "DASHBOARD")
+                    fragmentTransaction.addToBackStack("DASHBOARD")
                     fragmentTransaction.commit()
+                    binding.bottomNavView.menu.getItem(1).isChecked = true
                     mAlertDialog.dismiss()
                 }
 
@@ -226,9 +232,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.bottom_nav, menu)
-        return true
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val id = supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount-1).name
+        when(id){
+            "HOME" -> binding.bottomNavView.menu.getItem(0).isChecked = true
+            "DASHBOARD" -> binding.bottomNavView.menu.getItem(1).isChecked = true
+            "LINKS" -> binding.bottomNavView.menu.getItem(3).isChecked = true
+            "TIPS" -> binding.bottomNavView.menu.getItem(4).isChecked = true
+            else -> {
+            }
+        }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
