@@ -113,7 +113,6 @@ class MainActivity : AppCompatActivity() {
             val mAlertDialog = mBuilder.show()
 
             mAlertDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
-            mAlertDialog.window!!.setBackgroundBlurRadius(3)
 
             // force hide keyboard when Type and Frequency inputs text are pressed
             inputBind.inputFreq.setOnClickListener {
@@ -121,7 +120,7 @@ class MainActivity : AppCompatActivity() {
                 imm.hideSoftInputFromWindow(inputBind.inputFreqLayout.windowToken,0)
             }
             inputBind.inputType.setOnClickListener {
-                val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+               val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(inputBind.inputTypeLayout.windowToken,0)
             }
 
@@ -191,7 +190,6 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNavView.menu.getItem(1).isChecked = true
                     mAlertDialog.dismiss()
                 }
-
 
             }
 

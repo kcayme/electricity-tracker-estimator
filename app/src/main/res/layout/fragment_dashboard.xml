@@ -107,17 +107,6 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/emptyText"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/material_dynamic_neutral_variant10"
-        android:gravity="center"
-        android:text="No appliances to show"
-        android:textSize="20sp"
-        android:textStyle="italic"
-        android:visibility="gone" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dashboard_recyclerview"
         android:layout_width="match_parent"
