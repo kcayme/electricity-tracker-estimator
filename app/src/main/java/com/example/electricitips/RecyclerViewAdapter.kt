@@ -1,14 +1,17 @@
 package com.example.electricitips
 
 import android.media.MediaPlayer
+import android.util.TypedValue
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 
 class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val context: Fragment) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
@@ -64,18 +67,16 @@ class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val cont
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems(arrayList[position])
 
-        holder.itemView.setOnClickListener {
+        val collapseBtn = holder.itemView.findViewById<Button>(R.id.card_collapseBtn)
+        collapseBtn.setOnClickListener {
             val holderLL = holder.itemView.findViewById<LinearLayout>(R.id.card_linearlayout)
-            val holderImgView = holder.itemView.findViewById<ImageView>(R.id.card_img)
             if(holderLL.visibility != View.VISIBLE){
                 holderLL.visibility = View.VISIBLE
-                holderImgView.layoutParams.width = 110
-                holderImgView.layoutParams.height = 150
+                collapseBtn.setBackgroundResource(R.drawable.collapse)
             }
             else{
                 holderLL.visibility = View.GONE
-                holderImgView.layoutParams.width = 60
-                holderImgView.layoutParams.height = 100
+                collapseBtn.setBackgroundResource(R.drawable.expand)
             }
         }
         holder.itemView.setOnLongClickListener {

@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:orientation="vertical"
-    android:paddingBottom="50dp"
     tools:context=".fragments.Dashboard">
 
     <TextView
@@ -117,6 +116,7 @@
         android:background="@color/theme_grey"
         android:paddingStart="5dp"
         android:paddingTop="5dp"
+        android:paddingBottom="50dp"
         android:paddingEnd="5dp">
 
     </androidx.recyclerview.widget.RecyclerView>

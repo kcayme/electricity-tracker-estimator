@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -54,7 +55,8 @@ class MainActivity : AppCompatActivity() {
         // setup navigation host
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         //navController controls the navigation between fragments
-        navController = navHostFragment.findNavController()
+        //navController = navHostFragment.findNavController()
+        navController = Navigation.findNavController(this,R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.home,R.id.dashboard,R.id.links,R.id.tips)
         )
@@ -63,6 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         applianceDBHelper = ApplianceDBHelper(this)
         // listener still needed to ensure correct navigation
+        /*
         binding.bottomNavView.setOnItemSelectedListener {
             val fragTransaction = supportFragmentManager.beginTransaction()
             when (it.itemId) {
@@ -94,6 +97,7 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+        */
 
         binding.floating.setOnClickListener {
             val mPrompt = MediaPlayer.create(this,R.raw.input)
@@ -179,15 +183,16 @@ class MainActivity : AppCompatActivity() {
                     applianceDBHelper.insertAppliance(newAppliance)
                     mSuccess.start()
                     Toast.makeText(this,"New item added!", Toast.LENGTH_SHORT).show()
+                    navController.popBackStack()
+                    navController.navigate(R.id.dashboard)
                     // create new dashboard object
-                    val dbFragment = Dashboard()
+                    //val dbFragment = Dashboard()
                     // create transaction object
-                    //val fragmentTransaction = parentFragmentManager
-                    val fragmentTransaction = supportFragmentManager.beginTransaction()
-                    fragmentTransaction.replace(R.id.nav_host_fragment,dbFragment, "DASHBOARD")
-                    fragmentTransaction.addToBackStack("DASHBOARD")
-                    fragmentTransaction.commit()
-                    binding.bottomNavView.menu.getItem(1).isChecked = true
+                    //val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    //fragmentTransaction.replace(R.id.nav_host_fragment,dbFragment, "DASHBOARD")
+                    //fragmentTransaction.addToBackStack("DASHBOARD")
+                    //fragmentTransaction.commit()
+                    //binding.bottomNavView.menu.getItem(1).isChecked = true
                     mAlertDialog.dismiss()
                 }
 
@@ -233,16 +238,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        val id = supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount-1).name
-        when(id){
-            "HOME" -> binding.bottomNavView.menu.getItem(0).isChecked = true
-            "DASHBOARD" -> binding.bottomNavView.menu.getItem(1).isChecked = true
-            "LINKS" -> binding.bottomNavView.menu.getItem(3).isChecked = true
-            "TIPS" -> binding.bottomNavView.menu.getItem(4).isChecked = true
-            else -> {
-            }
-        }
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

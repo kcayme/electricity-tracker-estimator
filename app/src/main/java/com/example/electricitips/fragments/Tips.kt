@@ -5,16 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
-import androidx.fragment.app.Fragment
-import com.example.electricitips.R
 import android.webkit.WebViewClient
-import androidx.appcompat.app.AlertDialog
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
+import androidx.fragment.app.commit
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import com.example.electricitips.*
 import com.example.electricitips.databinding.FragmentTipsBinding
 
-class Tips :  Fragment(){
+
+class Tips :  Fragment(R.layout.fragment_tips){
 
     private lateinit var binding: FragmentTipsBinding
     private var webView: WebView? = null
+    private var navController : NavController? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container:ViewGroup?,
@@ -22,11 +29,6 @@ class Tips :  Fragment(){
     ): View? {
         // inflate layout for this fragment
         binding = FragmentTipsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated (view:View, savedInstanceState: Bundle? ) {
-        super.onViewCreated(view, savedInstanceState)
 
         webView = binding.webView
         webView!!.webViewClient = WebViewClient()
@@ -34,11 +36,39 @@ class Tips :  Fragment(){
         val webSettings = binding.webView.settings
         webSettings.javaScriptEnabled = true
 
-        onLoadWebsites()
+        //onLoadWebsites()
+        binding.tipsBtn.setOnClickListener() {
+            val action = TipsDirections.actionTipsToWebView2()
+            try{
+                //val transaction = parentFragmentManager.beginTransaction()
+                //val newFrag = WebView()
+                //transaction.replace(R.id.nav_host_fragment,newFrag)
+                //transaction.commit()
+                //val current = parentFragmentManager.getBackStackEntryAt(parentFragmentManager.backStackEntryCount-1)
+                //var NavHostFrag = parentFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+                //var navController = NavHostFrag.navController
+                val action = TipsDirections.actionTipsToWebView2()
+                navController = parentFragmentManager.findFragmentById(R.id.nav_host_fragment)?.findNavController()
+                navController!!.navigate(action)
+            }
+            catch (e: Exception){
+                Toast.makeText(context,"${e.toString()}",Toast.LENGTH_LONG).show()
+            }
+            //navController controls the navigation between fragments
+            //navController = navHostFragment.findNavController()
+        }
+
+        return binding.root
     }
 
+
     private fun onLoadWebsites() {
+
+    /*
         binding.tipsBtn.setOnClickListener() {
+            val action = TipsDirections.actionTipsToWebView2()
+            findNavController().navigate(action)
+
             val tips: Array<String> = resources.getStringArray(R.array.tipsWebsites)
             AlertDialog.Builder(requireContext()) //requireContext is used when fragments are involved
                 .setTitle("List of Tips")
@@ -61,6 +91,9 @@ class Tips :  Fragment(){
                 }
                 .show()
         }
+        */
     }
+
+
 }
 

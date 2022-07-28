@@ -13,7 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import com.example.electricitips.R
 import com.example.electricitips.databinding.FragmentLinksBinding
 
-class Links : Fragment(), View.OnClickListener {
+class Links : Fragment(R.layout.fragment_links), View.OnClickListener {
 
     private lateinit var binding: FragmentLinksBinding
 
@@ -82,7 +82,7 @@ class Links : Fragment(), View.OnClickListener {
     private fun linksDialog(selectedItem:Int) {
         val items: Array<String> = arrayOf("Facebook", "Official Website")
         var checkItem = 0
-        AlertDialog.Builder(context!!)
+        AlertDialog.Builder(requireContext())
             .setIcon(R.drawable.baseline_language_24)
             .setTitle("Select which site to open:")
             .setSingleChoiceItems(items, checkItem) { _, which ->
