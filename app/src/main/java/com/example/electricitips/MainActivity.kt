@@ -113,7 +113,6 @@ class MainActivity : AppCompatActivity() {
             val mAlertDialog = mBuilder.show()
 
             mAlertDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
-            mAlertDialog.window!!.setBackgroundBlurRadius(3)
 
             // force hide keyboard when Type and Frequency inputs text are pressed
             inputBind.inputFreq.setOnClickListener {
