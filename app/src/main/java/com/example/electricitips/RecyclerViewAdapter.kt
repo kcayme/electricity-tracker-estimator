@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -23,6 +24,7 @@ class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val cont
         private var rating = itemView.findViewById<TextView>(R.id.card_rating)
         private var duration = itemView.findViewById<TextView>(R.id.card_duration)
         private var frequency = itemView.findViewById<TextView>(R.id.card_frequency)
+        private var linearlayout = itemView.findViewById<LinearLayout>(R.id.card_linearlayout)
 
         fun bindItems(appliance: Appliance){
             if(appliance.imgId == R.drawable.empty){
@@ -42,6 +44,7 @@ class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val cont
                 rating.text = appliance.rating.toString()
                 duration.text = appliance.duration.toString()
                 frequency.text = appliance.frequency
+                linearlayout.visibility = View.GONE
             }
         }
     }
@@ -61,6 +64,20 @@ class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val cont
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems(arrayList[position])
 
+        holder.itemView.setOnClickListener {
+            val holderLL = holder.itemView.findViewById<LinearLayout>(R.id.card_linearlayout)
+            val holderImgView = holder.itemView.findViewById<ImageView>(R.id.card_img)
+            if(holderLL.visibility != View.VISIBLE){
+                holderLL.visibility = View.VISIBLE
+                holderImgView.layoutParams.width = 110
+                holderImgView.layoutParams.height = 150
+            }
+            else{
+                holderLL.visibility = View.GONE
+                holderImgView.layoutParams.width = 60
+                holderImgView.layoutParams.height = 100
+            }
+        }
         holder.itemView.setOnLongClickListener {
             if(holder.itemView.findViewById<TextView>(R.id.card_rating).text != "N/A"){
                 AlertDialog.Builder(context.context!!)
