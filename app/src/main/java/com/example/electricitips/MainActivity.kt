@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // setup navigation host
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        //val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         //navController controls the navigation between fragments
         //navController = navHostFragment.findNavController()
         navController = Navigation.findNavController(this,R.id.nav_host_fragment)

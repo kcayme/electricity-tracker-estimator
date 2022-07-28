@@ -40,5 +40,9 @@
         android:id="@+id/webview"
         android:name="com.example.electricitips.fragments.WebView"
         android:label="fragment_web_view"
-        tools:layout="@layout/fragment_web_view" />
+        tools:layout="@layout/fragment_web_view" >
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
 </navigation>

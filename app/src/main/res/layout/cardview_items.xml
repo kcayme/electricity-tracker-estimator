@@ -53,7 +53,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/card_modelcode"
+                    android:id="@+id/card_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="SDW-A197A"

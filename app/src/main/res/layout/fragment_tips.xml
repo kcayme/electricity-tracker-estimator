@@ -10,7 +10,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tipsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center|top"
+        android:visibility="gone"
         android:paddingTop="15dp">
 
         <TextView
@@ -25,19 +45,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:text="@string/tipsBtnText" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="80dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <WebView
-            android:id="@+id/webView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
     </LinearLayout>
 
 

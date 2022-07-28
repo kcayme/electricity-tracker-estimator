@@ -1,7 +1,6 @@
 package com.example.electricitips
 
 import android.media.MediaPlayer
-import android.util.TypedValue
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
@@ -11,7 +10,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 
 class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val context: Fragment) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
@@ -21,7 +19,7 @@ class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val cont
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private var img = itemView.findViewById<ImageView>(R.id.card_img)
-        private var modelCode = itemView.findViewById<TextView>(R.id.card_modelcode)
+        private var modelCode = itemView.findViewById<TextView>(R.id.card_code)
         private var name = itemView.findViewById<TextView>(R.id.card_name)
         private var type = itemView.findViewById<TextView>(R.id.card_type)
         private var rating = itemView.findViewById<TextView>(R.id.card_rating)
@@ -55,7 +53,7 @@ class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val cont
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.cardview_items, parent, false)
         // initialize db helper
-        applianceDBHelper = ApplianceDBHelper(context.context!!)
+        applianceDBHelper = ApplianceDBHelper(context.requireContext())
 
         return ViewHolder(v)
     }
@@ -81,7 +79,7 @@ class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val cont
         }
         holder.itemView.setOnLongClickListener {
             if(holder.itemView.findViewById<TextView>(R.id.card_rating).text != "N/A"){
-                AlertDialog.Builder(context.context!!)
+                AlertDialog.Builder(context.requireContext())
                     .setMessage("Proceed to delete item?")
                     .setPositiveButton("OK") { _, _ ->
                         // delete item from database
