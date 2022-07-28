@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
-    <androidx.fragment.app.FragmentContainerView
+    <fragment
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
@@ -14,15 +15,26 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_add_24"
+        app:fabSize="normal"
+        app:layout_anchor="@id/bottom_bar"
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
-        app:fabCradleVerticalOffset="5dp"
-        app:fabCradleMargin="10dp"
+        app:fabCradleVerticalOffset="0dp"
+        app:fabCradleMargin="5dp"
+        app:fabAnchorMode="cradle"
+        app:hideOnScroll="true"
+        android:background="@color/black"
         app:fabCradleRoundedCornerRadius="10dp"
         android:layout_height="wrap_content"
         app:contentInsetStart="0dp"
-        app:contentInsetLeft="0dp"
         android:layout_gravity="bottom">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -30,16 +42,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:elevation="0dp"
-            android:background="@color/black"
+            android:background="@android:color/transparent"
             app:menu="@menu/bottom_nav"/>
+
     </com.google.android.material.bottomappbar.BottomAppBar>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_add_24"
-        app:layout_anchor="@id/bottom_bar"
-        tools:ignore="SpeakableTextPresentCheck" />
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom"
+        android:layout_above="@id/bottom_bar"
+        android:background="@drawable/shadow"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
