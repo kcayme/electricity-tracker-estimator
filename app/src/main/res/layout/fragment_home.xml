@@ -1,25 +1,259 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:layout_width="match_parent">
 
-    <TextView
-        android:id="@+id/rateInputTest"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="@color/white"
-        android:textSize="24sp" />
+        android:background="@color/black"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/itemsInputTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="@color/theme_yellow"
-        android:textSize="30sp" />
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:padding="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <EditText
+                    android:id="@+id/kwh_monthly"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:inputType="numberDecimal"
+                    android:hint="Enter Monthly kWh Cost">
+
+                </EditText>
+
+                <Button
+                    android:id="@+id/set_kwh_monthly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Set"
+                    android:textColor="@color/black">
+
+                </Button>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp">
+
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="200dp"
+                        android:background="@drawable/box1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_marginTop="20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Daily kWh Usage"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="12dp"
+                            android:paddingBottom="10dp">
+
+                        </TextView>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="150px"
+                            android:src="@drawable/daily_electricity"
+                            app:tint="@color/white"
+                            android:paddingBottom="10dp">
+
+                        </ImageView>
+
+                        <TextView
+                            android:id="@+id/dailyEle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="No Item Added"
+                            android:textSize="15dp"
+                            android:textColor="@color/white"
+                            android:gravity="center">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp">
+
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="200dp"
+                        android:background="@drawable/box2"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_marginTop="20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Monthly kWh Usage"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="12dp"
+                            android:paddingBottom="10dp">
+
+                        </TextView>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="150px"
+                            android:src="@drawable/monthly_electricity"
+                            app:tint="@color/white"
+                            android:paddingBottom="10dp">
+
+                        </ImageView>
+
+                        <TextView
+                            android:id="@+id/monthlyEle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="No Item Added"
+                            android:textSize="15dp"
+                            android:textColor="@color/white"
+                            android:gravity="center">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp">
+
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="200dp"
+                        android:background="@drawable/box3"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_marginTop="20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Daily Electricity Cost"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="12dp"
+                            android:paddingBottom="10dp">
+
+                        </TextView>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="150px"
+                            android:src="@drawable/daily_bill"
+                            app:tint="@color/white"
+                            android:paddingBottom="10dp">
+
+                        </ImageView>
+
+                        <TextView
+                            android:id="@+id/dailyCost"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="No Item Added"
+                            android:textSize="15dp"
+                            android:textColor="@color/white"
+                            android:gravity="center">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp">
+
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="200dp"
+                        android:background="@drawable/box4"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_marginTop="20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Monthly Electricity Cost"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="12dp"
+                            android:paddingBottom="10dp">
+
+                        </TextView>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="150px"
+                            android:src="@drawable/monthly_bill"
+                            app:tint="@color/white"
+                            android:paddingBottom="10dp">
+
+                        </ImageView>
+
+                        <TextView
+                            android:id="@+id/monthlyCost"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="No Item Added"
+                            android:textSize="15dp"
+                            android:textColor="@color/white"
+                            android:gravity="center">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
