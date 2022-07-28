@@ -58,12 +58,12 @@ class ApplianceDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_N
         return (Integer.parseInt("$success")!= 0)
     }
 
-    fun readAppliance(name: String): ArrayList<Appliance> {
+    fun readAppliance(nameQuery: String): ArrayList<Appliance> {
         val appliances = ArrayList<Appliance>()
         val db = readableDatabase
-        var cursor: Cursor? = null
+        var cursor: Cursor?
         try {
-            cursor = db.rawQuery("select * from " + DBSchema.ApplianceEntity.TABLE_NAME + " WHERE " + DBSchema.ApplianceEntity.COLUMN_NAME + "='" + name + "'", null)
+            cursor = db.rawQuery("select * from " + DBSchema.ApplianceEntity.TABLE_NAME + " WHERE " + DBSchema.ApplianceEntity.COLUMN_NAME + "='" + nameQuery + "'", null)
         } catch (e: SQLiteException) {
             db.execSQL(SQL_CREATE_ENTRIES)
             db.close()
@@ -108,7 +108,7 @@ class ApplianceDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_N
     fun readAllAppliances(): ArrayList<Appliance> {
         var appliances = ArrayList<Appliance>()
         val db = readableDatabase
-        var cursor: Cursor? = null
+        var cursor: Cursor?
         try {
             cursor = db.rawQuery("select * from " + DBSchema.ApplianceEntity.TABLE_NAME, null)
         } catch (e: SQLiteException) {
