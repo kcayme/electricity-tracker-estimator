@@ -56,9 +56,9 @@ class Tips :  Fragment(R.layout.fragment_tips){
                 "Meralco",
                 "",
                 "1. Choose the right fan depending on the specific area occupied by people who would need ventilation:\n" +
-                        "\ta. For small areas, desk fans are good energy efficient spot coolers\n" +
-                        "\tb. For medium-sized areas, stand fans offer great flexibility because of its adjustable height levels\n" +
-                        "\tc. For large or spacious rooms, consider using ceiling fans\n" +
+                        "\t\ta. For small areas, desk fans are good energy efficient spot coolers\n" +
+                        "\t\tb. For medium-sized areas, stand fans offer great flexibility because of its adjustable height levels\n" +
+                        "\t\tc. For large or spacious rooms, consider using ceiling fans\n" +
                         "2. Set the right fan motor speed that would provide comfortable cooling to the area occupants\n" +
                         "3. Clean the fans regularly and oil the motors per manufacturer advice. Poorly maintained fans " +
                         "(e.g. dust accumulation in fan blades and motor housing) negatively affects the fan’s energy consumption."

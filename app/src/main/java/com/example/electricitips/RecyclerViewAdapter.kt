@@ -5,10 +5,7 @@ import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 
@@ -83,27 +80,32 @@ class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val cont
                     .setMessage("Proceed to delete item?")
                     .setPositiveButton("OK") { _, _ ->
                         // delete item from database
-                        applianceDBHelper.deleteAppliance(arrayList[position].modelCode)
-                        // delete item from adapter's arraylist
-                        arrayList.removeAt(position)
-                        mDelete.start()
-                        if (arrayList.size == 0) {
-                            arrayList.add(
-                                Appliance(
-                                    R.drawable.empty,
-                                    "No items to show",
-                                    "",
-                                    "",
-                                    0.0f,
-                                    0.0f,
-                                    ""
+                        if(position <= arrayList.size-1){
+                            applianceDBHelper.deleteAppliance(arrayList[position].modelCode)
+                            // delete item from adapter's arraylist
+                            arrayList.removeAt(position)
+                            mDelete.start()
+                            if (arrayList.size == 0) {
+                                arrayList.add(
+                                    Appliance(
+                                        R.drawable.empty,
+                                        "No items to show",
+                                        "",
+                                        "",
+                                        0.0f,
+                                        0.0f,
+                                        ""
+                                    )
                                 )
-                            )
 
+                            }
+                            // update recycler view
+                            notifyDataSetChanged()
+                            holder.bindItems(arrayList[position])
                         }
-                        // update recycler view
-                        notifyDataSetChanged()
-                        holder.bindItems(arrayList[position])
+                        else{
+                            Toast.makeText(context.requireContext(),"position: $position arraylist size:${arrayList.size}",Toast.LENGTH_SHORT).show()
+                        }
                     }
                     .setNegativeButton("Cancel") { _, _ ->
                     }
