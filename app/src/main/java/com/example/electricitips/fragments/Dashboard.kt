@@ -119,7 +119,6 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
             }
             cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
         }
-        binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
         binding?.dashboardRecyclerview?.adapter = cardAdapter
     }
 
@@ -147,7 +146,6 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
             }
             cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
         }
-        binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
         binding?.dashboardRecyclerview?.adapter = cardAdapter
     }
 
@@ -175,7 +173,6 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
             }
             cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
         }
-        binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
         binding?.dashboardRecyclerview?.adapter = cardAdapter
     }
 
@@ -203,11 +200,9 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
             }
             cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
         }
-        binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
         binding?.dashboardRecyclerview?.adapter = cardAdapter
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun filterByLighting() {
         var cardAdapter: RecyclerViewAdapter? = null
         val checkedIDs = binding!!.chipGroup.checkedChipIds
@@ -232,7 +227,6 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
             }
             cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
         }
-        binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
         binding?.dashboardRecyclerview?.adapter = cardAdapter
     }
 
@@ -260,7 +254,6 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
             }
             cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
         }
-        binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
         binding?.dashboardRecyclerview?.adapter = cardAdapter
     }
 

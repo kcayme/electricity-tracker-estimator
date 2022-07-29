@@ -14,7 +14,7 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/theme_orange"
+            android:background="@color/theme_dark_blue"
             app:contentScrim="@color/theme_orange"
             app:elevation="0dp"
             app:expandedTitleTextAppearance="@style/expandedBarTextStyle"
@@ -35,7 +35,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="30dp"
-                    android:background="@color/theme_orange"
                     android:paddingStart="20dp"
                     android:text="Your Appliances"
                     android:textAlignment="textStart"
@@ -56,6 +55,12 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
                         android:layout_weight="1"
                         android:hint="Electricity Rate (Php per kWh)">
 
@@ -63,6 +68,7 @@
                             android:id="@+id/inputCostRate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:backgroundTint="@color/black"
                             android:inputType="numberDecimal" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,9 +76,11 @@
                         android:id="@+id/setRateBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:cornerRadius="20dp"
+                        android:backgroundTint="@color/theme_red"
+                        android:shadowRadius="@integer/material_motion_duration_long_2"
                         android:layout_gravity="center"
                         android:layout_marginStart="20dp"
-                        android:background="@color/theme_dark_blue"
                         android:text="Set" />
 
                 </LinearLayout>
@@ -151,9 +159,6 @@
             android:id="@+id/dashboard_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="5dp"
-            android:paddingTop="5dp"
-            android:paddingEnd="5dp"
             android:paddingBottom="50dp" />
     </androidx.core.widget.NestedScrollView>
 

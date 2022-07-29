@@ -5,27 +5,18 @@ import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils.isEmpty
-import android.view.Menu
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.onNavDestinationSelected
-import androidx.navigation.ui.setupWithNavController
 import com.example.electricitips.databinding.ActivityMainBinding
 import com.example.electricitips.databinding.FragmentInputFormBinding
-import com.example.electricitips.databinding.FragmentTipsBinding
-import com.example.electricitips.fragments.Dashboard
-import com.example.electricitips.fragments.Home
-import com.example.electricitips.fragments.Links
-import com.example.electricitips.fragments.Tips
 
 /*
         Minimum Requirements:
@@ -53,52 +44,33 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // setup navigation host
-        //val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        //navController controls the navigation between fragments
-        //navController = navHostFragment.findNavController()
-        navController = Navigation.findNavController(this,R.id.nav_host_fragment)
-        appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.home,R.id.dashboard,R.id.links,R.id.tips)
-        )
-        // setup controller of navigation bar
-        binding.bottomNavView.setupWithNavController(navController)
-
+        // setup db helper
         applianceDBHelper = ApplianceDBHelper(this)
-        // listener still needed to ensure correct navigation
-        /*
+        // setup navController
+        navController = Navigation.findNavController(this,R.id.nav_host_fragment)
+
+        // setup nav options builder to set a transition animations
+        val options = NavOptions.Builder()
+            .setLaunchSingleTop(true)
+            .setExitAnim(androidx.transition.R.anim.abc_fade_out)
+            .setPopEnterAnim(com.google.android.material.R.anim.abc_popup_enter)
+            .setPopExitAnim(com.google.android.material.R.anim.abc_popup_exit)
+            .setPopUpTo(navController.graph.startDestinationId, true)
+            .build()
+
+        // listener when nav bar item is selected
         binding.bottomNavView.setOnItemSelectedListener {
-            val fragTransaction = supportFragmentManager.beginTransaction()
             when (it.itemId) {
-                R.id.home -> {
-                    binding.bottomNavView.menu.getItem(0).isChecked = true
-                    val fragHome = Home()
-                    fragTransaction.replace(R.id.nav_host_fragment, fragHome, "HOME")
-                    fragTransaction.addToBackStack("HOME")
-                    fragTransaction.commit()
-                }
-                R.id.dashboard -> {
-                    val fragDash = Dashboard()
-                    fragTransaction.replace(R.id.nav_host_fragment, fragDash, "DASHBOARD")
-                    fragTransaction.addToBackStack("DASHBOARD")
-                    fragTransaction.commit()
-                }
-                R.id.links -> {
-                    val fragLinks = Links()
-                    fragTransaction.replace(R.id.nav_host_fragment, fragLinks, "LINKS")
-                    fragTransaction.addToBackStack("LINKS")
-                    fragTransaction.commit()
-                }
-                else -> {
-                    val fragTips = Tips()
-                    fragTransaction.replace(R.id.nav_host_fragment, fragTips, "TIPS")
-                    fragTransaction.addToBackStack("TIPS")
-                    fragTransaction.commit()
-                }
+                R.id.home -> navController.navigate(R.id.home,null, options)
+                R.id.dashboard -> navController.navigate(R.id.dashboard,null, options)
+                R.id.links -> navController.navigate(R.id.links,null, options)
+                else -> navController.navigate(R.id.tips,null, options)
             }
             true
         }
-        */
+        binding.bottomNavView.setOnItemReselectedListener { _ ->
+            return@setOnItemReselectedListener
+        }
 
         binding.floating.setOnClickListener {
             val mPrompt = MediaPlayer.create(this,R.raw.input)
@@ -186,14 +158,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this,"New item added!", Toast.LENGTH_SHORT).show()
                     navController.popBackStack()
                     navController.navigate(R.id.dashboard)
-                    // create new dashboard object
-                    //val dbFragment = Dashboard()
-                    // create transaction object
-                    //val fragmentTransaction = supportFragmentManager.beginTransaction()
-                    //fragmentTransaction.replace(R.id.nav_host_fragment,dbFragment, "DASHBOARD")
-                    //fragmentTransaction.addToBackStack("DASHBOARD")
-                    //fragmentTransaction.commit()
-                    //binding.bottomNavView.menu.getItem(1).isChecked = true
+                    binding.bottomNavView.menu.getItem(1).isChecked = true
                     mAlertDialog.dismiss()
                 }
 
@@ -240,6 +205,13 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         binding.bottomBar.performShow()
+        val id = navController.currentDestination!!.id
+        when(id){
+            R.id.home -> binding.bottomNavView.menu.getItem(0).isChecked = true
+            R.id.dashboard -> binding.bottomNavView.menu.getItem(1).isChecked = true
+            R.id.links -> binding.bottomNavView.menu.getItem(3).isChecked = true
+            else -> binding.bottomNavView.menu.getItem(4).isChecked = true
+        }
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return  item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
