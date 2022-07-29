@@ -21,6 +21,7 @@ import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.example.electricitips.databinding.ActivityMainBinding
 import com.example.electricitips.databinding.FragmentInputFormBinding
+import com.example.electricitips.databinding.FragmentTipsBinding
 import com.example.electricitips.fragments.Dashboard
 import com.example.electricitips.fragments.Home
 import com.example.electricitips.fragments.Links
@@ -236,6 +237,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+
+        super.onBackPressed()
+        if(navController.currentDestination!!.id == R.id.tips){
+
+            //val bool = supportFragmentManager.findFragmentById(R.id.tips)
+
+            //val count = tipsBinding.tipsRecyclerView.adapter!!.itemCount
+            //Toast.makeText(this,"$bool",Toast.LENGTH_SHORT).show()
+            //val emptyAdapter = RecyclerViewAdapter(ArrayList<Appliance>(),supportFragmentManager.findFragmentById(
+            //    navController.currentDestination!!.id)!!)
+
+            //tipsBinding.tipsRecyclerView.adapter.notifyDataSetChanged()
+        }
+    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return  item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
