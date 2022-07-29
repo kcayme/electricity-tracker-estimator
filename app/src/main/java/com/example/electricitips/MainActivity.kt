@@ -238,19 +238,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-
         super.onBackPressed()
-        if(navController.currentDestination!!.id == R.id.tips){
-
-            //val bool = supportFragmentManager.findFragmentById(R.id.tips)
-
-            //val count = tipsBinding.tipsRecyclerView.adapter!!.itemCount
-            //Toast.makeText(this,"$bool",Toast.LENGTH_SHORT).show()
-            //val emptyAdapter = RecyclerViewAdapter(ArrayList<Appliance>(),supportFragmentManager.findFragmentById(
-            //    navController.currentDestination!!.id)!!)
-
-            //tipsBinding.tipsRecyclerView.adapter.notifyDataSetChanged()
-        }
+        binding.bottomBar.performShow()
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return  item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
