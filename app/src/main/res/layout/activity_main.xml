@@ -21,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_add_24"
+        app:tint="@android:color/white"
         app:fabSize="normal"
         app:layout_anchor="@id/bottom_bar"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
@@ -32,7 +33,7 @@
         app:fabCradleMargin="5dp"
         app:fabAnchorMode="cradle"
         app:hideOnScroll="true"
-        android:background="@color/black"
+        app:backgroundTint="@color/theme_dark_blue"
         app:fabCradleRoundedCornerRadius="10dp"
         android:layout_height="wrap_content"
         app:contentInsetStart="0dp"
@@ -42,6 +43,9 @@
             android:id="@+id/bottom_nav_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:itemIconTint="@color/bottom_nav_item_color"
+            app:itemTextColor="@color/bottom_nav_item_color"
+            android:backgroundTint="@color/white"
             app:elevation="0dp"
             android:background="@android:color/transparent"
             app:menu="@menu/bottom_nav"/>
