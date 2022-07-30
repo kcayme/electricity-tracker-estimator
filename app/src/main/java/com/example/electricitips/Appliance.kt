@@ -4,14 +4,15 @@ import android.os.Parcel
 import android.os.Parcelable
 
 // Parcelable constructor and override methods are needed to make object Appliance passable to other activities/fragments
-class Appliance(var imgId: Int, var name: String, var type: String, var rating: String, var duration: String, var frequency: String) :
+class Appliance(var imgId: Int, var name: String, var modelCode: String, var type: String, var rating: Float, var duration: Float, var frequency: String) :
     Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString().toString(),
         parcel.readString().toString(),
         parcel.readString().toString(),
-        parcel.readString().toString(),
+        parcel.readFloat(),
+        parcel.readFloat(),
         parcel.readString().toString()
     ) {
     }
@@ -19,9 +20,10 @@ class Appliance(var imgId: Int, var name: String, var type: String, var rating: 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(imgId)
         parcel.writeString(name)
+        parcel.writeString(modelCode)
         parcel.writeString(type)
-        parcel.writeString(rating)
-        parcel.writeString(duration)
+        parcel.writeFloat(rating)
+        parcel.writeFloat(duration)
         parcel.writeString(frequency)
     }
 

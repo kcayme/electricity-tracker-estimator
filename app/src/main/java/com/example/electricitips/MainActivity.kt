@@ -1,39 +1,25 @@
 package com.example.electricitips
 
 import android.content.Context
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Parcelable
 import android.text.TextUtils.isEmpty
-import android.view.Menu
 import android.view.MenuItem
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.getSystemService
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.onNavDestinationSelected
-import androidx.navigation.ui.setupWithNavController
 import com.example.electricitips.databinding.ActivityMainBinding
 import com.example.electricitips.databinding.FragmentInputFormBinding
-import com.example.electricitips.fragments.Dashboard
-import com.example.electricitips.fragments.Home
-import com.example.electricitips.fragments.Links
-import com.example.electricitips.fragments.Tips
 
 /*
-        Minimum Requiresments:
+        Minimum Requirements:
         a. Segues (Multi-scene)
         b. Embed in Tab Bar / Navigation View Controller
         c. Appropriate User Interfaces
@@ -50,64 +36,45 @@ class MainActivity : AppCompatActivity() {
     // navigation components
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
-    // arraylist that holds item inputs
-    private var arrayList = ArrayList<Appliance>()
-    // this is a ViewModel class that holds data (the added items and electricity rate input) that can be used by all fragments and main activity
+    // database helper
+    private lateinit var applianceDBHelper: ApplianceDBHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // setup navigation bar
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        //navController controls the navigation between fragments
-        navController = navHostFragment.findNavController()
-        appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.home,R.id.dashboard,R.id.links,R.id.tips)
-        )
-        binding.bottomNavView.setupWithNavController(navController)
+        // setup db helper
+        applianceDBHelper = ApplianceDBHelper(this)
+        // setup navController
+        navController = Navigation.findNavController(this,R.id.nav_host_fragment)
 
+        // setup nav options builder to set a transition animations
+        val options = NavOptions.Builder()
+            .setLaunchSingleTop(true)
+            .setExitAnim(androidx.transition.R.anim.abc_fade_out)
+            .setPopEnterAnim(com.google.android.material.R.anim.abc_popup_enter)
+            .setPopExitAnim(com.google.android.material.R.anim.abc_popup_exit)
+            .setPopUpTo(navController.graph.startDestinationId, true)
+            .build()
 
-        // listener still needed to ensure correct navigation
+        // listener when nav bar item is selected
         binding.bottomNavView.setOnItemSelectedListener {
-            val fragTransaction = supportFragmentManager.beginTransaction()
             when (it.itemId) {
-                R.id.home -> {
-                    val fragHome = Home()
-                    fragTransaction.replace(R.id.nav_host_fragment, fragHome, "HOME")
-                    fragTransaction.commit()
-                    true
-                }
-                R.id.dashboard -> {
-                    val fragDash = Dashboard()
-                    if (arrayList != null){
-                        val bundle = Bundle()
-                        bundle.putParcelableArrayList("data", arrayList)
-                        fragDash.arguments = bundle
-                    }
-                    fragTransaction.replace(R.id.nav_host_fragment,fragDash, "DASHBOARD")
-                    fragTransaction.commit()
-                    true
-                }
-                R.id.links -> {
-                    val fragLinks = Links()
-                    fragTransaction.replace(R.id.nav_host_fragment, fragLinks, "LINKS")
-                    fragTransaction.commit()
-                    true
-                }
-                else -> {
-                    val fragTips = Tips()
-                    fragTransaction.replace(R.id.nav_host_fragment, fragTips, "TIPS")
-                    fragTransaction.commit()
-                    true
-                }
+                R.id.home -> navController.navigate(R.id.home,null, options)
+                R.id.dashboard -> navController.navigate(R.id.dashboard,null, options)
+                R.id.links -> navController.navigate(R.id.links,null, options)
+                else -> navController.navigate(R.id.tips,null, options)
             }
-
             true
+        }
+        binding.bottomNavView.setOnItemReselectedListener { _ ->
+            return@setOnItemReselectedListener
         }
 
         binding.floating.setOnClickListener {
+            val mPrompt = MediaPlayer.create(this,R.raw.input)
+            mPrompt.start()
             val inputBind = FragmentInputFormBinding.inflate(layoutInflater)
 
             val typeItems: Array<String> = resources.getStringArray(R.array.appliance_types)
@@ -119,59 +86,81 @@ class MainActivity : AppCompatActivity() {
 
             val mBuilder = AlertDialog.Builder(this)
                 .setView(inputBind.root)
-                .setCancelable(true)
+                .setCancelable(false)
             val mAlertDialog = mBuilder.show()
+
             mAlertDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
-            mAlertDialog.window!!.setBackgroundBlurRadius(3)
-            navController.navigate(R.id.dashboard)
 
             // force hide keyboard when Type and Frequency inputs text are pressed
             inputBind.inputFreq.setOnClickListener {
                 val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(inputBind.freqlayout.windowToken,0)
+                imm.hideSoftInputFromWindow(inputBind.inputFreqLayout.windowToken,0)
             }
             inputBind.inputType.setOnClickListener {
-                val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(inputBind.typelayout.windowToken,0)
+               val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(inputBind.inputTypeLayout.windowToken,0)
             }
 
             inputBind.cancelBtn.setOnClickListener {
                 mAlertDialog.dismiss()
             }
 
+            inputFieldsFocusListeners(inputBind)
+
             inputBind.confirmBtn.setOnClickListener {
 
-
                 val name = inputBind.inputName.text.toString()
+                val code = inputBind.inputCode.text.toString().uppercase()
                 val type = inputBind.inputType.text.toString()
                 val rating = inputBind.inputRating.text.toString()
                 val duration = inputBind.inputHours.text.toString()
                 val freq = inputBind.inputFreq.text.toString()
 
-                mAlertDialog.dismiss()
-
-                if(isEmpty(name) || isEmpty(type) || isEmpty(rating) || isEmpty(duration) || isEmpty(freq)){
-                    Toast.makeText(this, "Some fields are empty!",Toast.LENGTH_SHORT).show()
-                }
-                else{
-                    var imgID: Int = getTypeIcon(type)
-                    var newAppliance = Appliance(imgID,name,type,rating,duration,freq)
-                    arrayList.add(newAppliance)
-                    // create new dashboard object
-                    val dbFragment = Dashboard()
-                    // create transaction object
-                    val fragmentTransaction = supportFragmentManager.beginTransaction()
-                    // create bundle containing user inputs
-                    val bundle = Bundle()
-                    bundle.putParcelableArrayList("data", arrayList)
-                    if (dbFragment != null) {
-                        // pass bundle as an argument of the fragment
-                        dbFragment.arguments = bundle
-                        fragmentTransaction.replace(R.id.nav_host_fragment,dbFragment, "DASHBOARD")
-                        fragmentTransaction.commit()
+                val errorMsg = "This field is required!"
+                // prompt error message if fields are empty
+                if(isEmpty(name) || isEmpty(code) || isEmpty(type) || isEmpty(rating) || isEmpty(duration) || isEmpty(freq)){
+                    if(isEmpty(name)){
+                        inputBind.inputNameLayout.isErrorEnabled = true
+                        inputBind.inputNameLayout.error = errorMsg
+                    }
+                    if(isEmpty(code)){
+                        inputBind.inputCodeLayout.isErrorEnabled = true
+                        inputBind.inputCodeLayout.error = errorMsg
+                    }
+                    if(isEmpty(type)){
+                        inputBind.inputTypeLayout.isErrorEnabled = true
+                        inputBind.inputTypeLayout.error = errorMsg
+                    }
+                    if(isEmpty(rating)){
+                        inputBind.inputRatingLayout.isErrorEnabled = true
+                        inputBind.inputRatingLayout.error = errorMsg
+                    }
+                    if(isEmpty(duration)){
+                        inputBind.inputDurationLayout.isErrorEnabled = true
+                        inputBind.inputDurationLayout.error = errorMsg
+                    }
+                    if(isEmpty(freq)){
+                        inputBind.inputFreqLayout.isErrorEnabled = true
+                        inputBind.inputFreqLayout.error = errorMsg
                     }
                 }
+                else{
+                    val mSuccess = MediaPlayer.create(this,R.raw.success)
 
+                    val imgID: Int = getTypeIcon(type)
+                    // blue text is just to ensure variables are passed to correct object parameters
+                    val newAppliance = Appliance(imgId = imgID, name = name,
+                        modelCode = code, type = type,
+                        rating = rating.toFloat(), duration = duration.toFloat(), frequency = freq
+                    )
+                    applianceDBHelper.insertAppliance(newAppliance)
+                    mSuccess.start()
+                    Toast.makeText(this,"New item added!", Toast.LENGTH_SHORT).show()
+                    navController.popBackStack()
+                    navController.navigate(R.id.dashboard)
+                    binding.bottomNavView.menu.getItem(1).isChecked = true
+                    mAlertDialog.dismiss()
+                }
 
             }
 
@@ -179,11 +168,49 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.bottom_nav, menu)
-        return true
+    private fun inputFieldsFocusListeners(inputBind: FragmentInputFormBinding) {
+        inputBind.inputName.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                inputBind.inputNameLayout.isErrorEnabled = false
+            }
+        }
+        inputBind.inputCode.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                inputBind.inputCodeLayout.isErrorEnabled = false
+            }
+        }
+        inputBind.inputType.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                inputBind.inputTypeLayout.isErrorEnabled = false
+            }
+        }
+        inputBind.inputRating.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                inputBind.inputRatingLayout.isErrorEnabled = false
+            }
+        }
+        inputBind.inputHours.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                inputBind.inputDurationLayout.isErrorEnabled = false
+            }
+        }
+        inputBind.inputFreq.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                inputBind.inputFreqLayout.isErrorEnabled = false
+            }
+        }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        binding.bottomBar.performShow()
+        when(navController.currentDestination!!.id){
+            R.id.home -> binding.bottomNavView.menu.getItem(0).isChecked = true
+            R.id.dashboard -> binding.bottomNavView.menu.getItem(1).isChecked = true
+            R.id.links -> binding.bottomNavView.menu.getItem(3).isChecked = true
+            else -> binding.bottomNavView.menu.getItem(4).isChecked = true
+        }
+    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return  item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
