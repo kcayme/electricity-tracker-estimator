@@ -34,42 +34,54 @@
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Entertainment" />
+            android:text="Entertainment"
+            app:chipBackgroundColor="@color/chip_background"
+            android:textColor="@color/chip_textcolor"/>
 
         <com.google.android.material.chip.Chip
             android:id="@+id/filter_lighting"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lighting" />
+            android:text="Lighting"
+            app:chipBackgroundColor="@color/chip_background"
+            android:textColor="@color/chip_textcolor"/>
 
         <com.google.android.material.chip.Chip
             android:id="@+id/filter_cooling"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cooling" />
+            android:text="Cooling"
+            app:chipBackgroundColor="@color/chip_background"
+            android:textColor="@color/chip_textcolor"/>
 
         <com.google.android.material.chip.Chip
             android:id="@+id/filter_kitchen"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kitchen" />
+            android:text="Kitchen"
+            app:chipBackgroundColor="@color/chip_background"
+            android:textColor="@color/chip_textcolor"/>
 
         <com.google.android.material.chip.Chip
             android:id="@+id/filter_household"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Household" />
+            android:text="Household"
+            app:chipBackgroundColor="@color/chip_background"
+            android:textColor="@color/chip_textcolor"/>
 
         <com.google.android.material.chip.Chip
             android:id="@+id/filter_others"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Others" />
+            android:text="Others"
+            app:chipBackgroundColor="@color/chip_background"
+            android:textColor="@color/chip_textcolor"/>
     </com.google.android.material.chip.ChipGroup>
 
     <LinearLayout
