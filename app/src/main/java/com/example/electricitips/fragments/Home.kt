@@ -22,17 +22,13 @@ class Home :  Fragment(R.layout.fragment_home){
     ): View? {
         // inflate layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater,container,false)
-
-        // access electricity cost rate saved in the view model
-        sharedViewModel.electricityRateLive.observe(viewLifecycleOwner) { electricityrate ->
-            binding!!.rateInputTest.text = electricityrate.toString()
-        }
-
-        // access arraylist of items saved in the view model
-        sharedViewModel.arrayListLive.observe(viewLifecycleOwner){arrayList ->
-            binding!!.itemsInputTest.text = arrayList.size.toString()
-        }
         return binding!!.root
+    }
+
+    fun setPieChartValues(){
+
+        binding.usageLimit
+
     }
 
 }

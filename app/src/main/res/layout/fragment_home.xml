@@ -32,7 +32,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:inputType="numberDecimal"
-                    android:hint="Enter Monthly kWh Cost">
+                    android:hint="Enter Monthly kW Limit">
 
                 </EditText>
 
@@ -275,16 +275,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Monthly Usage"
-                        android:gravity="center">
+                        android:textSize="11dp"
+                        android:gravity="center"
+                        android:textColor="@color/white">
 
                     </TextView>
 
-                    <lecho.lib.hellocharts.view.PieChartView
+                    <com.github.mikephil.charting.charts.PieChart
                         android:id="@+id/monthlyUsage"
                         android:layout_height="100dp"
                         android:layout_width="100dp">
 
-                    </lecho.lib.hellocharts.view.PieChartView>
+                    </com.github.mikephil.charting.charts.PieChart>
 
                 </LinearLayout>
 
@@ -297,17 +299,19 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Usage Limit"
-                        android:gravity="center">
+                        android:text="Monthly Usage Limit"
+                        android:textSize="11dp"
+                        android:gravity="center"
+                        android:textColor="@color/white">
 
                     </TextView>
 
-                    <lecho.lib.hellocharts.view.PieChartView
+                    <ProgressBar
                         android:id="@+id/usageLimit"
                         android:layout_height="100dp"
                         android:layout_width="100dp">
 
-                    </lecho.lib.hellocharts.view.PieChartView>
+                    </ProgressBar>
 
                 </LinearLayout>
 
