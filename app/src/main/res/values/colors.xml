@@ -11,4 +11,5 @@
     <color name="theme_red">#EA5455</color>
     <color name="theme_orange">#F07B3F</color>
     <color name="theme_yellow">#FFD460</color>
+    <color name="theme_grey">#161C20</color>
 </resources>

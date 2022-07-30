@@ -62,7 +62,7 @@ class RateDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     fun readCost(): Float {
         var cost = 0.0f
         val db = readableDatabase
-        var cursor: Cursor? = null
+        var cursor: Cursor?
         try {
             cursor = db.rawQuery("select * from " + RateDBSchema.RateEntity.TABLE_NAME, null)
         } catch (e: SQLiteException) {

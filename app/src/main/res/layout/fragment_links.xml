@@ -23,14 +23,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginEnd="25dp">
+
             <ImageButton
                 android:id="@+id/meralcoIB"
                 android:layout_width="105dp"
                 android:layout_height="105dp"
+                android:layout_marginTop="25dp"
                 android:background="@android:color/transparent"
                 android:scaleType="centerInside"
                 android:src="@drawable/meralco"
-                android:layout_marginTop="25dp"/>
+                tools:ignore="SpeakableTextPresentCheck" />
             <TextView
                 android:id="@+id/meralcoTV"
                 android:layout_width="105dp"
@@ -47,14 +49,16 @@
                 android:textAlignment="center"
                 android:textSize="11sp"
                 android:textStyle="italic" />
+
             <ImageButton
                 android:id="@+id/vecoIB"
                 android:layout_width="105dp"
                 android:layout_height="105dp"
-                android:src="@drawable/veco"
-                android:scaleType="centerInside"
+                android:layout_marginTop="25dp"
                 android:background="@android:color/transparent"
-                android:layout_marginTop="25dp"/>
+                android:scaleType="centerInside"
+                android:src="@drawable/veco"
+                tools:ignore="SpeakableTextPresentCheck" />
             <TextView
                 android:id="@+id/vecoTV"
                 android:layout_width="105dp"
@@ -71,14 +75,16 @@
                 android:textAlignment="center"
                 android:textSize="11sp"
                 android:textStyle="italic" />
+
             <ImageButton
                 android:id="@+id/dlpcIB"
                 android:layout_width="105dp"
                 android:layout_height="105dp"
-                android:src="@drawable/dlpc"
-                android:scaleType="centerInside"
+                android:layout_marginTop="25dp"
                 android:background="@android:color/transparent"
-                android:layout_marginTop="25dp"/>
+                android:scaleType="centerInside"
+                android:src="@drawable/dlpc"
+                tools:ignore="SpeakableTextPresentCheck" />
             <TextView
                 android:id="@+id/dlpcTV"
                 android:layout_width="105dp"
@@ -101,14 +107,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginStart="25dp">
-        <ImageButton
-            android:id="@+id/doeIB"
-            android:layout_width="105dp"
-            android:layout_height="105dp"
-            android:background="@android:color/transparent"
-            android:scaleType="centerInside"
-            android:src="@drawable/doe"
-            android:layout_marginTop="25dp"/>
+
+            <ImageButton
+                android:id="@+id/doeIB"
+                android:layout_width="105dp"
+                android:layout_height="105dp"
+                android:layout_marginTop="25dp"
+                android:background="@android:color/transparent"
+                android:scaleType="centerInside"
+                android:src="@drawable/doe"
+                tools:ignore="SpeakableTextPresentCheck" />
         <TextView
             android:id="@+id/doeTV"
             android:layout_width="105dp"
@@ -125,14 +133,16 @@
             android:textAlignment="center"
             android:textSize="11sp"
             android:textStyle="italic" />
-        <ImageButton
-            android:id="@+id/napocorIB"
-            android:layout_width="105dp"
-            android:layout_height="105dp"
-            android:src="@drawable/napocor"
-            android:scaleType="centerInside"
-            android:background="@android:color/transparent"
-            android:layout_marginTop="25dp"/>
+
+            <ImageButton
+                android:id="@+id/napocorIB"
+                android:layout_width="105dp"
+                android:layout_height="105dp"
+                android:layout_marginTop="25dp"
+                android:background="@android:color/transparent"
+                android:scaleType="centerInside"
+                android:src="@drawable/napocor"
+                tools:ignore="SpeakableTextPresentCheck" />
         <TextView
             android:id="@+id/napocorTV"
             android:layout_width="105dp"
@@ -149,14 +159,16 @@
             android:textAlignment="center"
             android:textSize="11sp"
             android:textStyle="italic" />
-        <ImageButton
-            android:id="@+id/ngcpIB"
-            android:layout_width="105dp"
-            android:layout_height="105dp"
-            android:src="@drawable/ngcp"
-            android:scaleType="centerInside"
-            android:background="@android:color/transparent"
-            android:layout_marginTop="25dp"/>
+
+            <ImageButton
+                android:id="@+id/ngcpIB"
+                android:layout_width="105dp"
+                android:layout_height="105dp"
+                android:layout_marginTop="25dp"
+                android:background="@android:color/transparent"
+                android:scaleType="centerInside"
+                android:src="@drawable/ngcp"
+                tools:ignore="SpeakableTextPresentCheck" />
         <TextView
             android:id="@+id/ngcpTV"
             android:layout_width="105dp"

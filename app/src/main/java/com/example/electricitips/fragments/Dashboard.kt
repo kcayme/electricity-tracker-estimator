@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.electricitips.*
 import com.example.electricitips.databinding.FragmentDashboardBinding
 
+
+
+
 class Dashboard: Fragment(R.layout.fragment_dashboard) {
 
     private var binding: FragmentDashboardBinding? = null
@@ -22,33 +25,33 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
     private lateinit var applianceDBHelper: ApplianceDBHelper
     private lateinit var rateDBHelper: RateDBHelper
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentDashboardBinding.inflate(inflater, container, false)
+     override fun onCreateView(
+         inflater: LayoutInflater,
+         container: ViewGroup?,
+         savedInstanceState: Bundle?
+     ): View? {
+         binding = FragmentDashboardBinding.inflate(inflater, container, false)
 
-        // initialize db helpers
-        applianceDBHelper = ApplianceDBHelper(activity!!.applicationContext)
-        rateDBHelper = RateDBHelper(activity!!.applicationContext)
+         // initialize db helpers
+         applianceDBHelper = ApplianceDBHelper(requireActivity().applicationContext)
+         rateDBHelper = RateDBHelper(requireActivity().applicationContext)
 
-        binding!!.inputCostRate.setText(rateDBHelper.readCost().toString())
+         binding!!.inputCostRate.setText(rateDBHelper.readCost().toString())
 
-        binding!!.setRateBtn.setOnClickListener {
-            val mSet = MediaPlayer.create(context,R.raw.set)
-            rateDBHelper.deleteCost()
-            val cost = binding!!.inputCostRate.text.toString().toFloat()
-            rateDBHelper.insertRate(cost)
-            val test = rateDBHelper.readCost()
-            mSet.start()
-            // hide keyboard layout after set button is pressed
-            val imm: InputMethodManager = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(binding!!.costInputLayout.windowToken,0)
-            Toast.makeText(context, "Electricity rate set! $test",Toast.LENGTH_SHORT).show()
-        }
-        return binding!!.root
-    }
+         binding!!.setRateBtn.setOnClickListener {
+             val mSet = MediaPlayer.create(context,R.raw.set)
+             rateDBHelper.deleteCost()
+             val cost = binding!!.inputCostRate.text.toString().toFloat()
+             rateDBHelper.insertRate(cost)
+             val test = rateDBHelper.readCost()
+             mSet.start()
+             // hide keyboard layout after set button is pressed
+             val imm: InputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+             imm.hideSoftInputFromWindow(binding!!.costInputLayout.windowToken,0)
+             Toast.makeText(context, "Electricity rate set! $test",Toast.LENGTH_SHORT).show()
+         }
+         return binding!!.root
+     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -24,5 +24,25 @@
         android:id="@+id/tips"
         android:name="com.example.electricitips.fragments.Tips"
         android:label="fragment_tips"
-        tools:layout="@layout/fragment_tips" />
+        tools:layout="@layout/fragment_tips" >
+        <action
+            android:id="@+id/action_tips_to_webView2"
+            app:destination="@id/webview"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:launchSingleTop="false"
+            app:popUpToInclusive="true"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/tips" />
+    </fragment>
+    <fragment
+        android:id="@+id/webview"
+        android:name="com.example.electricitips.fragments.WebView"
+        android:label="fragment_web_view"
+        tools:layout="@layout/fragment_web_view" >
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
 </navigation>
