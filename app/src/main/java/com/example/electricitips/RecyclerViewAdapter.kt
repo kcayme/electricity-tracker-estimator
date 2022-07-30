@@ -1,5 +1,6 @@
 package com.example.electricitips
 
+
 import android.media.MediaPlayer
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
@@ -7,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 
@@ -25,6 +28,7 @@ class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val cont
         private var duration = itemView.findViewById<TextView>(R.id.card_duration)
         private var frequency = itemView.findViewById<TextView>(R.id.card_frequency)
         private var linearlayout = itemView.findViewById<LinearLayout>(R.id.card_linearlayout)
+        private var cardBackground = itemView.findViewById<CardView>(R.id.dashboard_cardview)
 
         fun bindItems(appliance: Appliance){
             if(appliance.imgId == R.drawable.empty){
@@ -46,14 +50,24 @@ class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val cont
                 frequency.text = appliance.frequency
                 linearlayout.visibility = View.GONE
             }
-        }
 
+            when(appliance.type){
+                "Entertainment" -> cardBackground.setCardBackgroundColor(ContextCompat.getColor(cardBackground.context, R.color.theme_red))
+                "Lighting" -> cardBackground.setCardBackgroundColor(ContextCompat.getColor(cardBackground.context, R.color.theme_green))
+                "Cooling" -> cardBackground.setCardBackgroundColor(ContextCompat.getColor(cardBackground.context, R.color.theme_blue))
+                "Kitchen Appliance" -> cardBackground.setCardBackgroundColor(ContextCompat.getColor(cardBackground.context, R.color.theme_pink))
+                "Household Appliance" -> cardBackground.setCardBackgroundColor(ContextCompat.getColor(cardBackground.context, R.color.theme_yellow))
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.cardview_items, parent, false)
         // initialize db helper
         applianceDBHelper = ApplianceDBHelper(context.requireContext())
+
+
+
 
         return ViewHolder(v)
     }
@@ -114,6 +128,9 @@ class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val cont
             }
             true
         }
+
+
+
 
     }
 }

@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
                 imm.hideSoftInputFromWindow(inputBind.inputFreqLayout.windowToken,0)
             }
             inputBind.inputType.setOnClickListener {
-                val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+               val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(inputBind.inputTypeLayout.windowToken,0)
             }
 
@@ -161,7 +161,6 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNavView.menu.getItem(1).isChecked = true
                     mAlertDialog.dismiss()
                 }
-
 
             }
 

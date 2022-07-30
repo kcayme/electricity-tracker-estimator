@@ -92,7 +92,6 @@
                 app:layout_collapseMode="pin"
                 android:layout_height="?attr/actionBarSize"/>
 
-
         </com.google.android.material.appbar.CollapsingToolbarLayout>
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup"
