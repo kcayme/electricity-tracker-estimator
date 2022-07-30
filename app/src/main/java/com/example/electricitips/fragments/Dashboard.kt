@@ -3,6 +3,7 @@ package com.example.electricitips.fragments
 
 import android.content.Context
 import android.media.MediaPlayer
+import android.os.Build
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.electricitips.*
 import com.example.electricitips.databinding.FragmentDashboardBinding
@@ -117,7 +119,6 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
             }
             cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
         }
-        binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
         binding?.dashboardRecyclerview?.adapter = cardAdapter
     }
 
@@ -145,7 +146,6 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
             }
             cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
         }
-        binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
         binding?.dashboardRecyclerview?.adapter = cardAdapter
     }
 
@@ -173,7 +173,6 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
             }
             cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
         }
-        binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
         binding?.dashboardRecyclerview?.adapter = cardAdapter
     }
 
@@ -201,7 +200,6 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
             }
             cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
         }
-        binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
         binding?.dashboardRecyclerview?.adapter = cardAdapter
     }
 
@@ -229,7 +227,6 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
             }
             cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
         }
-        binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
         binding?.dashboardRecyclerview?.adapter = cardAdapter
     }
 
@@ -257,10 +254,10 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
             }
             cardAdapter = RecyclerViewAdapter(filteredArrayList, this)
         }
-        binding?.dashboardRecyclerview?.layoutManager = LinearLayoutManager(context)
         binding?.dashboardRecyclerview?.adapter = cardAdapter
     }
 
+    // binding must be set to null on fragment destroy to prevent memory leaks
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null

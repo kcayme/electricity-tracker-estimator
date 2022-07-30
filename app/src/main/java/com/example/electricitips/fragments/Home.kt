@@ -23,8 +23,8 @@ class Home :  Fragment(R.layout.fragment_home){
         binding = FragmentHomeBinding.inflate(inflater,container,false)
 
         // initialize db helpers
-        applianceDBHelper = ApplianceDBHelper(activity!!.applicationContext)
-        rateDBHelper = RateDBHelper(activity!!.applicationContext)
+        applianceDBHelper = ApplianceDBHelper(requireActivity().applicationContext)
+        rateDBHelper = RateDBHelper(requireActivity().applicationContext)
 
         arrayList = applianceDBHelper.readAllAppliances()
 
@@ -45,4 +45,9 @@ class Home :  Fragment(R.layout.fragment_home){
         return binding!!.root
     }
 
+    // binding must be set to null on fragment destroy to prevent memory leaks
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 }

@@ -6,21 +6,20 @@ import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 
 class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val context: Fragment) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     private lateinit var applianceDBHelper: ApplianceDBHelper
-    private var mDelete = MediaPlayer.create(context.context, R.raw.delete)
+    private var mDelete = MediaPlayer.create(context.requireContext(), R.raw.delete)
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+
         private var img = itemView.findViewById<ImageView>(R.id.card_img)
         private var modelCode = itemView.findViewById<TextView>(R.id.card_code)
         private var name = itemView.findViewById<TextView>(R.id.card_name)
@@ -60,9 +59,6 @@ class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val cont
                 "Household Appliance" -> cardBackground.setCardBackgroundColor(ContextCompat.getColor(cardBackground.context, R.color.theme_yellow))
             }
         }
-
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -95,33 +91,36 @@ class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val cont
                 collapseBtn.setBackgroundResource(R.drawable.expand)
             }
         }
+
         holder.itemView.setOnLongClickListener {
             if(holder.itemView.findViewById<TextView>(R.id.card_rating).text != "N/A"){
                 AlertDialog.Builder(context.requireContext())
                     .setMessage("Proceed to delete item?")
                     .setPositiveButton("OK") { _, _ ->
-                        // delete item from database
-                        applianceDBHelper.deleteAppliance(arrayList[position].modelCode)
-                        // delete item from adapter's arraylist
-                        arrayList.removeAt(position)
                         mDelete.start()
-                        if (arrayList.size == 0) {
-                            arrayList.add(
-                                Appliance(
-                                    R.drawable.empty,
-                                    "No items to show",
-                                    "",
-                                    "",
-                                    0.0f,
-                                    0.0f,
-                                    ""
-                                )
-                            )
+                        try {
+                            // delete item from database
+                            val del = applianceDBHelper.deleteAppliance(arrayList[position].modelCode)
+                            arrayList.removeAt(position)
 
+                            if (arrayList.size == 0) {
+                                arrayList.add(
+                                    Appliance(
+                                        R.drawable.empty,
+                                        "No items to show",
+                                        "",
+                                        "",
+                                        0.0f,
+                                        0.0f,
+                                        ""
+                                    )
+                                )
+                            }
+                            notifyDataSetChanged()
                         }
-                        // update recycler view
-                        notifyDataSetChanged()
-                        holder.bindItems(arrayList[position])
+                        catch (e: Exception){
+                            Toast.makeText(context.requireContext(),"$e",Toast.LENGTH_SHORT).show()
+                        }
                     }
                     .setNegativeButton("Cancel") { _, _ ->
                     }
