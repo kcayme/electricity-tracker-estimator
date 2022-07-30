@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.electricitips"
-        minSdk 21
+        minSdk 24
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -51,5 +51,4 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.google.android.material:material:1.7.0-alpha03'
     implementation  ("androidx.cardview:cardview:1.0.0")
-
 }

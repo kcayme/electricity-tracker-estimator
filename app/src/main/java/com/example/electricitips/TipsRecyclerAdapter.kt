@@ -1,5 +1,6 @@
 package com.example.electricitips
 
+import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.electricitips.fragments.TipsDirections
 
 class TipsRecyclerAdapter (private var arrayList: ArrayList<Articles>, val context: Fragment) : RecyclerView.Adapter<TipsRecyclerAdapter.ArticleViewHolder>(){
+
+    private val mClick = MediaPlayer.create(context.context,R.raw.readmore)
 
     class ArticleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
@@ -44,6 +47,7 @@ class TipsRecyclerAdapter (private var arrayList: ArrayList<Articles>, val conte
 
         val readmoreBtn = holder.itemView.findViewById<Button>(R.id.readmoreBtn)
         readmoreBtn.setOnClickListener {
+            mClick.start()
             val url = when(position){
                 0 -> "https://www.pna.gov.ph/articles/1095032"
                 1 -> "https://www.energyliteracyph.com/learning-materials/save-energy"

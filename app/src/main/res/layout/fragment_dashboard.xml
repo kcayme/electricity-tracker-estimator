@@ -1,124 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/dashboard_LinearLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/black"
-    android:orientation="vertical"
-    tools:context=".fragments.Dashboard">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:fitsSystemWindows="true"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:text="Your Appliances"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="26sp"
-        android:textStyle="bold" />
+        android:layout_width="match_parent">
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:paddingStart="20dp"
-        app:singleSelection="false">
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/filter_entertainment"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="wrap_content"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Entertainment" />
+            android:background="@color/theme_dark_blue"
+            app:contentScrim="@color/theme_orange"
+            app:elevation="0dp"
+            app:expandedTitleTextAppearance="@style/expandedBarTextStyle"
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+            app:scrimAnimationDuration="300"
+            app:title="Your Appliances"
+            app:toolbarId="@+id/toolbar">
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/filter_lighting"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Lighting" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/filter_cooling"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cooling" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/filter_kitchen"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Kitchen" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/filter_household"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Household" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/filter_others"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Others" />
-    </com.google.android.material.chip.ChipGroup>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/costInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="15dp"
-            android:layout_weight="1"
-            android:hint="Electricity Rate (Php per kWh)">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputCostRate"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="200dp"
+                android:gravity="center"
+                android:orientation="vertical">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/setRateBtn"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="30dp"
+                    android:paddingStart="20dp"
+                    android:text="Your Appliances"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    tools:ignore="TextContrastCheck" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/costInputLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        android:layout_weight="1"
+                        android:hint="Electricity Rate (Php per kWh)">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputCostRate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/black"
+                            android:inputType="numberDecimal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/setRateBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cornerRadius="20dp"
+                        android:backgroundTint="@color/theme_red"
+                        android:shadowRadius="@integer/material_motion_duration_long_2"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:text="Set" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                app:layout_collapseMode="pin"
+                android:layout_height="?attr/actionBarSize"/>
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="Set" />
+            android:background="@color/black"
+            android:padding="10dp"
+            app:singleSelection="false">
 
-    </LinearLayout>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/filter_entertainment"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Entertainment" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/dashboard_recyclerview"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/filter_lighting"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lighting" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/filter_cooling"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cooling" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/filter_kitchen"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kitchen" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/filter_household"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Household" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/filter_others"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Others" />
+        </com.google.android.material.chip.ChipGroup>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@color/theme_grey"
-        android:paddingStart="5dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="50dp"
-        android:paddingEnd="5dp">
+        android:background="@color/black"
+        android:padding="10dp"
+        android:visibility="visible"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dashboard_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="50dp" />
+    </androidx.core.widget.NestedScrollView>
 
-</LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

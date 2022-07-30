@@ -4,67 +4,67 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import com.example.electricitips.R
 import com.example.electricitips.databinding.FragmentLinksBinding
 
 class Links : Fragment(R.layout.fragment_links), View.OnClickListener {
 
-    private lateinit var binding: FragmentLinksBinding
+    private var binding: FragmentLinksBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLinksBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding!!.root
     }
 
     override fun onViewCreated(view:View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.meralcoIB.setOnClickListener(this)
-        binding.vecoIB.setOnClickListener(this)
-        binding.dlpcIB.setOnClickListener(this)
-        binding.doeIB.setOnClickListener(this)
-        binding.napocorIB.setOnClickListener(this)
-        binding.ngcpIB.setOnClickListener(this)
+        binding!!.meralcoIB.setOnClickListener(this)
+        binding!!.vecoIB.setOnClickListener(this)
+        binding!!.dlpcIB.setOnClickListener(this)
+        binding!!.doeIB.setOnClickListener(this)
+        binding!!.napocorIB.setOnClickListener(this)
+        binding!!.ngcpIB.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v!!.id) {
-            binding.meralcoIB.id -> {
+            binding!!.meralcoIB.id -> {
                 playSelectClick()
                 Toast.makeText(activity, "You clicked MERALCO.", Toast.LENGTH_SHORT).show()
                 linksDialog(0)
             }
-            binding.vecoIB.id -> {
+            binding!!.vecoIB.id -> {
                 playSelectClick()
                 Toast.makeText(activity, "You clicked VECO.", Toast.LENGTH_SHORT).show()
                 linksDialog(1)
             }
-            binding.dlpcIB.id -> {
+            binding!!.dlpcIB.id -> {
                 playSelectClick()
                 Toast.makeText(activity, "You clicked DLPC.", Toast.LENGTH_SHORT).show()
                 linksDialog(2)
             }
-            binding.doeIB.id -> {
+            binding!!.doeIB.id -> {
                 playSelectClick()
                 Toast.makeText(activity, "You clicked DOE.", Toast.LENGTH_SHORT).show()
                 linksDialog(3)
             }
-            binding.napocorIB.id -> {
+            binding!!.napocorIB.id -> {
                 playSelectClick()
                 Toast.makeText(activity, "You clicked NAPOCOR.", Toast.LENGTH_SHORT).show()
                 linksDialog(4)
             }
-            binding.ngcpIB.id -> {
+            binding!!.ngcpIB.id -> {
                 playSelectClick()
                 Toast.makeText(activity, "You clicked NGCP.", Toast.LENGTH_SHORT).show()
                 linksDialog(5)
@@ -77,8 +77,6 @@ class Links : Fragment(R.layout.fragment_links), View.OnClickListener {
         mMusic?.start()
     }
 
-
-
     private fun linksDialog(selectedItem:Int) {
         val items: Array<String> = arrayOf("Facebook", "Official Website")
         var checkItem = 0
@@ -90,7 +88,8 @@ class Links : Fragment(R.layout.fragment_links), View.OnClickListener {
             }
             .setPositiveButton("OK"){ _, _ ->
                 if (checkItem==0) {
-                    val intent = Intent(Intent.ACTION_VIEW)
+                    var intent = Intent(Intent.ACTION_VIEW)
+
                     when(selectedItem) {
                         0 -> intent.data = Uri.parse(resources.getString(R.string.meralcoFB))
                         1 -> intent.data = Uri.parse(resources.getString(R.string.vecoFB))
@@ -123,5 +122,11 @@ class Links : Fragment(R.layout.fragment_links), View.OnClickListener {
     private fun playClickTone() {
         val mMusic = MediaPlayer.create(activity, R.raw.coolinterfaceclicktone)
         mMusic?.start()
+    }
+
+    // binding must be set to null on fragment destroy to prevent memory leaks
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }
