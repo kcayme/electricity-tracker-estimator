@@ -90,9 +90,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="No Item Added"
-                            android:textSize="15dp"
+                            android:textSize="20dp"
                             android:textColor="@color/white"
-                            android:gravity="center">
+                            android:gravity="center"
+                            android:fontFamily="@font/Merchant_Copy">
 
                         </TextView>
 
@@ -139,7 +140,8 @@
                             android:gravity="center"
                             android:text="No Item Added"
                             android:textColor="@color/white"
-                            android:textSize="15dp">
+                            android:textSize="20dp"
+                            android:fontFamily="@font/Merchant_Copy">
 
                         </TextView>
 
@@ -193,9 +195,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="No Item Added"
-                            android:textSize="15dp"
+                            android:textSize="20dp"
                             android:textColor="@color/white"
-                            android:gravity="center">
+                            android:gravity="center"
+                            android:fontFamily="@font/Merchant_Copy">
 
                         </TextView>
 
@@ -241,9 +244,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="No Item Added"
-                            android:textSize="15dp"
+                            android:textSize="20dp"
                             android:textColor="@color/white"
-                            android:gravity="center">
+                            android:gravity="center"
+                            android:fontFamily="@font/Merchant_Copy">
 
                         </TextView>
 
