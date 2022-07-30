@@ -15,7 +15,7 @@ import com.example.electricitips.databinding.FragmentWebViewBinding
 
 class WebView :  Fragment(R.layout.fragment_web_view){
     private val args: WebViewArgs by navArgs()
-    private lateinit var binding: FragmentWebViewBinding
+    private var binding: FragmentWebViewBinding? = null
     private var webView: WebView? = null
 
     override fun onCreateView(
@@ -24,18 +24,24 @@ class WebView :  Fragment(R.layout.fragment_web_view){
     ): View? {
         // inflate layout for this fragment
         binding = FragmentWebViewBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding!!.root
     }
 
     override fun onViewCreated (view:View, savedInstanceState: Bundle? ) {
         super.onViewCreated(view, savedInstanceState)
 
-        webView = binding.webView
+        webView = binding!!.webView
         webView!!.webViewClient = WebViewClient()
 
-        val webSettings = binding.webView.settings
+        val webSettings = binding!!.webView.settings
         webSettings.javaScriptEnabled = true
 
-        binding.webView.loadUrl(args.url)
+        binding!!.webView.loadUrl(args.url)
+    }
+
+    // binding must be set to null on fragment destroy to prevent memory leaks
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

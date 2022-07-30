@@ -52,10 +52,4 @@
 
     </com.google.android.material.bottomappbar.BottomAppBar>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_gravity="bottom"
-        android:layout_above="@id/bottom_bar"
-        android:background="@drawable/shadow"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -257,6 +257,7 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
         binding?.dashboardRecyclerview?.adapter = cardAdapter
     }
 
+    // binding must be set to null on fragment destroy to prevent memory leaks
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null

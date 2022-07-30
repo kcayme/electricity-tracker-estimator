@@ -20,7 +20,7 @@ import com.example.electricitips.databinding.FragmentTipsBinding
 
 class Tips :  Fragment(R.layout.fragment_tips){
 
-    private lateinit var binding: FragmentTipsBinding
+    private var binding: FragmentTipsBinding? = null
     private var webView: WebView? = null
     private var arrayArticles = ArrayList<Articles>()
 
@@ -86,15 +86,20 @@ class Tips :  Fragment(R.layout.fragment_tips){
         }
 
 
-        return binding.root
+        return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val articlesAdapter = TipsRecyclerAdapter(arrayArticles, this)
-        binding.tipsRecyclerView.layoutManager = LinearLayoutManager(context)
-        binding.tipsRecyclerView.adapter = articlesAdapter
+        binding!!.tipsRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding!!.tipsRecyclerView.adapter = articlesAdapter
     }
 
+    // binding must be set to null on fragment destroy to prevent memory leaks
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 }
 

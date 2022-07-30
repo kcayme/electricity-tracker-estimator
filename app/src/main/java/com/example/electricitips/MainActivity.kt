@@ -205,8 +205,7 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         binding.bottomBar.performShow()
-        val id = navController.currentDestination!!.id
-        when(id){
+        when(navController.currentDestination!!.id){
             R.id.home -> binding.bottomNavView.menu.getItem(0).isChecked = true
             R.id.dashboard -> binding.bottomNavView.menu.getItem(1).isChecked = true
             R.id.links -> binding.bottomNavView.menu.getItem(3).isChecked = true
