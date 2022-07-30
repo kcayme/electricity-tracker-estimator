@@ -28,9 +28,6 @@ class Home :  Fragment(R.layout.fragment_home){
 
         arrayList = applianceDBHelper.readAllAppliances()
 
-        binding!!.itemsInputTest.text = arrayList.size.toString()
-        binding!!.rateInputTest.text = rateDBHelper.readCost().toString()
-
         /*
         // access electricity cost rate saved in the view model
         sharedViewModel.electricityRateLive.observe(viewLifecycleOwner) { electricityrate ->
