@@ -49,7 +49,7 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
              rateDBHelper.deleteCost()
 
              if(TextUtils.isEmpty(binding!!.inputCostRate.text.toString())){
-                 Toast.makeText(context, "Enter Cost Rate", Toast.LENGTH_LONG).show()
+                 Toast.makeText(context, "Enter Electricity Rate", Toast.LENGTH_LONG).show()
              }
              else{
                  val cost = binding!!.inputCostRate.text.toString().toFloat()

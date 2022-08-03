@@ -130,7 +130,7 @@ class Home :  Fragment(R.layout.fragment_home){
         pieChart.legend.isEnabled = false
         pieChart.description.isEnabled = false
 
-        binding!!.dailyEle.text = (total/30).toString() + "kW"
+        binding!!.dailyEle.text =  String.format("%.2f",(total/30)) + "kW"
         binding!!.monthlyEle.text = (total).toString() + "kW"
 
         binding!!.setKwhMonthly.setOnClickListener(){
