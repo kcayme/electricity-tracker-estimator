@@ -6,6 +6,7 @@ import android.media.MediaPlayer
 import android.os.Build
 import androidx.fragment.app.Fragment
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,23 +35,34 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
      ): View? {
          binding = FragmentDashboardBinding.inflate(inflater, container, false)
 
+         var test:Float = 0f
+
          // initialize db helpers
          applianceDBHelper = ApplianceDBHelper(requireActivity().applicationContext)
          rateDBHelper = RateDBHelper(requireActivity().applicationContext)
+
 
          binding!!.inputCostRate.setText(rateDBHelper.readCost().toString())
 
          binding!!.setRateBtn.setOnClickListener {
              val mSet = MediaPlayer.create(context,R.raw.set)
              rateDBHelper.deleteCost()
-             val cost = binding!!.inputCostRate.text.toString().toFloat()
-             rateDBHelper.insertRate(cost)
-             val test = rateDBHelper.readCost()
-             mSet.start()
-             // hide keyboard layout after set button is pressed
-             val imm: InputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-             imm.hideSoftInputFromWindow(binding!!.costInputLayout.windowToken,0)
-             Toast.makeText(context, "Electricity rate set! $test",Toast.LENGTH_SHORT).show()
+
+             if(TextUtils.isEmpty(binding!!.inputCostRate.text.toString())){
+                 Toast.makeText(context, "Enter Cost Rate", Toast.LENGTH_LONG).show()
+             }
+             else{
+                 val cost = binding!!.inputCostRate.text.toString().toFloat()
+                 rateDBHelper.insertRate(cost)
+                 test = rateDBHelper.readCost()
+                 mSet.start()
+
+                 // hide keyboard layout after set button is pressed
+                 val imm: InputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                 imm.hideSoftInputFromWindow(binding!!.costInputLayout.windowToken,0)
+                 Toast.makeText(context, "Electricity rate set! $test",Toast.LENGTH_SHORT).show()
+             }
+
          }
          return binding!!.root
      }
