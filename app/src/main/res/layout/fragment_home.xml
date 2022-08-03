@@ -1,26 +1,504 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".fragments.Home">
+    android:layout_width="match_parent"
+    android:background="@color/black">
 
-    <TextView
-        android:id="@+id/rateInputTest"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="@color/white"
-        android:textSize="24sp" />
+        android:background="@color/black"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/itemsInputTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="@color/theme_yellow"
-        android:textSize="30sp" />
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:padding="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Enter Monthly kW Limit"
+                    android:layout_gravity="left"
+                    android:textColor="@color/white">
+
+                </TextView>
+
+                <EditText
+                    android:id="@+id/kwh_monthly"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:inputType="numberDecimal"
+                    android:hint="Enter Monthly kW Limit"
+                    android:text="0.0">
+
+                </EditText>
+
+                <Button
+                    android:id="@+id/set_kwh_monthly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Set"
+                    android:textColor="@color/black">
+
+                </Button>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp">
+
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="200dp"
+                        android:background="@drawable/box1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_marginTop="20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Daily kW Usage"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="12dp"
+                            android:paddingBottom="10dp">
+
+                        </TextView>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="150px"
+                            android:src="@drawable/daily_electricity"
+                            app:tint="@color/white"
+                            android:paddingBottom="10dp">
+
+                        </ImageView>
+
+                        <TextView
+                            android:id="@+id/dailyEle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="No Item Added"
+                            android:textSize="20dp"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            android:fontFamily="@font/merchant_copy">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp">
+
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="200dp"
+                        android:background="@drawable/box2"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:gravity="center"
+                            android:paddingBottom="10dp"
+                            android:text="Monthly kW Usage"
+                            android:textColor="@color/white"
+                            android:textSize="12dp">
+
+                        </TextView>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="150px"
+                            android:paddingBottom="10dp"
+                            android:src="@drawable/monthly_electricity"
+                            app:tint="@color/white">
+
+                        </ImageView>
+
+                        <TextView
+                            android:id="@+id/monthlyEle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="No Item Added"
+                            android:textColor="@color/white"
+                            android:textSize="20dp"
+                            android:fontFamily="@font/merchant_copy">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp">
+
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="200dp"
+                        android:background="@drawable/box3"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_marginTop="20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Daily Electricity Cost"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="12dp"
+                            android:paddingBottom="10dp">
+
+                        </TextView>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="150px"
+                            android:src="@drawable/daily_bill"
+                            app:tint="@color/white"
+                            android:paddingBottom="10dp">
+
+                        </ImageView>
+
+                        <TextView
+                            android:id="@+id/dailyCost"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="No Item Added"
+                            android:textSize="20dp"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            android:fontFamily="@font/merchant_copy">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp">
+
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="200dp"
+                        android:background="@drawable/box4"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:gravity="center"
+                            android:paddingBottom="10dp"
+                            android:text="Monthly Electricity Cost"
+                            android:textColor="@color/white"
+                            android:textSize="12dp">
+
+                        </TextView>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="150px"
+                            android:paddingBottom="10dp"
+                            android:src="@drawable/monthly_bill"
+                            app:tint="@color/white">
+
+                        </ImageView>
+
+                        <TextView
+                            android:id="@+id/monthlyCost"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/merchant_copy"
+                            android:gravity="center"
+                            android:text="No Item Added"
+                            android:textColor="@color/white"
+                            android:textSize="20dp">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="20dp"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="30dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Monthly Usage Chart"
+                        android:textColor="@color/white"
+                        android:textSize="11dp">
+
+                    </TextView>
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/monthlyUsage_pieChart"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp">
+
+                    </com.github.mikephil.charting.charts.PieChart>
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="30dp">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Monthly Usage Limit"
+                        android:textColor="@color/white"
+                        android:textSize="11dp"
+                        tools:layout_editor_absoluteX="30dp">
+
+                    </TextView>
+
+                    <ProgressBar
+                        android:id="@+id/usageLimit_progress"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:indeterminateOnly="false"
+                        android:progressDrawable="@drawable/circle"
+                        android:rotation="-90"
+                        app:layout_constraintEnd_toEndOf="@+id/textView3"
+                        app:layout_constraintStart_toStartOf="@+id/textView3"
+                        app:layout_constraintTop_toBottomOf="@+id/textView3"
+                        tools:progress="0">
+
+                    </ProgressBar>
+
+                    <TextView
+                        android:id="@+id/usageLimit_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Not Set"
+                        app:layout_constraintBottom_toBottomOf="@+id/usageLimit_progress"
+                        app:layout_constraintEnd_toEndOf="@+id/usageLimit_progress"
+                        app:layout_constraintStart_toStartOf="@+id/usageLimit_progress"
+                        app:layout_constraintTop_toTopOf="@+id/usageLimit_progress"
+                        android:textColor="@color/white">
+
+                    </TextView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="20dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="#B95051"
+                        android:minWidth="10dp"
+                        android:minHeight="10dp"
+                        android:layout_margin="5dp">
+
+                    </ImageView>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="#64412F"
+                        android:minWidth="10dp"
+                        android:minHeight="10dp"
+                        android:layout_margin="5dp">
+
+                    </ImageView>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="#743D6A"
+                        android:minWidth="10dp"
+                        android:minHeight="10dp"
+                        android:layout_margin="5dp">
+
+                    </ImageView>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="#80519E"
+                        android:minWidth="10dp"
+                        android:minHeight="10dp"
+                        android:layout_margin="5dp">
+
+                    </ImageView>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="#e1a81e"
+                        android:minWidth="10dp"
+                        android:minHeight="10dp"
+                        android:layout_margin="5dp">
+
+                    </ImageView>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="#c23d59"
+                        android:minWidth="10dp"
+                        android:minHeight="10dp"
+                        android:layout_margin="5dp">
+
+                    </ImageView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="40dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Entertainment"
+                        android:textSize="10dp"
+                        android:textColor="@color/white"
+                        android:padding="3.2dp">
+
+                    </TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lighting"
+                        android:textSize="10dp"
+                        android:textColor="@color/white"
+                        android:padding="3.2dp">
+
+                    </TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cooling"
+                        android:textSize="10dp"
+                        android:textColor="@color/white"
+                        android:padding="3.2dp">
+
+                    </TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kitchen Appliances"
+                        android:textSize="10dp"
+                        android:textColor="@color/white"
+                        android:padding="3.2dp">
+
+                    </TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Household Appliances"
+                        android:textSize="10dp"
+                        android:textColor="@color/white"
+                        android:padding="3.2dp">
+
+                    </TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Others"
+                        android:textSize="10dp"
+                        android:textColor="@color/white"
+                        android:padding="3.2dp">
+
+                    </TextView>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
