@@ -29,26 +29,26 @@
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
-        app:fabCradleVerticalOffset="0dp"
-        app:fabCradleMargin="5dp"
-        app:fabAnchorMode="cradle"
-        app:hideOnScroll="true"
-        app:backgroundTint="@color/theme_dark_blue"
-        app:fabCradleRoundedCornerRadius="10dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:backgroundTint="@color/orignal_grey"
         app:contentInsetStart="0dp"
-        android:layout_gravity="bottom">
+        app:fabAnchorMode="cradle"
+        app:fabCradleMargin="5dp"
+        app:fabCradleRoundedCornerRadius="10dp"
+        app:fabCradleVerticalOffset="0dp"
+        app:hideOnScroll="true">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:itemIconTint="@color/bottom_nav_item_color"
-            app:itemTextColor="@color/bottom_nav_item_color"
+            android:background="@android:color/transparent"
             android:backgroundTint="@color/white"
             app:elevation="0dp"
-            android:background="@android:color/transparent"
-            app:menu="@menu/bottom_nav"/>
+            app:itemIconTint="@color/bottom_nav_item_color"
+            app:itemTextColor="@color/bottom_nav_item_color"
+            app:menu="@menu/bottom_nav" />
 
     </com.google.android.material.bottomappbar.BottomAppBar>
 

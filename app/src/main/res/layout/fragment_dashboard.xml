@@ -14,7 +14,7 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/theme_dark_blue"
+            android:background="@color/orignal_grey"
             app:contentScrim="@color/theme_orange"
             app:elevation="0dp"
             app:expandedTitleTextAppearance="@style/expandedBarTextStyle"
@@ -55,14 +55,14 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        app:boxCornerRadiusTopStart="15dp"
-                        app:boxCornerRadiusTopEnd="15dp"
-                        app:boxCornerRadiusBottomStart="15dp"
-                        app:boxCornerRadiusBottomEnd="15dp"
-                        app:boxStrokeWidth="0dp"
-                        app:boxStrokeWidthFocused="0dp"
                         android:layout_weight="1"
-                        android:hint="Electricity Rate (Php per kWh)">
+                        android:hint="Electricity Rate (Php per kWh)"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/inputCostRate"
@@ -76,12 +76,12 @@
                         android:id="@+id/setRateBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:cornerRadius="20dp"
-                        android:backgroundTint="@color/theme_red"
-                        android:shadowRadius="@integer/material_motion_duration_long_2"
                         android:layout_gravity="center"
                         android:layout_marginStart="20dp"
-                        android:text="Set" />
+                        android:backgroundTint="@color/theme_red"
+                        android:shadowRadius="@integer/material_motion_duration_long_2"
+                        android:text="Set"
+                        app:cornerRadius="20dp" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -89,8 +89,8 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                app:layout_collapseMode="pin"
-                android:layout_height="?attr/actionBarSize"/>
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
         <com.google.android.material.chip.ChipGroup
@@ -106,42 +106,54 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Entertainment" />
+                android:text="Entertainment"
+                app:chipBackgroundColor="@color/chip_background"
+                android:textColor="@color/chip_textcolor"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/filter_lighting"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lighting" />
+                android:text="Lighting"
+                app:chipBackgroundColor="@color/chip_background"
+                android:textColor="@color/chip_textcolor"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/filter_cooling"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cooling" />
+                android:text="Cooling"
+                app:chipBackgroundColor="@color/chip_background"
+                android:textColor="@color/chip_textcolor"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/filter_kitchen"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kitchen" />
+                android:text="Kitchen"
+                app:chipBackgroundColor="@color/chip_background"
+                android:textColor="@color/chip_textcolor"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/filter_household"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Household" />
+                android:text="Household"
+                app:chipBackgroundColor="@color/chip_background"
+                android:textColor="@color/chip_textcolor"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/filter_others"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Others" />
+                android:text="Others"
+                app:chipBackgroundColor="@color/chip_background"
+                android:textColor="@color/chip_textcolor"/>
         </com.google.android.material.chip.ChipGroup>
     </com.google.android.material.appbar.AppBarLayout>
 
