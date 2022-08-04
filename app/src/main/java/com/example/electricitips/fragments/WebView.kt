@@ -9,11 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.electricitips.R
 import com.example.electricitips.databinding.FragmentTipsBinding
 import com.example.electricitips.databinding.FragmentWebViewBinding
+import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class WebView :  Fragment(R.layout.fragment_web_view){
     private val args: WebViewArgs by navArgs()
@@ -27,18 +31,6 @@ class WebView :  Fragment(R.layout.fragment_web_view){
         // inflate layout for this fragment
         binding = FragmentWebViewBinding.inflate(inflater, container, false)
 
-        binding!!.webView.setOnKeyListener { view, i, keyEvent ->
-            // check if back button is pressed
-            if (i == KEYCODE_BACK && binding!!.webView.canGoBack()){
-                // do webview go back
-                binding!!.webView.goBack()
-            }
-                // else do default main activity on back pressed
-            else{
-                requireActivity().onBackPressed()
-            }
-            true
-        }
         return binding!!.root
     }
 
@@ -53,6 +45,28 @@ class WebView :  Fragment(R.layout.fragment_web_view){
 
         binding!!.webView.loadUrl(args.url)
 
+        binding!!.webView.setOnKeyListener { view, i, keyEvent ->
+            // check if back button is pressed
+            if (i == KEYCODE_BACK){
+
+                if(binding!!.webView.canGoBack()) {
+                    // do webview go back
+                    Toast.makeText(context,"CAN",Toast.LENGTH_SHORT).show()
+                    binding!!.webView.goBack()
+
+                }
+                // else do default main activity on back pressed
+                else{
+                    Toast.makeText(context,"CANNOT",Toast.LENGTH_SHORT).show()
+                    //findNavController().navigate(R.id.tips)
+                }
+                true
+            }else {
+
+                false
+            }
+
+        }
 
     }
 

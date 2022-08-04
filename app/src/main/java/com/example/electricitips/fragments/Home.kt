@@ -22,6 +22,8 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.formatter.PercentFormatter
+import java.util.*
+import kotlin.collections.ArrayList
 
 class Home :  Fragment(R.layout.fragment_home){
     private var binding: FragmentHomeBinding? = null
@@ -61,14 +63,20 @@ class Home :  Fragment(R.layout.fragment_home){
         var total:Double = 0.0
         var dummyPrice:Double = 0.0
         var pieChart = binding!!.monthlyUsagePieChart
+        // get calendar
+        val calendar = Calendar.getInstance()
+        // get total number of days of current month
+        val daysOfThisMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+        // get total number of weeks of current month
+        val weeksOfThisMonth = calendar.getActualMaximum(Calendar.WEEK_OF_MONTH)
 
         for (item in arrayList){
 
             when(arrayList[counter].frequency){
-
-                "Daily" -> dummyPrice = (arrayList[counter].rating.toDouble()) * (arrayList[counter].duration.toDouble()) * 30
-                "Weekly" -> dummyPrice = (arrayList[counter].rating.toDouble()) * (arrayList[counter].duration.toDouble()) * 4
-                "Monthly" -> dummyPrice = (arrayList[counter].rating.toDouble()) * (arrayList[counter].duration.toDouble())
+                // rating must be divided by 1000 since it needs to be converted from watts to kilowatts
+                "Daily" -> dummyPrice = (arrayList[counter].rating.toDouble()/1000.0) * (arrayList[counter].duration.toDouble()) * daysOfThisMonth
+                "Weekly" -> dummyPrice = (arrayList[counter].rating.toDouble()/1000.0) * (arrayList[counter].duration.toDouble()) * weeksOfThisMonth
+                "Monthly" -> dummyPrice = (arrayList[counter].rating.toDouble()/1000.0) * (arrayList[counter].duration.toDouble())
 
             }
             when(arrayList[counter].type){
@@ -132,9 +140,9 @@ class Home :  Fragment(R.layout.fragment_home){
         pieChart.legend.isEnabled = false
         pieChart.description.isEnabled = false
 
-        binding!!.dailyEle.text = String.format("%.2f", total/30) + "kW"
-        binding!!.monthlyEle.text = String.format("%.2f", total) + "kW"
-        binding!!.dailyCost.text = "PHP " + String.format("%.2f", ((total/30)*rateCost))
+        binding!!.dailyEle.text = String.format("%.2f", total/30) + " kW"
+        binding!!.monthlyEle.text = String.format("%.2f", total) + " kW"
+        binding!!.dailyCost.text = "PHP " + String.format("%.2f", ((total/daysOfThisMonth)*rateCost))
         binding!!.monthlyCost.text = "PHP " + String.format("%.2f", (total*rateCost))
 
         if(max.equals(0.0)){
@@ -146,7 +154,7 @@ class Home :  Fragment(R.layout.fragment_home){
             val progress = ((total/max)*100).toInt()
             binding!!.usageLimitProgress.progress = progress
             binding!!.usageLimitText.text = "$progress%"
-            binding!!.monthlyLimitText.text = "$total kW / $max kW"
+            binding!!.monthlyLimitText.text = "${String.format("%.5f",total)} kW / ${String.format("%.2f",max)} kW"
         }
         if((total/max)*100 < 25){
             binding!!.monthlyLimitText.setTextColor(Color.GREEN)
