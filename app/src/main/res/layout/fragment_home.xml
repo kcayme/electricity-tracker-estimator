@@ -282,7 +282,7 @@
                 android:layout_gravity="start"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="Monthly Usage Chart"
+                android:text="Monthly Usage Chart (kW)"
                 android:textColor="@color/white"
                 android:textSize="18sp">
 
@@ -322,7 +322,7 @@
                             android:layout_gravity="center"
                             android:minWidth="10dp"
                             android:minHeight="10dp"
-                            android:src="#B95051">
+                            android:src="@color/theme_red">
 
                         </ImageView>
 
@@ -350,7 +350,7 @@
                             android:layout_gravity="center"
                             android:minWidth="10dp"
                             android:minHeight="10dp"
-                            android:src="#64412F">
+                            android:src="@color/theme_green">
 
                         </ImageView>
 
@@ -376,7 +376,7 @@
                             android:layout_gravity="center"
                             android:minWidth="10dp"
                             android:minHeight="10dp"
-                            android:src="#743D6A">
+                            android:src="@color/theme_blue">
 
                         </ImageView>
 
@@ -402,7 +402,7 @@
                             android:layout_gravity="center"
                             android:minWidth="10dp"
                             android:minHeight="10dp"
-                            android:src="#80519E">
+                            android:src="@color/theme_pink">
 
                         </ImageView>
 
@@ -428,7 +428,7 @@
                             android:layout_gravity="center"
                             android:minWidth="10dp"
                             android:minHeight="10dp"
-                            android:src="#e1a81e">
+                            android:src="@color/theme_yellow">
 
                         </ImageView>
 
@@ -455,7 +455,7 @@
                             android:layout_gravity="center"
                             android:minWidth="10dp"
                             android:minHeight="10dp"
-                            android:src="#c23d59">
+                            android:src="@color/theme_orange">
 
                         </ImageView>
 
