@@ -121,30 +121,16 @@ class MainActivity : AppCompatActivity() {
                 val errorMsg = "This field is required!"
                 // prompt error message if fields are empty
                 if(isEmpty(name) || isEmpty(code) || isEmpty(type) || isEmpty(rating) || isEmpty(duration) || isEmpty(freq)){
-                    if(isEmpty(name)){
-                        inputBind.inputNameLayout.isErrorEnabled = true
-                        inputBind.inputNameLayout.error = errorMsg
-                    }
-                    if(isEmpty(code)){
-                        inputBind.inputCodeLayout.isErrorEnabled = true
-                        inputBind.inputCodeLayout.error = errorMsg
-                    }
-                    if(isEmpty(type)){
-                        inputBind.inputTypeLayout.isErrorEnabled = true
-                        inputBind.inputTypeLayout.error = errorMsg
-                    }
-                    if(isEmpty(rating)){
-                        inputBind.inputRatingLayout.isErrorEnabled = true
-                        inputBind.inputRatingLayout.error = errorMsg
-                    }
-                    if(isEmpty(duration)){
-                        inputBind.inputDurationLayout.isErrorEnabled = true
-                        inputBind.inputDurationLayout.error = errorMsg
-                    }
-                    if(isEmpty(freq)){
-                        inputBind.inputFreqLayout.isErrorEnabled = true
-                        inputBind.inputFreqLayout.error = errorMsg
-                    }
+                    promptMissingFields(
+                        name,
+                        inputBind,
+                        errorMsg,
+                        code,
+                        type,
+                        rating,
+                        duration,
+                        freq
+                    )
                 }
                 else{
                     val mSuccess = MediaPlayer.create(this,R.raw.success)
@@ -168,6 +154,43 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    }
+
+
+    private fun promptMissingFields(
+        name: String,
+        inputBind: FragmentInputFormBinding,
+        errorMsg: String,
+        code: String,
+        type: String,
+        rating: String,
+        duration: String,
+        freq: String
+    ) {
+        if (isEmpty(name)) {
+            inputBind.inputNameLayout.isErrorEnabled = true
+            inputBind.inputNameLayout.error = errorMsg
+        }
+        if (isEmpty(code)) {
+            inputBind.inputCodeLayout.isErrorEnabled = true
+            inputBind.inputCodeLayout.error = errorMsg
+        }
+        if (isEmpty(type)) {
+            inputBind.inputTypeLayout.isErrorEnabled = true
+            inputBind.inputTypeLayout.error = errorMsg
+        }
+        if (isEmpty(rating)) {
+            inputBind.inputRatingLayout.isErrorEnabled = true
+            inputBind.inputRatingLayout.error = errorMsg
+        }
+        if (isEmpty(duration)) {
+            inputBind.inputDurationLayout.isErrorEnabled = true
+            inputBind.inputDurationLayout.error = errorMsg
+        }
+        if (isEmpty(freq)) {
+            inputBind.inputFreqLayout.isErrorEnabled = true
+            inputBind.inputFreqLayout.error = errorMsg
+        }
     }
 
     private fun inputFieldsFocusListeners(inputBind: FragmentInputFormBinding) {
