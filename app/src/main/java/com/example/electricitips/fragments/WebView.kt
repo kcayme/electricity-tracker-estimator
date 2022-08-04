@@ -1,6 +1,8 @@
 package com.example.electricitips.fragments
 
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.KeyEvent.*
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +26,19 @@ class WebView :  Fragment(R.layout.fragment_web_view){
     ): View? {
         // inflate layout for this fragment
         binding = FragmentWebViewBinding.inflate(inflater, container, false)
+
+        binding!!.webView.setOnKeyListener { view, i, keyEvent ->
+            // check if back button is pressed
+            if (i == KEYCODE_BACK && binding!!.webView.canGoBack()){
+                // do webview go back
+                binding!!.webView.goBack()
+            }
+                // else do default main activity on back pressed
+            else{
+                requireActivity().onBackPressed()
+            }
+            true
+        }
         return binding!!.root
     }
 
@@ -37,6 +52,8 @@ class WebView :  Fragment(R.layout.fragment_web_view){
         webSettings.javaScriptEnabled = true
 
         binding!!.webView.loadUrl(args.url)
+
+
     }
 
     // binding must be set to null on fragment destroy to prevent memory leaks

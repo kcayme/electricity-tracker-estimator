@@ -93,7 +93,7 @@
                             android:textSize="20dp"
                             android:textColor="@color/white"
                             android:gravity="center"
-                            android:fontFamily="@font/Merchant_Copy">
+                            android:fontFamily="@font/merchant_copy">
 
                         </TextView>
 
@@ -141,7 +141,7 @@
                             android:text="No Item Added"
                             android:textColor="@color/white"
                             android:textSize="20dp"
-                            android:fontFamily="@font/Merchant_Copy">
+                            android:fontFamily="">
 
                         </TextView>
 
@@ -198,7 +198,7 @@
                             android:textSize="20dp"
                             android:textColor="@color/white"
                             android:gravity="center"
-                            android:fontFamily="@font/Merchant_Copy">
+                            android:fontFamily="@font/merchant_copy">
 
                         </TextView>
 
@@ -247,7 +247,7 @@
                             android:textSize="20dp"
                             android:textColor="@color/white"
                             android:gravity="center"
-                            android:fontFamily="@font/Merchant_Copy">
+                            android:fontFamily="@font/merchant_copy">
 
                         </TextView>
 
