@@ -2,7 +2,8 @@ package com.example.electricitips
 
 import android.provider.BaseColumns
 
-object DBSchema {
+object
+DBSchema {
     /* inner class that defines the table contents */
     class ApplianceEntity : BaseColumns {
         companion object {
