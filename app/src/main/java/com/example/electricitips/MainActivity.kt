@@ -5,6 +5,7 @@ import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils.isEmpty
+import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
@@ -17,6 +18,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.onNavDestinationSelected
 import com.example.electricitips.databinding.ActivityMainBinding
 import com.example.electricitips.databinding.FragmentInputFormBinding
+import com.example.electricitips.databinding.FragmentWebViewBinding
 
 /*
         Minimum Requirements:
@@ -202,8 +204,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
         binding.bottomBar.performShow()
+        super.onBackPressed()
+
         when(navController.currentDestination!!.id){
             R.id.home -> binding.bottomNavView.menu.getItem(0).isChecked = true
             R.id.dashboard -> binding.bottomNavView.menu.getItem(1).isChecked = true
