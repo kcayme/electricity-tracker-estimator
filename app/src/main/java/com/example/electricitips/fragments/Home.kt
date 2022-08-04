@@ -3,11 +3,13 @@ package com.example.electricitips.fragments
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.graphics.drawable.DrawableCompat
@@ -24,8 +26,11 @@ import com.github.mikephil.charting.formatter.PercentFormatter
 class Home :  Fragment(R.layout.fragment_home){
     private var binding: FragmentHomeBinding? = null
     private var arrayList = ArrayList<Appliance>()
+    private var rateCost:Float = 0.0F
+    private var max: Float = 0.0F
     private lateinit var applianceDBHelper: ApplianceDBHelper
     private lateinit var rateDBHelper: RateDBHelper
+    private lateinit var maxDBHelper: MaxDBHelper
     var rating: Float = 0.0f
 
     override fun onCreateView(
@@ -39,8 +44,12 @@ class Home :  Fragment(R.layout.fragment_home){
         // initialize db helpers
         applianceDBHelper = ApplianceDBHelper(requireActivity().applicationContext)
         rateDBHelper = RateDBHelper(requireActivity().applicationContext)
+        maxDBHelper = MaxDBHelper(requireActivity().applicationContext)
 
         arrayList = applianceDBHelper.readAllAppliances()
+        rateCost = rateDBHelper.readCost()
+        max = maxDBHelper.readMax()
+        binding!!.kwhMonthly.setText(max.toString())
 
         var counter:Int = 0
         var entertainment:Double = 0.0
@@ -50,7 +59,6 @@ class Home :  Fragment(R.layout.fragment_home){
         var householdApp:Double = 0.0
         var other:Double = 0.0
         var total:Double = 0.0
-        var goal:Double = 0.0
         var dummyPrice:Double = 0.0
         var pieChart = binding!!.monthlyUsagePieChart
 
@@ -78,12 +86,6 @@ class Home :  Fragment(R.layout.fragment_home){
         }
 
         total = entertainment+lighting+cooling+kitchenApp+householdApp+other
-
-        binding!!.setKwhMonthly.setOnClickListener(){
-
-            goal = binding!!.kwhMonthly.text.toString().toDouble()
-
-        }
 
         val entries = ArrayList<PieEntry>()
 
@@ -130,8 +132,31 @@ class Home :  Fragment(R.layout.fragment_home){
         pieChart.legend.isEnabled = false
         pieChart.description.isEnabled = false
 
-        binding!!.dailyEle.text =  String.format("%.2f",(total/30)) + "kW"
-        binding!!.monthlyEle.text = (total).toString() + "kW"
+        binding!!.dailyEle.text = String.format("%.2f", total/30) + "kW"
+        binding!!.monthlyEle.text = String.format("%.2f", total) + "kW"
+        binding!!.dailyCost.text = "PHP " + String.format("%.2f", ((total/30)*rateCost))
+        binding!!.monthlyCost.text = "PHP " + String.format("%.2f", (total*rateCost))
+
+        if(max.equals(0.0)){
+            binding!!.usageLimitProgress.progress = 0
+            binding!!.usageLimitText.text = "Not Set"
+            binding!!.monthlyLimitText.text = "Not Set"
+        }
+        else{
+            val progress = ((total/max)*100).toInt()
+            binding!!.usageLimitProgress.progress = progress
+            binding!!.usageLimitText.text = "$progress%"
+            binding!!.monthlyLimitText.text = "$total kW / $max kW"
+        }
+        if((total/max)*100 < 25){
+            binding!!.monthlyLimitText.setTextColor(Color.GREEN)
+        }
+        else if((total/max)*100 < 75){
+            binding!!.monthlyLimitText.setTextColor(Color.parseColor("#FFA500"))
+        }
+        else{
+            binding!!.monthlyLimitText.setTextColor(Color.RED)
+        }
 
         binding!!.setKwhMonthly.setOnClickListener(){
 
@@ -140,11 +165,37 @@ class Home :  Fragment(R.layout.fragment_home){
                 binding!!.kwhMonthly.error = "Field is Empty."
 
             }
+            else if(binding!!.kwhMonthly.text.toString() == "0.0"){
+
+                binding!!.kwhMonthly.error = "Cannot be zero."
+
+            }
             else{
 
-                val progress = ((total/binding!!.kwhMonthly.text.toString().toFloat())*100).toInt()
+                val mSet = MediaPlayer.create(context,R.raw.set)
+                maxDBHelper.deleteMax()
+                val maxVal = binding!!.kwhMonthly.text.toString().toFloat()
+                maxDBHelper.insertMax(maxVal)
+                val test = maxDBHelper.readMax()
+                mSet.start()
+                val imm: InputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(binding!!.maxInputLayout.windowToken,0)
+                Toast.makeText(context, "Maximum Threshold Set! $test",Toast.LENGTH_SHORT).show()
+
+                val progress = ((total/maxVal)*100).toInt()
+                max = maxDBHelper.readMax()
+                if(progress < 25){
+                    binding!!.monthlyLimitText.setTextColor(Color.GREEN)
+                }
+                else if(progress < 75){
+                    binding!!.monthlyLimitText.setTextColor(Color.parseColor("#FFA500"))
+                }
+                else{
+                    binding!!.monthlyLimitText.setTextColor(Color.RED)
+                }
                 binding!!.usageLimitProgress.progress = progress
                 binding!!.usageLimitText.text = "$progress%"
+                binding!!.monthlyLimitText.text = "$total kW / $max kW"
 
             }
 

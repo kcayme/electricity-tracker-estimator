@@ -21,6 +21,7 @@
             tools:ignore="MissingConstraints">
 
             <LinearLayout
+                android:id="@+id/maxInputLayout"
                 android:padding="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -313,7 +314,8 @@
                         android:text="Monthly Usage Limit"
                         android:textColor="@color/white"
                         android:textSize="11dp"
-                        tools:layout_editor_absoluteX="30dp">
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
 
                     </TextView>
 
@@ -324,8 +326,8 @@
                         android:indeterminateOnly="false"
                         android:progressDrawable="@drawable/circle"
                         android:rotation="-90"
-                        app:layout_constraintEnd_toEndOf="@+id/textView3"
-                        app:layout_constraintStart_toStartOf="@+id/textView3"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView3"
                         tools:progress="0">
 
@@ -341,6 +343,20 @@
                         app:layout_constraintStart_toStartOf="@+id/usageLimit_progress"
                         app:layout_constraintTop_toTopOf="@+id/usageLimit_progress"
                         android:textColor="@color/white">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/monthlyLimitText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/merchant_copy"
+                        android:text="Not Set"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/usageLimit_progress">
 
                     </TextView>
 
