@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.activityViewModels
 import com.example.electricitips.*
@@ -96,40 +97,51 @@ class Home :  Fragment(R.layout.fragment_home){
         total = entertainment+lighting+cooling+kitchenApp+householdApp+other
 
         val entries = ArrayList<PieEntry>()
+        val colorSet = java.util.ArrayList<Int>()
 
-        if(entertainment>0){
-            entries.add(PieEntry(entertainment.toFloat()))
+        if (total == 0.0){
+
+            entries.add(PieEntry(100.0F))
+            colorSet.add(Color.parseColor("#666666"))
+
         }
-        if(lighting>0){
-            entries.add(PieEntry(lighting.toFloat()))
-        }
-        if(cooling>0){
-            entries.add(PieEntry(cooling.toFloat()))
-        }
-        if(kitchenApp>0){
-            entries.add(PieEntry(kitchenApp.toFloat()))
-        }
-        if(householdApp>0){
-            entries.add(PieEntry(householdApp.toFloat()))
-        }
-        if(other>0){
-            entries.add(PieEntry(other.toFloat()))
+        else{
+
+            if(entertainment>0){
+                entries.add(PieEntry(entertainment.toFloat()))
+                colorSet.add(ContextCompat.getColor(this.requireContext(), R.color.theme_red))
+            }
+            if(lighting>0){
+                entries.add(PieEntry(lighting.toFloat()))
+                colorSet.add(ContextCompat.getColor(this.requireContext(), R.color.theme_green))
+            }
+            if(cooling>0){
+                entries.add(PieEntry(cooling.toFloat()))
+                colorSet.add(ContextCompat.getColor(this.requireContext(), R.color.theme_blue))
+            }
+            if(kitchenApp>0){
+                entries.add(PieEntry(kitchenApp.toFloat()))
+                colorSet.add(ContextCompat.getColor(this.requireContext(), R.color.theme_pink))
+            }
+            if(householdApp>0){
+                entries.add(PieEntry(householdApp.toFloat()))
+                colorSet.add(ContextCompat.getColor(this.requireContext(), R.color.theme_yellow))
+            }
+            if(other>0){
+                entries.add(PieEntry(other.toFloat()))
+                colorSet.add(ContextCompat.getColor(this.requireContext(), R.color.theme_orange))
+            }
+
         }
 
         val dataSet = PieDataSet(entries,"")
-
         dataSet.setDrawValues(false)
-        dataSet.valueTextColor = Color.WHITE
-        dataSet.valueFormatter = PercentFormatter()
-
-        val colorSet = java.util.ArrayList<Int>()
-        colorSet.add(Color.parseColor("#B95051"))
-        colorSet.add(Color.parseColor("#64412F"))
-        colorSet.add(Color.parseColor("#743D6A"))
-        colorSet.add(Color.parseColor("#80519E"))
-        colorSet.add(Color.parseColor("#e1a81e"))
-        colorSet.add(Color.parseColor("#c23d59"))
         dataSet.colors = colorSet
+        dataSet.setDrawValues(true)
+        dataSet.valueTextColor = Color.WHITE
+        dataSet.valueTextSize = 12.0F
+        dataSet.xValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE;
+        dataSet.yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE;
 
         val data = PieData(dataSet)
 

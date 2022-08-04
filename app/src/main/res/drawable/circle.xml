@@ -4,6 +4,16 @@
         <shape
             android:shape="ring"
             android:thicknessRatio="16"
+            android:useLevel="false">
+            <solid android:color="#666666">
+
+            </solid>
+        </shape>
+    </item>
+    <item>
+        <shape
+            android:shape="ring"
+            android:thicknessRatio="16"
             android:useLevel="true">
             <solid android:color="@color/theme_red">
 
