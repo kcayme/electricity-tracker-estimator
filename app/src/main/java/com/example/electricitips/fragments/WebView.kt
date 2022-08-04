@@ -1,7 +1,6 @@
 package com.example.electricitips.fragments
 
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.KeyEvent.*
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,15 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.electricitips.R
-import com.example.electricitips.databinding.FragmentTipsBinding
 import com.example.electricitips.databinding.FragmentWebViewBinding
-import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class WebView :  Fragment(R.layout.fragment_web_view){
     private val args: WebViewArgs by navArgs()
@@ -45,27 +38,19 @@ class WebView :  Fragment(R.layout.fragment_web_view){
 
         binding!!.webView.loadUrl(args.url)
 
-        binding!!.webView.setOnKeyListener { view, i, keyEvent ->
-            // check if back button is pressed
-            if (i == KEYCODE_BACK){
-
+        binding!!.webView.setOnKeyListener { _, i, keyEvent ->
+            // check if back button is pressed and has been pressed down
+            if (i == KEYCODE_BACK && keyEvent.action == ACTION_DOWN){
                 if(binding!!.webView.canGoBack()) {
                     // do webview go back
-                    Toast.makeText(context,"CAN",Toast.LENGTH_SHORT).show()
                     binding!!.webView.goBack()
-
                 }
                 // else do default main activity on back pressed
                 else{
-                    Toast.makeText(context,"CANNOT",Toast.LENGTH_SHORT).show()
-                    //findNavController().navigate(R.id.tips)
+                    requireActivity().onBackPressed()
                 }
-                true
-            }else {
-
-                false
             }
-
+            true
         }
 
     }
