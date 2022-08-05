@@ -10,7 +10,6 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 
 class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val context: Fragment) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
@@ -67,9 +66,6 @@ class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val cont
         // initialize db helper
         applianceDBHelper = ApplianceDBHelper(context.requireContext())
 
-
-
-
         return ViewHolder(v)
     }
 
@@ -101,7 +97,7 @@ class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val cont
                         mDelete.start()
                         try {
                             // delete item from database
-                            val del = applianceDBHelper.deleteAppliance(arrayList[position].modelCode)
+                            applianceDBHelper.deleteAppliance(arrayList[position].modelCode)
                             arrayList.removeAt(position)
 
                             if (arrayList.size == 0) {

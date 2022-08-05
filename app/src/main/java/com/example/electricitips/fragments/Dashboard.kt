@@ -3,7 +3,6 @@ package com.example.electricitips.fragments
 
 import android.content.Context
 import android.media.MediaPlayer
-import android.os.Build
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.text.TextUtils
@@ -12,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.electricitips.*
 import com.example.electricitips.databinding.FragmentDashboardBinding
@@ -35,7 +33,7 @@ class Dashboard: Fragment(R.layout.fragment_dashboard) {
      ): View? {
          binding = FragmentDashboardBinding.inflate(inflater, container, false)
 
-         var test:Float = 0f
+         var test : Float
 
          // initialize db helpers
          applianceDBHelper = ApplianceDBHelper(requireActivity().applicationContext)

@@ -2,7 +2,6 @@ package com.example.electricitips.fragments
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,18 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
-import androidx.fragment.app.activityViewModels
 import com.example.electricitips.*
 import com.example.electricitips.databinding.FragmentHomeBinding
-import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
-import com.github.mikephil.charting.formatter.PercentFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -34,7 +27,6 @@ class Home :  Fragment(R.layout.fragment_home){
     private lateinit var applianceDBHelper: ApplianceDBHelper
     private lateinit var rateDBHelper: RateDBHelper
     private lateinit var maxDBHelper: MaxDBHelper
-    var rating: Float = 0.0f
 
     override fun onCreateView(
         inflater: LayoutInflater, container:ViewGroup?,
@@ -214,7 +206,7 @@ class Home :  Fragment(R.layout.fragment_home){
                     binding!!.monthlyLimitText.setTextColor(Color.RED)
                 }
                 binding!!.usageLimitProgress.progress = progress
-                binding!!.usageLimitText.text = "$progress%"
+                binding!!.usageLimitText.text = "$progress %"
                 binding!!.monthlyLimitText.text = "$total kW / $max kW"
 
             }

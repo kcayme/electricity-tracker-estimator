@@ -5,7 +5,6 @@ import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils.isEmpty
-import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
@@ -14,11 +13,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.onNavDestinationSelected
 import com.example.electricitips.databinding.ActivityMainBinding
 import com.example.electricitips.databinding.FragmentInputFormBinding
-import com.example.electricitips.databinding.FragmentWebViewBinding
 
 /*
         Minimum Requirements:
@@ -37,7 +34,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     // navigation components
     private lateinit var navController: NavController
-    private lateinit var appBarConfiguration: AppBarConfiguration
     // database helper
     private lateinit var applianceDBHelper: ApplianceDBHelper
 
@@ -70,7 +66,7 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-        binding.bottomNavView.setOnItemReselectedListener { _ ->
+        binding.bottomNavView.setOnItemReselectedListener {
             return@setOnItemReselectedListener
         }
 
@@ -118,13 +114,11 @@ class MainActivity : AppCompatActivity() {
                 val duration = inputBind.inputHours.text.toString()
                 val freq = inputBind.inputFreq.text.toString()
 
-                val errorMsg = "This field is required!"
                 // prompt error message if fields are empty
                 if(isEmpty(name) || isEmpty(code) || isEmpty(type) || isEmpty(rating) || isEmpty(duration) || isEmpty(freq)){
                     promptMissingFields(
                         name,
                         inputBind,
-                        errorMsg,
                         code,
                         type,
                         rating,
@@ -160,13 +154,13 @@ class MainActivity : AppCompatActivity() {
     private fun promptMissingFields(
         name: String,
         inputBind: FragmentInputFormBinding,
-        errorMsg: String,
         code: String,
         type: String,
         rating: String,
         duration: String,
         freq: String
     ) {
+        val errorMsg = "This field is required!"
         if (isEmpty(name)) {
             inputBind.inputNameLayout.isErrorEnabled = true
             inputBind.inputNameLayout.error = errorMsg
