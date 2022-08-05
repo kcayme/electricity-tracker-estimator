@@ -127,15 +127,24 @@ class Home :  Fragment(R.layout.fragment_home){
         }
 
         val dataSet = PieDataSet(entries,"")
-        dataSet.setDrawValues(false)
         dataSet.colors = colorSet
-        dataSet.setDrawValues(true)
-        dataSet.valueTextColor = Color.WHITE
-        dataSet.valueTextSize = 12.0F
-        dataSet.xValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE;
-        dataSet.yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE;
 
         val data = PieData(dataSet)
+
+        if (total==0.0){
+
+            dataSet.setDrawValues(false)
+
+        }
+        else{
+
+            dataSet.setDrawValues(true)
+            dataSet.valueTextColor = Color.WHITE
+            dataSet.valueTextSize = 12.0F
+            dataSet.xValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE;
+            dataSet.yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE;
+
+        }
 
         pieChart.data = data
         pieChart.centerTextRadiusPercent = 0f
