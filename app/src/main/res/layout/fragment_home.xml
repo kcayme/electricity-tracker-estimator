@@ -524,7 +524,7 @@
                     android:fontFamily="@font/merchant_copy"
                     android:text="Not Set"
                     android:textColor="@color/white"
-                    android:textSize="14sp">
+                    android:textSize="16sp">
 
                 </TextView>
 

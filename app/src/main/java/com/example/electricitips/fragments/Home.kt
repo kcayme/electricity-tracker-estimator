@@ -167,7 +167,7 @@ class Home :  Fragment(R.layout.fragment_home){
             val progress = ((total/max)*100).toInt()
             binding!!.usageLimitProgress.progress = progress
             binding!!.usageLimitText.text = "$progress%"
-            binding!!.monthlyLimitText.text = "${String.format("%.5f",total)} kW / ${String.format("%.2f",max)} kW"
+            binding!!.monthlyLimitText.text = "${String.format("%.2f",total)} kW / ${String.format("%.2f",max)} kW"
         }
         if((total/max)*100 < 25){
             binding!!.monthlyLimitText.setTextColor(Color.GREEN)
@@ -216,7 +216,9 @@ class Home :  Fragment(R.layout.fragment_home){
                 }
                 binding!!.usageLimitProgress.progress = progress
                 binding!!.usageLimitText.text = "$progress %"
-                binding!!.monthlyLimitText.text = "$total kW / $max kW"
+                val formatTotal = String.format("%.2f",total)
+                val formatMax = String.format("%.2f",max)
+                binding!!.monthlyLimitText.text = "$formatTotal kW / $formatMax kW"
 
             }
 
