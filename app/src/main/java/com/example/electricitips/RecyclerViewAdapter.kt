@@ -57,6 +57,7 @@ class RecyclerViewAdapter (private var arrayList: ArrayList<Appliance>, val cont
                 "Kitchen Appliance" -> cardBackground.setCardBackgroundColor(ContextCompat.getColor(cardBackground.context, R.color.theme_pink))
                 "Household Appliance" -> cardBackground.setCardBackgroundColor(ContextCompat.getColor(cardBackground.context, R.color.theme_yellow))
                 "Others" -> cardBackground.setCardBackgroundColor(ContextCompat.getColor(cardBackground.context, R.color.theme_orange))
+                else -> cardBackground.setCardBackgroundColor(ContextCompat.getColor(cardBackground.context, R.color.orignal_grey))
             }
         }
     }
